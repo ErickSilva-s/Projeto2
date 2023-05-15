@@ -1,0 +1,125 @@
+<x-app-layout>
+    <x-slot name="header">
+        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+            <!-- {{ __('Endereços')}}  -->
+
+            Olá, {{ Auth::user()->name }}! Seja bem vindo. <br>
+
+        </h2>
+        <p> Você está logado com {{ Auth::user()->email }}. <br>
+            {{ \Carbon\Carbon::now()->format('d/m/Y') }}
+        </p>
+    </x-slot>
+
+    <div class="py-12 ">
+        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
+                <div class="p-6 text-gray-900">
+
+                    <h1 class="text-lg mt-4 font-bold text-center" style="font-size:24px;"> Endereços </h1>
+
+
+                    <fieldset class="border p-2 mb-2 border-black rounded">
+                        <legend class="px-2 border rounded-md border-black text-black ">Adicionar novo endereço</legend>
+                        <form action="{{ route('address.store')  }}" method="POST">
+                            @csrf
+                            <div class="grid gap-2 grid-cols-2 mb-2">
+                                <div class="mt-4">
+                                    <x-input-label for="number" :value="__('Número')" />
+                                    <x-text-input id="number" class="block mt-1 w-full " type="number" name="number" required />
+                                </div>
+                                <div class="mt-4">
+                                    <x-input-label for="road" :value="__('Logradouro')" />
+                                    <x-text-input id="road" class="block mt-1 w-full" type="text" name="road" required />
+                                </div>
+                                <div class="mt-4">
+                                    <x-input-label for="cep" :value="__('Cep')" />
+                                    <x-text-input id="cep" class="block mt-1 w-full" type="text" name="cep" required />
+                                </div>
+                                <div class="mt-4">
+                                    <x-input-label for="neighborhood" :value="__('Bairro')" />
+                                    <x-text-input id="neighborhood" class="block mt-1 w-full" type="text" name="neighborhood" required />
+                                </div>
+                                <div class="mt-4">
+                                    <x-input-label for="complement" :value="__('Complemento')" />
+                                    <x-text-input id="complement" class="block mt-1 w-full" type="text" name="complement" />
+                                </div>
+                            </div>
+
+                            <x-primary-button class="w-full bg-green-900 "> Adicionar </x-primary-button>
+
+
+
+                        </form>
+                    </fieldset>
+                    <br>
+
+                    <h2 class="text-lg font-bold bg-text-black"> Seus Endereços: </h2> <br>
+
+                    @foreach(Auth::user()->myAddress as $address)
+
+                    <div class="flex justify-between border-b mb-2 gap-4
+                    hover:bg-gray-300" x-data=" { showDelete: false, showEdit: false  } ">
+
+                        <div class="flex justify-between flex-grow px-2 border rounded-md border-green-500">
+                            CEP:{{ $address->cep }}
+                            Rua: {{ $address->road}},
+                            Número: {{ $address->number }},
+                            Bairro: {{ $address->neighborhood}}
+                            Complemento: {{ $address->complement}}
+                        </div>
+
+
+                        <div class="flex gap-2">
+                            <div>
+                                <span class="cursor-pointer px-2 bg-red-500 border rounded-md text-white" @click="showDelete = true ">Apagar</span>
+
+                            </div>
+
+                            <div>
+                                <span class="cursor-pointer px-2 bg-blue-500 border rounded-md text-white" @click="showEdit = true ">Editar </span>
+                            </div>
+                        </div>
+
+
+
+                        <template x-if="showDelete">
+                            <div class="absolute top-0 button-0 left-0 right-0 bg-gray-800 bg-opacity-20 z-0 display-flex center">
+                                <div class="w-96 bg-white p-4 absolute left-1/4 right-1/4 top-1/4 z-10 ">
+                                    <h2 class="text-xl font-bold text-center">Você tem certeza que quer apagar?</h2>
+                                    <form action="{{ route('address.destroy', $address) }}" method="POST">
+                                        @csrf
+                                        @method('DELETE')
+                                        <x-danger-button> Apagar </x-danger-button>
+                                    </form>
+                                    <x-primary-button class="w-full" @click="showDelete = false">Cancelar</x-primary-button>
+                                </div>
+                            </div>
+                        </template>
+
+                        <template x-if="showEdit">
+                            <div class="absolute top-0 button-0 left-0 right-0 bg-gray-800 bg-opacity-20 z-0">
+                                <div class="w-96 bg-white p-4 absolute left-1/4 right-1/4 top-1/4 z-10 ">
+                                    <h2 class="text-xl font-bold text-center">{{ $address->road }} | {{ $address->number }}</h2>
+                                    <form class="my-4" action="{{  route('address.update', $address) }}" method="POST">
+                                        @csrf
+                                        @method('PUT')
+                                        <x-text-input name="road" placeholder="Logradouro" value="{{ $address->road }}" required></x-text-input>
+                                        <x-text-input name="number" placeholder="Número" value="{{ $address->number }}" required></x-text-input>
+                                        <x-text-input name="cep" placeholder="CEP" value="{{ $address->cep }}" required></x-text-input>
+                                        <x-text-input name="neighborhood" placeholder="Bairro" value="{{ $address->neighborhood }}" required></x-text-input>
+                                        <x-text-input name="complement" placeholder="Complement" value="{{ $address->complement }}"></x-text-input>
+                                        <x-primary-button>Editar</x-primary-button>
+                                    </form>
+                                    <x-primary-button @click="showEdit = false" class="w-full">Cancelar</x-primary-button>
+                                </div>
+                            </div>
+                        </template>
+
+                    </div>
+                    @endforeach
+                </div>
+            </div>
+        </div>
+    </div>
+</x-app-layout>
