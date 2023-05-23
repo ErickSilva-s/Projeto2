@@ -21,6 +21,14 @@
                         {{ __('Produtos') }}
                     </x-nav-link>
                     @endif
+
+                    @if(Auth::user() ->is_admin)
+                    <x-nav-link :href="route('user.index')" :active="request()->routeIs('user.index')">
+                        {{ __('Usuários') }}
+                    </x-nav-link>
+                    @endif
+
+
                 </div>
             </div>
 
