@@ -1,14 +1,48 @@
-@if(!Auth::user() ->is_entregador)
+ @if(!Auth::user())
+
+@foreach (App\Models\Product::all() as $product)
+
+<div class="py-12">
+    <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+        <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
+            <div class="p-6 text-gray-900 dark:text-gray-100">
+
+                <div class="flex justify-between border-b mb-2 gap-4
+                    hover:bg-gray-300" x-data=" { showDelete: false, showEdit: false  } ">
+
+                    <div class="flex justify-between flex-grow border ">
+                        Descrição: {{ $product-> description }} <br>
+                        Estoque: {{ $product-> stock_product }} <br>
+                        Valor: R$ {{ $product-> price }} <br>
+                        Categoria: {{ $product-> category }}
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+@endforeach
+
+@endif 
+
+
+@if(Auth::user())
 <x-app-layout>
     <x-slot name="header">
+
+
         <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
             <!-- {{ __('Produtos') }} -->
+
+           
             Olá, {{ Auth::user()->name }}! <br>
 
         </h2>
         <p> Você está logado com {{ Auth::user()->email }}. <br>
             {{ \Carbon\Carbon::now()->format('d/m/Y') }}
         </p>
+
     </x-slot>
 
     <div class="py-12">
@@ -17,6 +51,7 @@
                 <div class="p-6 text-gray-900 dark:text-gray-100">
 
                     <h1 class="text-lg mt-4 font-bold text-center" style="font-size:24px;"> Produtos </h1>
+
 
                     @if(Auth::user() ->is_admin || (Auth::user() ->is_vendedor))
                     <fieldset class="border p-2 mb-2 border-black rounded">
@@ -57,7 +92,7 @@
 
 
                     <div>
-                     @if((Auth::user() ->is_cliente))
+                        @if((Auth::user() ->is_cliente))
 
                         <form action="{{ route('product.index') }}" method="GET">
                             <input type="text" name="pesquisa" placeholder="Pesquisar produtos">
@@ -66,13 +101,13 @@
 
 
 
-                    <div class=" border rounded-md border-green-500">
-                    @foreach ($product as $prod)
-                    <p>{{ $prod->description }} ( R$ {{ $prod->price }})</p>
-                    @endforeach
-                    </div>
+                        <div class=" border rounded-md border-green-500">
+                            @foreach ($product as $prod)
+                            <p>{{ $prod->description }} ( R$ {{ $prod->price }})</p>
+                            @endforeach
+                        </div>
 
-                    @endif
+                        @endif
 
                     </div>
 
@@ -200,9 +235,10 @@
                 </template>
 
             </div>
-
+           
             @endif
             @endforeach
+            
 
         </div>
     </div>
@@ -210,4 +246,5 @@
     </div>
 
 </x-app-layout>
+
 @endif

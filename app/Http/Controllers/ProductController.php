@@ -36,13 +36,14 @@ class ProductController extends Controller
         // }
 
         // $pesquisa = $request->input('pesquisa');
+
         $pesquisa= request('pesquisa');
 
         $product = Product::where('description', 'like', '%' . $pesquisa . '%')->get();
 
         return view('product.index', ['product' => $product]);
 
-        //  return view('product.index' );
+
     }
 
     /**
