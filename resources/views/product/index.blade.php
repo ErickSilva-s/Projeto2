@@ -1,47 +1,19 @@
- @if(!Auth::user())
-
-@foreach (App\Models\Product::all() as $product)
-
-<div class="py-12">
-    <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-        <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
-            <div class="p-6 text-gray-900 dark:text-gray-100">
-
-                <div class="flex justify-between border-b mb-2 gap-4
-                    hover:bg-gray-300" x-data=" { showDelete: false, showEdit: false  } ">
-
-                    <div class="flex justify-between flex-grow border ">
-                        Descrição: {{ $product-> description }} <br>
-                        Estoque: {{ $product-> stock_product }} <br>
-                        Valor: R$ {{ $product-> price }} <br>
-                        Categoria: {{ $product-> category }}
-                    </div>
-                </div>
-
-            </div>
-        </div>
-    </div>
-</div>
-@endforeach
-
-@endif 
-
-
-@if(Auth::user())
 <x-app-layout>
     <x-slot name="header">
 
 
         <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-            <!-- {{ __('Produtos') }} -->
 
-           
+
+            @if(Auth::user())
+
             Olá, {{ Auth::user()->name }}! <br>
 
         </h2>
         <p> Você está logado com {{ Auth::user()->email }}. <br>
             {{ \Carbon\Carbon::now()->format('d/m/Y') }}
         </p>
+        @endif
 
     </x-slot>
 
@@ -53,7 +25,10 @@
                     <h1 class="text-lg mt-4 font-bold text-center" style="font-size:24px;"> Produtos </h1>
 
 
-                    @if(Auth::user() ->is_admin || (Auth::user() ->is_vendedor))
+
+
+                     @if(Auth::user())
+                    @if(Auth::user()->is_admin || (Auth::user()->is_vendedor))
                     <fieldset class="border p-2 mb-2 border-black rounded">
                         <legend class="px-2 border rounded-md border-black">Adicionar novo produto</legend>
                         <form action="{{ route('product.store') }}" method="POST">
@@ -88,26 +63,18 @@
                     <h2 class="text-lg font-bold"> Produtos cadastrados: </h2>
 
                     @endif
-
-
+                    @endif
 
                     <div>
-                        @if((Auth::user() ->is_cliente))
-
                         <form action="{{ route('product.index') }}" method="GET">
                             <input type="text" name="pesquisa" placeholder="Pesquisar produtos">
                             <button type="submit">Pesquisar</button>
                         </form>
-
-
-
                         <div class=" border rounded-md border-green-500">
                             @foreach ($product as $prod)
                             <p>{{ $prod->description }} ( R$ {{ $prod->price }})</p>
                             @endforeach
                         </div>
-
-                        @endif
 
                     </div>
 
@@ -115,22 +82,22 @@
 
 
                     @foreach (App\Models\Product::all() as $product)
-                    @if((Auth::user() ->is_admin) || (Auth::user() ->is_cliente) && (Auth::user() ->is_cliente) && (!Auth::user()->is_vendedor))
+
+
                     <div class="flex justify-between border-b mb-2 gap-4
                     hover:bg-gray-300" x-data=" { showDelete: false, showEdit: false  } ">
 
                         <div class="flex justify-between flex-grow">
+                            @if(!Auth::user() || (Auth::user() ->is_admin) || (Auth::user() ->is_cliente)  && (Auth::user() ->is_cliente) &&  (!Auth::user()->is_vendedor))
+
                             Descrição: {{ $product-> description }} <br>
                             Estoque: {{ $product-> stock_product }} <br>
                             Valor: R$ {{ $product-> price }} <br>
                             Categoria: {{ $product-> category }}
+                            @endif
                         </div>
 
-                        @endif
-
-
-
-                        @if((Auth::user() ->is_admin))
+                        @if(( Auth::user() && Auth::user()->is_admin))
                         <div class="flex gap-2">
                             <div>
                                 <span class="cursor-pointer border rounded-md  px-2 bg-red-500 text-white" @click="showDelete = true ">Apagar</span>
@@ -179,6 +146,7 @@
                 @endforeach
 
 
+                @if(Auth::user())
                 @foreach (Auth::user()->myProducts as $product)
                 @if((Auth::user()->is_vendedor))
                 <div class="flex justify-between border-b mb-2 gap-4
@@ -235,10 +203,11 @@
                 </template>
 
             </div>
-           
+
             @endif
             @endforeach
-            
+            @endif
+
 
         </div>
     </div>
@@ -246,5 +215,3 @@
     </div>
 
 </x-app-layout>
-
-@endif

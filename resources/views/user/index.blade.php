@@ -28,6 +28,15 @@
                             Nome:{{ $user-> name }} <br>
                             Email: {{ $user-> email }} <br>
 
+                            @if($user->is_admin)
+                            Tipo: Administrador
+                            @elseif($user->is_entregador)
+                            Tipo: Entregador
+                            @elseif($user->is_vendedor)
+                            Tipo: Vendedor
+                            @else
+                            Tipo: Cliente
+                            @endif
 
                             @if(Auth::user() ->email == $user-> email)
                             <p>Conta que você está logado atualmente</p>
@@ -56,7 +65,7 @@
                     </template>
                 </div>
 
-    
+
                 @endforeach
                 @endif
 
