@@ -36,6 +36,10 @@ class ProductController extends Controller
         // }
 
         // $pesquisa = $request->input('pesquisa');
+  
+
+
+
 
         $pesquisa= request('pesquisa');
 
@@ -43,6 +47,7 @@ class ProductController extends Controller
 
         return view('product.index', ['product' => $product]);
 
+        
 
     }
 
