@@ -52,6 +52,7 @@
                                 <div class="mt-4">
                                      <x-input-label for="category" :value="__('Categoria')" class="text-lg"></x-input-label>
                                      <select required name="category">
+
                                          <option value=""> -- Selecione -- </option>
                                          <option value="grao">Grão</option>
                                          <option value="fruta">Fruta</option>
@@ -79,8 +80,8 @@
                             <input type="text" name="pesquisa" placeholder="Pesquisar produtos">
                             <x-primary-button class="git bg-green-900">Adicionar</x-primary-button>
 
-
                         </form>
+                        
                         <div class=" border rounded-md border-green-500">
                             @foreach ($product as $prod)
                             <p>{{ $prod->description }} ( R$ {{ $prod->price }})</p>
