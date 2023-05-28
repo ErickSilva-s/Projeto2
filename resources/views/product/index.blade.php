@@ -30,12 +30,12 @@
                      @if(Auth::user())
                     @if(Auth::user()->is_admin || (Auth::user()->is_vendedor))
                     <fieldset class="border p-2 mb-2 border-black rounded">
-                        <legend class="px-2 border rounded-md border-black">Adicionar novo produto</legend>
+                        <legend class="px-2 border rounded-md border-black" style="font-size:18px;">Adicionar novo produto</legend>
                         <form action="{{ route('product.store') }}" method="POST">
                             @csrf
-                            <div class="grid gap-2 grid-cols-2 mb-2">
+                            <div class="grid gap-2 grid-cols-2 mb-2 ">
                                 <div class="mt-4">
-                                    <x-input-label for="description" :value="__('Descrição')" />
+                                    <x-input-label for="description"  :value="__('Descrição')"/>
                                     <x-text-input id="description" class="block mt-1 w-full" type="text" name="description" required />
                                 </div>
 
@@ -46,7 +46,7 @@
 
                                 <div class="mt-4">
                                     <x-input-label for="price" :value="__('Preço')" />
-                                    <x-text-input id="price" class="block mt-1 w-full" type="number" step="0.01" name="price" required />
+                                    <x-text-input id="price" class="block mt-1 w-full " type="number" step="0.01" name="price" required />
                                 </div>
 
                                 <div class="mt-4">
@@ -78,10 +78,10 @@
                     <div>
                         <form action="{{ route('product.index') }}" method="GET">
                             <input type="text" name="pesquisa" placeholder="Pesquisar produtos">
-                            <x-primary-button class="git bg-green-900">Adicionar</x-primary-button>
+                            <x-primary-button class="git bg-green-900">Pesquisar</x-primary-button>
 
                         </form>
-                        
+
                         <div class=" border rounded-md border-green-500">
                             @foreach ($product as $prod)
                             <p>{{ $prod->description }} ( R$ {{ $prod->price }})</p>
