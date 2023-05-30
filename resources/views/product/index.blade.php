@@ -61,6 +61,7 @@
                                          <option value="ortalicas">Ortaliças</option>
                                          <option value="legumes">Legumes</option>
                                          <option value="tempero">Temperos</option>
+                                         <option value="outro">Outro</option>
                                      </select>
                                  </div>
                             </div>
@@ -78,7 +79,7 @@
                     <div>
                         <form action="{{ route('product.index') }}" method="GET">
                             <input type="text" name="pesquisa" placeholder="Pesquisar produtos">
-                            <x-primary-button class="git bg-green-900">Pesquisar</x-primary-button>
+                            <x-primary-button class="bg-green-900">Pesquisar</x-primary-button>
 
                         </form>
 
