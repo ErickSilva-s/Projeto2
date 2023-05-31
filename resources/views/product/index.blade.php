@@ -27,15 +27,15 @@
 
 
 
-                     @if(Auth::user())
+                    @if(Auth::user())
                     @if(Auth::user()->is_admin || (Auth::user()->is_vendedor))
                     <fieldset class="border p-2 mb-2 border-black rounded">
                         <legend class="px-2 border rounded-md border-black" style="font-size:18px;">Adicionar novo produto</legend>
-                        <form action="{{ route('product.store') }}" method="POST">
+                        <form action="{{ route('product.store') }}" method="POST" enctype="multipart/form-data" >
                             @csrf
                             <div class="grid gap-2 grid-cols-2 mb-2 ">
                                 <div class="mt-4">
-                                    <x-input-label for="description"  :value="__('Descrição')"/>
+                                    <x-input-label for="description" :value="__('Descrição')" />
                                     <x-text-input id="description" class="block mt-1 w-full" type="text" name="description" required />
                                 </div>
 
@@ -50,21 +50,38 @@
                                 </div>
 
                                 <div class="mt-4">
-                                     <x-input-label for="category" :value="__('Categoria')" class="text-lg"></x-input-label>
-                                     <select required name="category">
+                                    <x-input-label for="category" :value="__('Categoria')" class="text-lg"></x-input-label>
+                                    <select required name="category">
 
-                                         <option value=""> -- Selecione -- </option>
-                                         <option value="grao">Grão</option>
-                                         <option value="fruta">Fruta</option>
-                                         <option value="verdura">Verdura</option>
-                                         <option value="raiz">Raiz</option>
-                                         <option value="ortalicas">Ortaliças</option>
-                                         <option value="legumes">Legumes</option>
-                                         <option value="tempero">Temperos</option>
-                                         <option value="outro">Outro</option>
-                                     </select>
-                                 </div>
+                                        <option value=""> -- Selecione -- </option>
+                                        <option value="grao">Grão</option>
+                                        <option value="fruta">Fruta</option>
+                                        <option value="verdura">Verdura</option>
+                                        <option value="raiz">Raiz</option>
+                                        <option value="ortalicas">Ortaliças</option>
+                                        <option value="legumes">Legumes</option>
+                                        <option value="tempero">Temperos</option>
+                                        <option value="outro">Outro</option>
+                                    </select>
+                                </div>
+
+                            
+                                    <div class="mt-4">
+                                        <x-input-label for="imagem" :value="__('Imagem do Produto')" />
+                                        <input id="imagem" class="form-control-file" type="file" name="imagem" required />
+                                    </div>
+
+                                
                             </div>
+
+                            <!-- <form action="product" method="POST" enctype="multipart/form-data">
+                            @csrf
+                            <div class="mt-4">
+                                    <x-input-label for="imagem" :value="__('Imagem do Produto')" />
+                                    <input id="imagem" class="form-control-file" type="file" name="imagem" required />
+                                </div>
+
+                        </form> -->
 
                             <x-primary-button class="w-full bg-green-900">Adicionar</x-primary-button>
                         </form>
@@ -101,14 +118,18 @@
                     hover:bg-gray-300" x-data=" { showDelete: false, showEdit: false  } ">
 
                         <div class="flex justify-between flex-grow">
-                            @if(!Auth::user() || (Auth::user() ->is_admin) || (Auth::user() ->is_cliente)  && (Auth::user() ->is_cliente) &&  (!Auth::user()->is_vendedor))
+                            @if(!Auth::user() || (Auth::user() ->is_admin) || (Auth::user() ->is_cliente) && (Auth::user() ->is_cliente) && (!Auth::user()->is_vendedor))
 
                             Descrição: {{ $product-> description }} <br>
                             Estoque: {{ $product-> stock_product }} <br>
                             Valor: R$ {{ $product-> price }} <br>
-                            Categoria: {{ $product-> category }}
+                            Categoria: {{ $product-> category }} <br>
+                            Imagem: {{ $product-> imagem}}
+                            <!-- <img src="/img/imagemProducts{{ $product-> imagem}}"> -->
                             @endif
                         </div>
+
+                        <img src="/img/imagemProducts{{ $product-> imagem}}">
 
                         @if(( Auth::user() && Auth::user()->is_admin))
                         <div class="flex gap-2">

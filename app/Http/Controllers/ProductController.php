@@ -64,15 +64,46 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        Product::create([
-            'description' =>  $request ->description,
-            'stock_product' =>  $request ->stock_product,
-            'price' =>  $request ->price,
-            'category'  =>  $request ->category,
-            'user_id' => Auth::user()->id
+        // Product::create([
+        //     'description' =>  $request ->description,
+        //     'stock_product' =>  $request ->stock_product,
+        //     'price' =>  $request ->price,
+        //     'category'  =>  $request ->category,
+        //     'user_id' => Auth::user()->id
 
-        ]);
+        // ]);
 
+        $product = new Product;
+
+        $product -> description =  $request ->description;
+        $product -> stock_product =  $request ->stock_product;
+        $product -> price =  $request ->price;
+        $product -> category  =  $request ->category;
+        $product -> user_id = Auth::user()->id;
+
+
+
+
+        //Upload imagem
+
+        if($request->hasFile('imagem') && $request->file('imagem')->isValid()){
+            $requestImagem = $request->imagem;
+
+            $extension = $requestImagem->extension();
+
+            //esse md5 cria um hash da imagem para evitar que sejam salvos imagens iguais e concatena com a extenção;
+            $imagemName = md5($requestImagem->getClientOriginalName() . strtotime("now")) . "." . $extension;
+          
+            //Guarda o path da imagem no banco e ela em si fica em uma pagina dentro do projeto, ou seja ela fica no servidor ('img/imagemProducts');
+            $requestImagem->move(public_path('css/img/imgProduct'), $imagemName);
+
+            // 'imagem'=> $request -> $imagemName;
+
+            $product->imagem=$imagemName;
+
+        };
+
+        $product->save();
         return redirect('/product');
     }
 

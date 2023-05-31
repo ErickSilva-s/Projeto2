@@ -14,6 +14,7 @@ class Product extends Model
         'stock_product',
         'price',
         'category',
+        'imagem',
         'user_id'
     ];
 }
