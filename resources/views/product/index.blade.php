@@ -124,12 +124,11 @@
                             Estoque: {{ $product-> stock_product }} <br>
                             Valor: R$ {{ $product-> price }} <br>
                             Categoria: {{ $product-> category }} <br>
-                            Imagem: {{ $product-> imagem}}
-                            <!-- <img src="/img/imagemProducts{{ $product-> imagem}}"> -->
+                            <img src="{{ asset('/img/imgProduct/' . $product->imagem) }}" alt="Imagem do Produto" style="width: 200px; height:auto;"> 
                             @endif
                         </div>
 
-                        <img src="/img/imagemProducts{{ $product-> imagem}}">
+                        
 
                         @if(( Auth::user() && Auth::user()->is_admin))
                         <div class="flex gap-2">

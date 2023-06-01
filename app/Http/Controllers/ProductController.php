@@ -95,7 +95,7 @@ class ProductController extends Controller
             $imagemName = md5($requestImagem->getClientOriginalName() . strtotime("now")) . "." . $extension;
           
             //Guarda o path da imagem no banco e ela em si fica em uma pagina dentro do projeto, ou seja ela fica no servidor ('img/imagemProducts');
-            $requestImagem->move(public_path('css/img/imgProduct'), $imagemName);
+            $requestImagem->move(public_path('/img/imgProduct'), $imagemName);
 
             // 'imagem'=> $request -> $imagemName;
 
