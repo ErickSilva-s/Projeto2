@@ -3,12 +3,13 @@
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
             <!-- {{ __('Endereços')}}  -->
 
-            Olá, {{ Auth::user()->name }}! Seja bem vindo. <br>
+            Olá, {{ Auth::user()->name }}! Seja bem vindo ({{ Auth::user()->type }}) <br>
 
         </h2>
         <p> Você está logado com {{ Auth::user()->email }}. <br>
             {{ \Carbon\Carbon::now()->format('d/m/Y') }}
         </p>
+
     </x-slot>
 
     <div class="py-12 ">

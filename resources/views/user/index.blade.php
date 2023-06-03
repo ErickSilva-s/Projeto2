@@ -17,7 +17,7 @@
 
                     <h1 class="text-lg mt-4 font-bold text-center" style="font-size:24px;"> Usuários</h1>
 
-                    @if(Auth::user() ->is_admin)
+                    @if(Auth::user() ->type=='administrador')
                     @foreach (App\Models\user::all() as $user)
                     <div class="flex justify-between border-b mb-2 gap-4
                     hover:bg-gray-300" x-data=" { showDelete: false, showEdit: false  } ">
@@ -27,16 +27,9 @@
 
                             Nome:{{ $user-> name }} <br>
                             Email: {{ $user-> email }} <br>
+                            Tipo usuário: {{ $user-> type }}
 
-                            @if($user->is_admin)
-                            Tipo: Administrador
-                            @elseif($user->is_entregador)
-                            Tipo: Entregador
-                            @elseif($user->is_vendedor)
-                            Tipo: Vendedor
-                            @else
-                            Tipo: Cliente
-                            @endif
+
 
                             @if(Auth::user() ->email == $user-> email)
                             <p>Conta que você está logado atualmente</p>

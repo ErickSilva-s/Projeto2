@@ -5,16 +5,13 @@
         <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
 
 
-            @if(Auth::user())
-
-            Olá, {{ Auth::user()->name }}! <br>
-
+        @if(Auth::user())
+            Olá, {{ Auth::user()->name }}! ({{ Auth::user()->type }}) <br>
         </h2>
         <p> Você está logado com {{ Auth::user()->email }}. <br>
             {{ \Carbon\Carbon::now()->format('d/m/Y') }}
         </p>
         @endif
-
     </x-slot>
 
     <div class="py-12">
@@ -25,10 +22,8 @@
                     <h1 class="text-lg mt-4 font-bold text-center" style="font-size:24px;"> Produtos </h1>
 
 
-
-
                     @if(Auth::user())
-                    @if(Auth::user()->is_admin || (Auth::user()->is_vendedor))
+                    @if(Auth::user()->type=='administrador' || (Auth::user()->type=='vendedor'))
                     <fieldset class="border p-2 mb-2 border-black rounded">
                         <legend class="px-2 border rounded-md border-black" style="font-size:18px;">Adicionar novo produto</legend>
                         <form action="{{ route('product.store') }}" method="POST" enctype="multipart/form-data" >
@@ -58,30 +53,21 @@
                                         <option value="fruta">Fruta</option>
                                         <option value="verdura">Verdura</option>
                                         <option value="raiz">Raiz</option>
-                                        <option value="ortalicas">Ortaliças</option>
+                                        <option value="Hortalicas">Hortaliças</option>
                                         <option value="legumes">Legumes</option>
                                         <option value="tempero">Temperos</option>
                                         <option value="outro">Outro</option>
                                     </select>
                                 </div>
 
-                            
+
                                     <div class="mt-4">
                                         <x-input-label for="imagem" :value="__('Imagem do Produto')" />
                                         <input id="imagem" class="form-control-file" type="file" name="imagem" required />
                                     </div>
 
-                                
+
                             </div>
-
-                            <!-- <form action="product" method="POST" enctype="multipart/form-data">
-                            @csrf
-                            <div class="mt-4">
-                                    <x-input-label for="imagem" :value="__('Imagem do Produto')" />
-                                    <input id="imagem" class="form-control-file" type="file" name="imagem" required />
-                                </div>
-
-                        </form> -->
 
                             <x-primary-button class="w-full bg-green-900">Adicionar</x-primary-button>
                         </form>
@@ -111,26 +97,42 @@
 
 
 
+                    @if(!((Auth::user()->type=='vendedor') || (Auth::user()->type=='entregador')))
                     @foreach (App\Models\Product::all() as $product)
 
 
                     <div class="flex justify-between border-b mb-2 gap-4
                     hover:bg-gray-300" x-data=" { showDelete: false, showEdit: false  } ">
 
+                    @if(!Auth::user())
+                            <div class="flex justify-between border-b mb-2 gap-4
+                                    hover:bg-gray-300">
+
+                                Descrição: {{ $product-> description }} <br>
+                                Estoque: {{ $product-> stock_product }} <br>
+                                Valor: R$ {{ $product-> price }} <br>
+                                Categoria: {{ $product-> category }} <br>
+                                <img src="{{ asset('/img/imgProduct/' . $product->imagem) }}" alt="Imagem do Produto" style="width: 200px; height:auto;">
+
+                        </div>
+                        @endif
+
+                        @if(Auth::user())
+                        @if(!((Auth::user()->type=='vendedor') || (Auth::user()->type=='entregador')))
                         <div class="flex justify-between flex-grow">
-                            @if(!Auth::user() || (Auth::user() ->is_admin) || (Auth::user() ->is_cliente) && (Auth::user() ->is_cliente) && (!Auth::user()->is_vendedor))
 
                             Descrição: {{ $product-> description }} <br>
                             Estoque: {{ $product-> stock_product }} <br>
                             Valor: R$ {{ $product-> price }} <br>
                             Categoria: {{ $product-> category }} <br>
-                            <img src="{{ asset('/img/imgProduct/' . $product->imagem) }}" alt="Imagem do Produto" style="width: 200px; height:auto;"> 
+                            <img src="{{ asset('/img/imgProduct/' . $product->imagem) }}" alt="Imagem do Produto" style="width: 200px; height:auto;">
+                            @endif
                             @endif
                         </div>
 
-                        
 
-                        @if(( Auth::user() && Auth::user()->is_admin))
+
+                        @if(( Auth::user() && Auth::user()->type=='administrador'))
                         <div class="flex gap-2">
                             <div>
                                 <span class="cursor-pointer border rounded-md  px-2 bg-red-500 text-white" @click="showDelete = true ">Apagar</span>
@@ -177,11 +179,12 @@
 
                 @endif
                 @endforeach
+                @endif
 
 
                 @if(Auth::user())
                 @foreach (Auth::user()->myProducts as $product)
-                @if((Auth::user()->is_vendedor))
+                @if((Auth::user()->type=='vendedor'))
                 <div class="flex justify-between border-b mb-2 gap-4
                     hover:bg-gray-300" x-data=" { showDelete: false, showEdit: false  } ">
 
@@ -190,6 +193,7 @@
                         Estoque: {{ $product-> stock_product }} <br>
                         Valor: R$ {{ $product-> price }} <br>
                         Categoria: {{ $product-> category }}
+                        <img src="{{ asset('/img/imgProduct/' . $product->imagem) }}" alt="Imagem do Produto" style="width: 200px; height:auto;">
                     </div>
 
 

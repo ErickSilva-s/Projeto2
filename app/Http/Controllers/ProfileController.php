@@ -44,7 +44,7 @@ class ProfileController extends Controller
     public function destroy(Request $request, User $user): RedirectResponse
     {
 
-        if(Auth::user() ->is_admin) {
+        if(Auth::user() ->type=='administrador') {
             $user->delete();
             return Redirect::to('user');
         }
