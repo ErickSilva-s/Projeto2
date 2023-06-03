@@ -97,7 +97,6 @@
 
 
 
-                    @if(!((Auth::user()->type=='vendedor') || (Auth::user()->type=='entregador')))
                     @foreach (App\Models\Product::all() as $product)
 
 
@@ -179,7 +178,7 @@
 
                 @endif
                 @endforeach
-                @endif
+
 
 
                 @if(Auth::user())
