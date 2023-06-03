@@ -1,11 +1,26 @@
 <x-app-layout>
+
     <x-slot name="header">
+
+    @if(!Auth::user())
+    @if (Route::has('login'))
+    <div class="hidden fixed top-0 right-0 px-6 py-4 sm:block ">
+
+        <a href="{{ route('login') }}" class="text-sm text-gray-700 dark:text-gray-500 underline">Entrar</a>
+
+
+        @if (Route::has('register'))
+        <a href="{{ route('register') }}" class="ml-4 text-sm text-gray-700 dark:text-gray-500 underline">Cadastre-se</a>
+        @endif
+    </div>
+    @endif
+    @endif
 
 
         <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
 
 
-        @if(Auth::user())
+            @if(Auth::user())
             Olá, {{ Auth::user()->name }}! ({{ Auth::user()->type }}) <br>
         </h2>
         <p> Você está logado com {{ Auth::user()->email }}. <br>
@@ -26,7 +41,7 @@
                     @if(Auth::user()->type=='administrador' || (Auth::user()->type=='vendedor'))
                     <fieldset class="border p-2 mb-2 border-black rounded">
                         <legend class="px-2 border rounded-md border-black" style="font-size:18px;">Adicionar novo produto</legend>
-                        <form action="{{ route('product.store') }}" method="POST" enctype="multipart/form-data" >
+                        <form action="{{ route('product.store') }}" method="POST" enctype="multipart/form-data">
                             @csrf
                             <div class="grid gap-2 grid-cols-2 mb-2 ">
                                 <div class="mt-4">
@@ -61,10 +76,10 @@
                                 </div>
 
 
-                                    <div class="mt-4">
-                                        <x-input-label for="imagem" :value="__('Imagem do Produto')" />
-                                        <input id="imagem" class="form-control-file" type="file" name="imagem" required />
-                                    </div>
+                                <div class="mt-4">
+                                    <x-input-label for="imagem" :value="__('Imagem do Produto')" />
+                                    <input id="imagem" class="form-control-file" type="file" name="imagem" required />
+                                </div>
 
 
                             </div>
@@ -103,15 +118,15 @@
                     <div class="flex justify-between border-b mb-2 gap-4
                     hover:bg-gray-300" x-data=" { showDelete: false, showEdit: false  } ">
 
-                    @if(!Auth::user())
-                            <div class="flex justify-between border-b mb-2 gap-4
+                        @if(!Auth::user())
+                        <div class="flex justify-between border-b mb-2 gap-4
                                     hover:bg-gray-300">
 
-                                Descrição: {{ $product-> description }} <br>
-                                Estoque: {{ $product-> stock_product }} <br>
-                                Valor: R$ {{ $product-> price }} <br>
-                                Categoria: {{ $product-> category }} <br>
-                                <img src="{{ asset('/img/imgProduct/' . $product->imagem) }}" alt="Imagem do Produto" style="width: 200px; height:auto;">
+                            Descrição: {{ $product-> description }} <br>
+                            Estoque: {{ $product-> stock_product }} <br>
+                            Valor: R$ {{ $product-> price }} <br>
+                            Categoria: {{ $product-> category }} <br>
+                            <img src="{{ asset('/img/imgProduct/' . $product->imagem) }}" alt="Imagem do Produto" style="width: 200px; height:auto;">
 
                         </div>
                         @endif
