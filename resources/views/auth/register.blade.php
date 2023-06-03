@@ -17,15 +17,17 @@
         </div>
 
         <!-- User Type -->
-        <div class="mt-4">
+        <!-- <div class="mt-4">
         <x-input-label for="user_type" :value="__('Se cadastrar como:')" />
         <x-text-input id="user_type" class="block mt-1 w-full " type="text" name="user_type" list="user_types" />
         <datalist id="user_types">
-            <option value="Cliente" ></option>
-            <option value="Vendedor" ></option>
-            <option value="Entregador" ></option>
+            <option value="cliente" >Cliente</option>
+            <option value="vendedor" >Vendedor</option>
+            <option value="entregador" >Entregador</option>
         </datalist>
-        </div>
+        </div> -->
+
+
 
         <!-- Password -->
         <div class="mt-4">
@@ -42,6 +44,16 @@
 
             <x-text-input id="password_confirmation" class="block mt-1 w-full" type="password" name="password_confirmation" required autocomplete="new-password" />
 
+            <div>
+                <label for="type">{{ __('Tipo de usuário') }}</label>
+                <select name="type" id="type" required>
+                <option value=""> -- Selecione -- </option>
+                    <option value="cliente">Cliente</option>
+                    <option value="vendedor">Vendedor</option>
+                    <option value="entregador">Entregador</option>
+                </select>
+            </div>
+
             <x-input-error :messages="$errors->get('password_confirmation')" class="mt-2" />
         </div>
 
@@ -49,6 +61,8 @@
             <a class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" href="{{ route('login') }}">
                 {{ __('Already registered?') }}
             </a>
+
+
 
             <x-primary-button class="ml-4">
                 {{ __('Register') }}
