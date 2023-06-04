@@ -111,18 +111,7 @@
                             @endif
                         </div>
                         @endif
-                    </div>
-
-
-
-
-                        <br>
-
-
-
-
-
-
+                    </div><br>
 
                         @foreach (App\Models\Product::all() as $product)
 
