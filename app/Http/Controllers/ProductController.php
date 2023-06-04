@@ -12,23 +12,20 @@ class ProductController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
+        $pesquisa = $request->input('pesquisa');
 
-
-        $pesquisa = request('pesquisa');
-        if (Auth::user() && (Auth::user()->type == 'vendedor')) {
-            $user = Auth::user(); // Obtém o usuário atualmente autenticado (exemplo usando o Laravel)
-
-            $product = Product::where('description', 'like', '%' . $pesquisa . '%')
-                ->where('user_id', $user->id) // Adiciona a condição para buscar apenas os produtos do usuário atual
+        if (Auth::check() && Auth::user()->type == 'vendedor') {
+            $user = Auth::user();
+            $products = Product::where('description', 'like', '%' . $pesquisa . '%')
+                ->where('user_id', $user->id)
                 ->get();
-
-            return view('product.index', ['product' => $product]);
         } else {
-            $product = Product::where('description', 'like', '%' . $pesquisa . '%')->get();
-            return view('product.index', ['product' => $product]);
+            $products = Product::where('description', 'like', '%' . $pesquisa . '%')->get();
         }
+
+        return view('product.index', ['products' => $products, 'pesquisa' => $pesquisa]);
     }
 
     /**
@@ -80,10 +77,13 @@ class ProductController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Product $product)
-    {
-        //
-    }
+
+
+     public function show(Product $product)
+     {
+    //
+     }
+
 
     /**
      * Show the form for editing the specified resource.

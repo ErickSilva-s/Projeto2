@@ -32,12 +32,10 @@ Route::middleware('auth')->group(function () {
 
     Route::resource('address', AddressController::class);
 
-    Route::resource('product', ProductController::class);
     Route::resource('user', ProfileController::class);
 
 
 });
 Route::resource('product', ProductController::class);
-
 
 require __DIR__.'/auth.php';
