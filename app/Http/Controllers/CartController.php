@@ -41,7 +41,7 @@ class CartController extends Controller
         $user = auth()->user();
         $user->myCarts()->delete();
 
-        return redirect()->back()->with('success');
+        return redirect('/cart');
     }
 
     public function update(Request $request, CartItem $cartItem)
@@ -55,6 +55,15 @@ class CartController extends Controller
 
         return redirect('/cart')->with('success', 'Quantidade do produto atualizada com sucesso!');
     }
+
+
+    public function completePurchase()
+{
+
+    $user = Auth::user();
+    $user->myCarts()->delete();
+    return redirect()->route('purchase.success');
+}
 
 }
 ?>

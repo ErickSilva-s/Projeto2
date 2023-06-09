@@ -40,8 +40,15 @@
 
                     @if(count(Auth::user()->myCarts) > 0)
 
+
+
                     <div class="flex justify-end">
-                        <x-primary-button class="bg-green-900 text-center">Finalizar compra</x-primary-button>
+                        <form action="{{ route('purchase.complete') }}" method="POST">
+                            @csrf
+                            <button type="submit" class="bg-green-900 text-center">
+                                <x-primary-button class="bg-green-900 text-center">Finalizar compra</x-primary-button>
+                            </button>
+                        </form>
                     </div><br>
 
                     @foreach (Auth::user()->myCarts as $cartItem)
@@ -87,7 +94,7 @@
                     <br>
                     <h1 class="text-lg mt-4 text-center font-bold">Valor total do carrinho R$: {{ $totalCarrinho }}</h1>
 
-                    <form action="{{ route('cart.empty') }}" method="post">
+                    <form action="{{ route('cart.empty') }}" method="POST">
                         @csrf
                         <x-primary-button>Esvaziar Carrinho</x-primary-button>
                     </form><br>

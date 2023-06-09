@@ -39,6 +39,14 @@ Route::middleware('auth')->group(function () {
     Route::delete('/cart/{cartItem}', [CartController::class, 'destroy'])->name('cart.destroy');
     Route::post('/cart/empty', [CartController::class, 'empty'])->name('cart.empty');
     Route::put('/cart/{cartItem}', [CartController::class, 'update'])->name('cart.update');
+
+    Route::get('/purchase-success', function () {
+        return view('purchase-success');
+    })->name('purchase.success');
+    Route::post('/purchase-complete', [CartController::class, 'completePurchase'])->name('purchase.complete');
+
+
+
 });
 Route::resource('product', ProductController::class);
 
