@@ -59,6 +59,8 @@
                         Valor por unidade/kg: R$ {{ $product->price }} <br>
                         Categoria: {{ $product->category }} <br>
                         Quantidade: {{ $cartItem->quantity }} <br>
+                        Vendedido por: {{ $product->User->name}} <br>
+                        
                         Valor total do produto R$: {{ $cartItem->quantity * $product->price }}
                         <img src="{{ asset('/img/imgProduct/' . $product->imagem) }}" alt="Imagem do Produto" style="width: 200px; height:auto;">
 

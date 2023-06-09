@@ -30,10 +30,16 @@
         <div class="mt-4">
             <x-input-label for="password_confirmation" :value="__('Confimar Senha')" />
 
+
             <x-text-input id="password_confirmation" class="block mt-1 w-full" type="password" name="password_confirmation" required autocomplete="new-password" />
+            
+            <br>
 
             <div>
                 <label for="type">{{ __('Tipo de usuário') }}</label>
+
+                <br>
+
                 <select name="type" id="type" required>
                 <option value=""> -- Selecione -- </option>
                     <option value="cliente">Cliente</option>

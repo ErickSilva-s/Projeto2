@@ -30,7 +30,7 @@
                     <h1 class="text-2xl mt-4 font-bold text-center"> Produtos </h1>
 
                     @if(Auth::user())
-                    @if(Auth::user()->type=='administrador' || (Auth::user()->type=='vendedor'))
+                    @if (Auth::user()->type=='vendedor')
                     <fieldset class="border p-2 mb-2 border-black rounded">
                         <legend class="px-2 border rounded-md border-black" style="font-size:18px;">Adicionar novo produto</legend>
                         <form action="{{ route('product.store') }}" method="POST" enctype="multipart/form-data">
@@ -109,7 +109,9 @@
                         Estoque: {{ $product-> stock_product }} <br>
                         Valor: R$ {{ $product-> price }} <br>
                         Categoria: {{ $product-> category }} <br>
+                        Vendedido por: {{ $product->User->name}} <br>
                         <img src="{{ asset('/img/imgProduct/' . $product->imagem) }}" alt="Imagem do Produto" style="width: 200px; height:auto;">
+
 
                     </div>
                     @endif
@@ -143,7 +145,9 @@
                             Estoque: {{ $product-> stock_product }} <br>
                             Valor: R$ {{ $product-> price }} <br>
                             Categoria: {{ $product-> category }} <br>
+                            Vendido por: {{ $product->User->name}} <br>
                             <img src="{{ asset('/img/imgProduct/' . $product->imagem) }}" alt="Imagem do Produto" style="width: 200px; height:auto;">
+                           
 
                             <form action="{{ route('cart.add') }}" method="POST">
                                 @if(Auth::user()->type=='cliente')
@@ -165,8 +169,8 @@
                     </div>
 
 
-                    @if(( Auth::user() && Auth::user()->type=='administrador'))
-                    <div class="flex gap-2">
+                     <!--@if(( Auth::user() && Auth::user()->type=='administrador'))
+                       <div class="flex gap-2">
                         <div>
                             <span class="cursor-pointer border rounded-md  px-2 bg-red-500 text-white" @click="showDelete = true ">Apagar</span>
                         </div>
@@ -207,10 +211,14 @@
                         </div>
                     </div>
                 </template>
+                       
+            </div> 
 
-            </div>
+            @endif  -->
 
-            @endif
+            </div> 
+
+
             @endforeach
             @endif
             @endif
@@ -231,7 +239,8 @@
                     Descrição: {{ $product-> description }} <br>
                     Estoque: {{ $product-> stock_product }} <br>
                     Valor: R$ {{ $product-> price }} <br>
-                    Categoria: {{ $product-> category }}
+                    Categoria: {{ $product-> category }} <br>
+                    Vendido por: {{ $product->User->name}} <br>
                     <img src="{{ asset('/img/imgProduct/' . $product->imagem) }}" alt="Imagem do Produto" style="width: 200px; height:auto;">
                 </div>
 
