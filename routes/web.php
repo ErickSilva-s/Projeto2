@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AddressController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\CartController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
@@ -31,11 +32,14 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
     Route::resource('address', AddressController::class);
-
     Route::resource('user', ProfileController::class);
 
-
+    Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
+    Route::post('/cart/add', [CartController::class, 'add'])->name('cart.add');
+    Route::delete('/cart/{cartItem}', [CartController::class, 'destroy'])->name('cart.destroy');
+    Route::post('/cart/empty', [CartController::class, 'empty'])->name('cart.empty');
+    Route::put('/cart/{cartItem}', [CartController::class, 'update'])->name('cart.update');
 });
 Route::resource('product', ProductController::class);
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';

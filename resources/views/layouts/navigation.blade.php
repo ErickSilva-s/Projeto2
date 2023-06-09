@@ -34,9 +34,17 @@
 
             <!-- Settings Dropdown -->
             <div class="hidden sm:flex sm:items-center sm:ml-6">
+            @if(Auth::user() ->type=='cliente')
+            <x-nav-link :href="route('cart.index')" :active="request()->routeIs('cart.index')">
+                        {{ __('Meu carrinho') }}
+                        <img src="{{ asset('meu_carrinho2.png') }}" alt="Ícone do carrinho" class="h-6 w-6">
+                    </x-nav-link>
+            @endif
+
                 <x-dropdown align="right" width="48">
                     <x-slot name="trigger">
                         <button class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-black bg-green-400 hover:text-gray-700 focus:outline-none transition ease-in-out duration-150">
+
                             <div>{{ Auth::user()->name }} ({{ Auth::user()->type }})</div>
 
                             <div class="ml-1">

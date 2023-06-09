@@ -2,12 +2,14 @@
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
 
-            Olá, {{ Auth::user()->name }}! <br>
+                Olá, {{ Auth::user()->name }}! <br>
 
-        </h2>
-        <p> Você está logado com {{ Auth::user()->email }}. <br>
-            {{ \Carbon\Carbon::now()->format('d/m/Y') }}
-        </p>
+                        </h2>
+                        <p> Você está logado com {{ Auth::user()->email }}. <br>
+                {{ \Carbon\Carbon::now()->format('d/m/Y') }}
+                        </p>
+
+
     </x-slot>
 
     <div class="py-12">
@@ -15,7 +17,7 @@
             <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900 dark:text-gray-100">
 
-                    <h1 class="text-lg mt-4 font-bold text-center" style="font-size:24px;"> Usuários</h1>
+                    <h1 class="text-2xl mt-4 font-bold text-center"> Usuários</h1>
 
                     @if(Auth::user() ->type=='administrador')
                     @foreach (App\Models\user::all() as $user)
@@ -25,7 +27,7 @@
                         <div class="flex justify-between flex-grow">
 
 
-                            Nome:{{ $user-> name }} <br>
+                            Nome: {{ $user-> name }} <br>
                             Email: {{ $user-> email }} <br>
                             Tipo usuário: {{ $user-> type }}
 

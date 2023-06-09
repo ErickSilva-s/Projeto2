@@ -3,24 +3,15 @@
     <x-slot name="header">
 
         @if(!Auth::user())
-        @if (Route::has('login'))
         <div class="hidden fixed top-0 right-0 px-6 py-4 sm:block ">
-
             <a href="{{ route('login') }}" class="text-sm text-gray-700 dark:text-gray-500 underline">Entrar</a>
-
-
-            @if (Route::has('register'))
             <a href="{{ route('register') }}" class="ml-4 text-sm text-gray-700 dark:text-gray-500 underline">Cadastre-se</a>
-            @endif
         </div>
         @endif
-        @endif
 
 
+        @if(Auth::user())
         <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-
-
-            @if(Auth::user())
             Olá, {{ Auth::user()->name }}! ({{ Auth::user()->type }}) <br>
         </h2>
         <p> Você está logado com {{ Auth::user()->email }}. <br>
@@ -34,8 +25,9 @@
             <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900 dark:text-gray-100">
 
-                    <h1 class="text-lg mt-4 font-bold text-center" style="font-size:24px;"> Produtos </h1>
 
+
+                    <h1 class="text-2xl mt-4 font-bold text-center"> Produtos </h1>
 
                     @if(Auth::user())
                     @if(Auth::user()->type=='administrador' || (Auth::user()->type=='vendedor'))
@@ -80,16 +72,11 @@
                                     <x-input-label for="imagem" :value="__('Imagem do Produto')" />
                                     <input id="imagem" class="form-control-file" type="file" name="imagem" required />
                                 </div>
-
-
                             </div>
 
                             <x-primary-button class="w-full bg-green-900">Adicionar</x-primary-button>
                         </form>
                     </fieldset>
-
-
-                    <h2 class="text-lg font-bold"> Produtos cadastrados: </h2>
 
                     @endif
                     @endif
@@ -99,7 +86,6 @@
                             <input type="text" name="pesquisa" placeholder="Pesquisar produtos" value="{{ $pesquisa ?? '' }}">
                             <x-primary-button class="bg-green-900 ">Pesquisar</x-primary-button>
                         </form>
-
                         @if (!empty($pesquisa))
                         <div class="border rounded-md border-green-500">
                             @if ($products->count() > 0)
@@ -113,159 +99,196 @@
                         @endif
                     </div><br>
 
-                        @foreach (App\Models\Product::all() as $product)
+                    @if(!Auth::user())
 
-
-                        <div class="flex justify-between border-b mb-2 gap-4
-                    hover:bg-gray-300" x-data=" { showDelete: false, showEdit: false  } ">
-
-
-
+                    @foreach (App\Models\Product::all() as $product)
                     @if(!Auth::user())
                     <div class="flex justify-between border-b mb-2 gap-4
-                    hover:bg-gray-300">
-
-                                Descrição: {{ $product-> description }} <br>
-                                Estoque: {{ $product-> stock_product }} <br>
-                                Valor: R$ {{ $product-> price }} <br>
-                                Categoria: {{ $product-> category }} <br>
-                                <img src="{{ asset('/img/imgProduct/' . $product->imagem) }}" alt="Imagem do Produto" style="width: 200px; height:auto;">
-
-                            </div>
-                            @endif
-
-                            @if(Auth::user())
-                            @if(!((Auth::user()->type=='vendedor') || (Auth::user()->type=='entregador')))
-                            <div class="flex justify-between flex-grow">
-
-
-                                Descrição: {{ $product-> description }} <br>
-                                Estoque: {{ $product-> stock_product }} <br>
-                                Valor: R$ {{ $product-> price }} <br>
-                                Categoria: {{ $product-> category }} <br>
-                                <img src="{{ asset('/img/imgProduct/' . $product->imagem) }}" alt="Imagem do Produto" style="width: 200px; height:auto;">
-                                @endif
-                                @endif
-                            </div>
-
-
-
-                            @if(( Auth::user() && Auth::user()->type=='administrador'))
-                            <div class="flex gap-2">
-                                <div>
-                                    <span class="cursor-pointer border rounded-md  px-2 bg-red-500 text-white" @click="showDelete = true ">Apagar</span>
-                                </div>
-                                <div>
-                                    <span class="cursor-pointer px-2 bg-blue-500 border rounded-md text-white" @click="showEdit = true ">Editar </span>
-                                </div>
-                            </div>
-
-                            <template x-if="showDelete">
-                                <div class="absolute top-0 button-0 left-0 right-0 bg-gray-800 bg-opacity-20 z-0">
-                                    <div class="w-96 bg-white p-4 absolute left-1/4 right-1/4 top-1/4 z-10 ">
-                                        <h2 class="text-xl font-bold text-center">Você tem certeza que quer apagar?</h2>
-                                        <form action="{{ route('product.destroy', $product )}}" method="POST">
-                                            @csrf
-                                            @method('delete')
-                                            <x-danger-button class="bg-red-300 hover:bg-red-500"> Apagar </x-danger-button>
-                                        </form>
-                                        <x-primary-button class="w-full" @click="showDelete = false">Cancelar</x-primary-button>
-                                    </div>
-                                </div>
-                        </div>
-                        </template>
-
-                        <template x-if="showEdit">
-                            <div class="absolute top-0 button-0 left-0 right-0 bg-gray-800 bg-opacity-20 z-0">
-                                <div class="w-96 bg-white p-4 absolute left-1/4 right-1/4 top-1/4 z-10 ">
-                                    <h2 class="text-xl font-bold text-center">{{ $product ->description }} | {{ $product->price}} </h2>
-                                    <form class="my-4" action=" {{ route('product.destroy', $product) }}" method="POST">
-                                        @csrf
-                                        @method('PUT')
-                                        <x-text-input name="description" placeholder="Descrição" value="{{ $product->description }}" required></x-text-input>
-                                        <x-text-input name="stock_product" placeholder="Estoque" value="{{ $product->stock_product }}" required></x-text-input>
-                                        <x-text-input name="price" placeholder="Preço" value="{{ $product->price }}" required></x-text-input>
-                                        <x-text-input name="category" placeholder="Categoria" value="{{ $product->category }}" required></x-text-input>
-                                        <x-primary-button>Editar</x-primary-button>
-                                    </form>
-                                    <x-primary-button @click="showEdit = false" class="w-full">Cancelar</x-primary-button>
-                                </div>
-                            </div>
-                        </template>
+                        hover:bg-gray-300">
+                        Descrição: {{ $product-> description }} <br>
+                        Estoque: {{ $product-> stock_product }} <br>
+                        Valor: R$ {{ $product-> price }} <br>
+                        Categoria: {{ $product-> category }} <br>
+                        <img src="{{ asset('/img/imgProduct/' . $product->imagem) }}" alt="Imagem do Produto" style="width: 200px; height:auto;">
 
                     </div>
-
                     @endif
                     @endforeach
+                    @endif
 
-
+                    @if (session('status'))
+                    <div x-data="{show:true}">
+                        <div class="p-4 bg-green-300 w-full" x-show="show">
+                            {{ session('status') }}
+                            <span class="float-right cursor-point" x-on:click="show=false">&times;</span>
+                        </div>
+                    </div>
+                    @endif
 
                     @if(Auth::user())
-                    @foreach (Auth::user()->myProducts as $product)
-                    @if((Auth::user()->type=='vendedor'))
+                    @if(!((Auth::user()->type=='vendedor') || (Auth::user()->type=='entregador')))
+                    <h2 class="text-lg font-bold bg-text-black text-center"> Produtos cadastrados: </h2>
+
+
+                    @foreach (App\Models\Product::all() as $product)
+
+
                     <div class="flex justify-between border-b mb-2 gap-4
                     hover:bg-gray-300" x-data=" { showDelete: false, showEdit: false  } ">
 
                         <div class="flex justify-between flex-grow">
+
+
                             Descrição: {{ $product-> description }} <br>
                             Estoque: {{ $product-> stock_product }} <br>
                             Valor: R$ {{ $product-> price }} <br>
-                            Categoria: {{ $product-> category }}
+                            Categoria: {{ $product-> category }} <br>
                             <img src="{{ asset('/img/imgProduct/' . $product->imagem) }}" alt="Imagem do Produto" style="width: 200px; height:auto;">
+
+                            <form action="{{ route('cart.add') }}" method="POST">
+                                @if(Auth::user()->type=='cliente')
+                                @csrf
+
+                                <input type="hidden" name="product_id" value="{{ $product->id }}" required>
+                                <input type="hidden" name="user_id" value="{{ Auth::user()->id }}" required>
+                                <x-input-label for="quantity" :value="__('Quantidade')" />
+
+                                <input type="number" name="quantity" value="1" min="1" max="{{ $product-> stock_product }}" required>
+
+                                <x-primary-button>Adicionar ao carrinho</x-primary-button>
+                            </form>
+
+
+
                         </div>
-
-
-                        <div class="flex gap-2">
-                            <div>
-                                <span class="cursor-pointer px-2 bg-red-500 text-white" @click="showDelete = true ">Apagar</span>
-                            </div>
-                            <div>
-                                <span class="cursor-pointer px-2 bg-blue-500 text-white" @click="showEdit = true ">Editar </span>
-                            </div>
-                        </div>
-
-                        <template x-if="showDelete">
-                            <div class="absolute top-0 button-0 left-0 right-0 bg-gray-800 bg-opacity-20 z-0">
-                                <div class="w-96 bg-white p-4 absolute left-1/4 right-1/4 top-1/4 z-10 ">
-                                    <h2 class="text-xl font-bold text-center">Você tem certeza que quer apagar?</h2>
-                                    <form action="{{ route('product.destroy', $product )}}" method="POST">
-                                        @csrf
-                                        @method('delete')
-                                        <x-danger-button class="bg-red-300 hover:bg-red-500"> Apagar </x-danger-button>
-                                    </form>
-                                    <x-primary-button class="w-full" @click="showDelete = false">Cancelar</x-primary-button>
-                                </div>
-                            </div>
+                        @endif
                     </div>
-                    </template>
 
-                    <template x-if="showEdit">
+
+                    @if(( Auth::user() && Auth::user()->type=='administrador'))
+                    <div class="flex gap-2">
+                        <div>
+                            <span class="cursor-pointer border rounded-md  px-2 bg-red-500 text-white" @click="showDelete = true ">Apagar</span>
+                        </div>
+                        <div>
+                            <span class="cursor-pointer px-2 bg-blue-500 border rounded-md text-white" @click="showEdit = true ">Editar </span>
+                        </div>
+                    </div>
+
+                    <template x-if="showDelete">
                         <div class="absolute top-0 button-0 left-0 right-0 bg-gray-800 bg-opacity-20 z-0">
                             <div class="w-96 bg-white p-4 absolute left-1/4 right-1/4 top-1/4 z-10 ">
-                                <h2 class="text-xl font-bold text-center">{{ $product ->description }} | {{ $product->price}} </h2>
-                                <form class="my-4" action=" {{ route('product.destroy', $product) }}" method="POST">
+                                <h2 class="text-xl font-bold text-center">Você tem certeza que quer apagar?</h2>
+                                <form action="{{ route('product.destroy', $product )}}" method="POST">
                                     @csrf
-                                    @method('PUT')
-                                    <x-text-input name="description" placeholder="Descrição" value="{{ $product->description }}" required></x-text-input>
-                                    <x-text-input name="stock_product" placeholder="Estoque" value="{{ $product->stock_product }}" required></x-text-input>
-                                    <x-text-input name="price" placeholder="Preço" value="{{ $product->price }}" required></x-text-input>
-                                    <x-text-input name="category" placeholder="Categoria" value="{{ $product->category }}" required></x-text-input>
-                                    <x-primary-button>Editar</x-primary-button>
+                                    @method('delete')
+                                    <x-danger-button class="bg-red-300 hover:bg-red-500"> Apagar </x-danger-button>
                                 </form>
-                                <x-primary-button @click="showEdit = false" class="w-full">Cancelar</x-primary-button>
+                                <x-primary-button class="w-full" @click="showDelete = false">Cancelar</x-primary-button>
                             </div>
                         </div>
-                    </template>
-
                 </div>
+                </template>
 
-                @endif
-                @endforeach
-                @endif
-
+                <template x-if="showEdit">
+                    <div class="absolute top-0 button-0 left-0 right-0 bg-gray-800 bg-opacity-20 z-0">
+                        <div class="w-96 bg-white p-4 absolute left-1/4 right-1/4 top-1/4 z-10 ">
+                            <h2 class="text-xl font-bold text-center">{{ $product ->description }} | {{ $product->price}} </h2>
+                            <form class="my-4" action=" {{ route('product.destroy', $product) }}" method="POST">
+                                @csrf
+                                @method('PUT')
+                                <x-text-input name="description" placeholder="Descrição" value="{{ $product->description }}" required></x-text-input>
+                                <x-text-input name="stock_product" placeholder="Estoque" value="{{ $product->stock_product }}" required></x-text-input>
+                                <x-text-input name="price" placeholder="Preço" value="{{ $product->price }}" required></x-text-input>
+                                <x-text-input name="category" placeholder="Categoria" value="{{ $product->category }}" required></x-text-input>
+                                <x-primary-button>Editar</x-primary-button>
+                            </form>
+                            <x-primary-button @click="showEdit = false" class="w-full">Cancelar</x-primary-button>
+                        </div>
+                    </div>
+                </template>
 
             </div>
+
+            @endif
+            @endforeach
+            @endif
+            @endif
+
+
+
+            @if(Auth::user())
+            @if((Auth::user()->type=='vendedor'))
+            @if(count(Auth::user()->myProducts) > 0)
+
+            <h1 class="text-lg mt-4 font-bold text-center" style="font-size:18px;"> Seus produtos cadastrados </h1>
+
+            @foreach (Auth::user()->myProducts as $product)
+            <div class="flex justify-between border-b mb-2 gap-4
+                    hover:bg-gray-300" x-data=" { showDelete: false, showEdit: false  } ">
+
+                <div class="flex justify-between flex-grow">
+                    Descrição: {{ $product-> description }} <br>
+                    Estoque: {{ $product-> stock_product }} <br>
+                    Valor: R$ {{ $product-> price }} <br>
+                    Categoria: {{ $product-> category }}
+                    <img src="{{ asset('/img/imgProduct/' . $product->imagem) }}" alt="Imagem do Produto" style="width: 200px; height:auto;">
+                </div>
+
+
+                <div class="flex gap-2">
+                    <div>
+                        <span class="cursor-pointer px-2 bg-red-500 text-white" @click="showDelete = true ">Apagar</span>
+                    </div>
+                    <div>
+                        <span class="cursor-pointer px-2 bg-blue-500 text-white" @click="showEdit = true ">Editar </span>
+                    </div>
+                </div>
+
+                <template x-if="showDelete">
+                    <div class="absolute top-0 button-0 left-0 right-0 bg-gray-800 bg-opacity-20 z-0">
+                        <div class="w-96 bg-white p-4 absolute left-1/4 right-1/4 top-1/4 z-10 ">
+                            <h2 class="text-xl font-bold text-center">Você tem certeza que quer apagar?</h2>
+                            <form action="{{ route('product.destroy', $product )}}" method="POST">
+                                @csrf
+                                @method('delete')
+                                <x-danger-button class="bg-red-300 hover:bg-red-500"> Apagar </x-danger-button>
+                            </form>
+                            <x-primary-button class="w-full" @click="showDelete = false">Cancelar</x-primary-button>
+                        </div>
+                    </div>
+            </div>
+            </template>
+
+            <template x-if="showEdit">
+                <div class="absolute top-0 button-0 left-0 right-0 bg-gray-800 bg-opacity-20 z-0">
+                    <div class="w-96 bg-white p-4 absolute left-1/4 right-1/4 top-1/4 z-10 ">
+                        <h2 class="text-xl font-bold text-center">{{ $product ->description }} | {{ $product->price}} </h2>
+                        <form class="my-4" action=" {{ route('product.destroy', $product) }}" method="POST">
+                            @csrf
+                            @method('PUT')
+                            <x-text-input name="description" placeholder="Descrição" value="{{ $product->description }}" required></x-text-input>
+                            <x-text-input name="stock_product" placeholder="Estoque" value="{{ $product->stock_product }}" required></x-text-input>
+                            <x-text-input name="price" placeholder="Preço" value="{{ $product->price }}" required></x-text-input>
+                            <x-text-input name="category" placeholder="Categoria" value="{{ $product->category }}" required></x-text-input>
+                            <x-primary-button>Editar</x-primary-button>
+                        </form>
+                        <x-primary-button @click="showEdit = false" class="w-full">Cancelar</x-primary-button>
+                    </div>
+                </div>
+            </template>
+
         </div>
+
+        @endforeach
+        @else
+        <h1 class="text-lg font-bold bg-text-black text-center"> Você ainda não tem nenhum produto cadastrado! </h1>
+        @endif
+        @endif
+        @endif
+
+    </div>
+    </div>
     </div>
     </div>
 

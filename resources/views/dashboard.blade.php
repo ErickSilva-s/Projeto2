@@ -17,7 +17,7 @@
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900">
 
-                    <h1 class="text-lg mt-4 font-bold text-center" style="font-size:24px;"> Endereços </h1>
+                    <h1 class="text-2xl mt-4 font-bold text-center" > Endereços </h1>
 
 
                     <fieldset class="border p-2 mb-2 border-black rounded">
@@ -47,7 +47,7 @@
                                 </div>
                             </div>
 
-                            <x-primary-button class="w-full bg-green-900 "> Adicionar </x-primary-button>
+                            <x-primary-button class="w-full bg-green-900"> Adicionar </x-primary-button>
 
 
 
@@ -55,7 +55,9 @@
                     </fieldset>
                     <br>
 
-                    <h2 class="text-lg font-bold bg-text-black"> Seus Endereços: </h2> <br>
+                    @if(count(Auth::user()->myAddress) > 0)
+
+                    <h2 class="text-lg font-bold bg-text-black text-center"> Seus Endereços cadastrados: </h2> <br>
 
                     @foreach(Auth::user()->myAddress as $address)
 
@@ -119,6 +121,12 @@
 
                     </div>
                     @endforeach
+
+                    @else
+                    <h2 class="text-lg font-bold bg-text-black text-center"> Você ainda não tem nenhum endereço cadastrado! </h2>
+                    @endif
+
+
                 </div>
             </div>
         </div>
