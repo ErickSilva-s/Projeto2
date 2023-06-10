@@ -23,14 +23,14 @@ class CartController extends Controller
             'user_id' => Auth::user()->id
 
         ]);
-
-        return redirect('/product') ->with('status', 'Produto adicionado ao carrinho');
+        
+            return redirect('/product') ->with('status', 'Produto adicionado ao carrinho');   
     }
 
     public function destroy(CartItem $cartItem)
     {
         $cartItem->delete();
-
+        
         return redirect()->back()->with('remove', 'Produto removido do carrinho com sucesso!');
     }
 

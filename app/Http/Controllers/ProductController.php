@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Product;
+use Illuminate\Auth\Events\Validated;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -41,6 +42,13 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
+
+        $request->validate([
+            'imagem' => 'required|file|mimes:jpeg,png,jpg|max:2048',
+            // o mimes especifica o tipo dos arquivos; o max esta especificando o tamanho em kilobyte.
+        ], ['imagem.mimes' => 'O tipo de arquivo enviado não é suportado. Por favor, envie um arquivo JPEG, PNG ou JPG.',
+    ]);
+    
         $product = new Product;
 
         $product->description =  $request->description;
@@ -68,10 +76,14 @@ class ProductController extends Controller
             // 'imagem'=> $request -> $imagemName;
 
             $product->imagem = $imagemName;
-        };
+        }
+
+
+
 
         $product->save();
-        return redirect('/product');
+        return redirect('/product')->with('success', 'Produto adicionado com sucesso!!');      
+    
     }
 
     /**
@@ -79,10 +91,13 @@ class ProductController extends Controller
      */
 
 
-     public function show(Product $product)
+     public function show($id)
      {
-    //
+         $product = Product::findOrFail($id);
+     
+         return view('product.show', compact('product'));
      }
+     
 
 
     /**
