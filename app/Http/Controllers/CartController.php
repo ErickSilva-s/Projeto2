@@ -17,20 +17,34 @@ class CartController extends Controller
     }
     public function add(Request $request)
     {
-        CartItem::create([
-            'product_id' => $request->product_id,
-            'quantity' => $request->quantity,
-            'user_id' => Auth::user()->id
+        $productId = $request->product_id;
+        $userId = Auth::user()->id;
 
+        // Verificar se o produto já está no carrinho
+        $existingItem = CartItem::where('product_id', $productId)
+                                ->where('user_id', $userId)
+                                ->first();
+
+        if ($existingItem) {
+            // O produto já está no carrinho, você pode escolher como lidar com isso
+            return redirect('/product')->with('status', 'O produto já está no carrinho');
+        }
+
+        // O produto não está no carrinho, então pode ser adicionado
+        CartItem::create([
+            'product_id' => $productId,
+            'quantity' => $request->quantity,
+            'user_id' => $userId
         ]);
-        
-            return redirect('/product') ->with('status', 'Produto adicionado ao carrinho');   
+
+        return redirect('/product')->with('status', 'Produto adicionado ao carrinho');
     }
+
 
     public function destroy(CartItem $cartItem)
     {
         $cartItem->delete();
-        
+
         return redirect()->back()->with('remove', 'Produto removido do carrinho com sucesso!');
     }
 
