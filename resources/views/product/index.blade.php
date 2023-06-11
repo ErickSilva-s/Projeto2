@@ -112,7 +112,10 @@
                         <div class="border rounded-md border-green-500">
                             @if ($products->count() > 0)
                             @foreach ($products as $product)
-                            {{ $product->description }} (R$ {{ $product->price }})
+                            <div>
+                                <a href="{{ route('product.show', $product->id) }}">
+                                    {{ $product->description }} (R$ {{ $product->price }})
+                            </div>
                             @endforeach
                             @else
                             <p>Nenhum resultado encontrado.</p>
@@ -133,8 +136,10 @@
                         Categoria: {{ $product-> category }} <br>
                         Vendedido por: {{ $product->User->name}} <br>
                         <img src="{{ asset('/img/imgProduct/' . $product->imagem) }}" alt="Imagem do Produto" style="width: 200px; height:auto;">
+                        <div>
+                            <x-primary-button><a href="{{ route('product.show', $product->id) }}">Ver Mais</a></x-primary-button>
+                        </div>
 
-                        <x-primary-button><a href="{{ route('product.show', $product->id) }}">Ver Mais</a></x-primary-button>
 
 
                     </div>
@@ -191,38 +196,38 @@
 
 
 
-                        @endif
-                    </div>
-
-
-                 @if(( Auth::user() && Auth::user()->type=='administrador'))
-                       <div class="flex gap-2">
-                        <div>
-                            <span class="cursor-pointer border rounded-md  px-2 bg-red-500 text-white" @click="showDelete = true ">Apagar</span>
+                            @endif
                         </div>
 
-                        <!-- <div>
+
+                        @if(( Auth::user() && Auth::user()->type=='administrador'))
+                        <div class="flex gap-2">
+                            <div>
+                                <span class="cursor-pointer border rounded-md  px-2 bg-red-500 text-white" @click="showDelete = true ">Apagar</span>
+                            </div>
+
+                            <!-- <div>
                             <span class="cursor-pointer px-2 bg-blue-500 border rounded-md text-white" @click="showEdit = true ">Editar </span>
                         </div>-->
 
-                    </div>
-
-                    <template x-if="showDelete">
-                        <div class="absolute top-0 button-0 left-0 right-0 bg-gray-800 bg-opacity-20 z-0">
-                            <div class="w-96 bg-white p-4 absolute left-1/4 right-1/4 top-1/4 z-10 ">
-                                <h2 class="text-xl font-bold text-center">Você tem certeza que quer apagar?</h2>
-                                <form action="{{ route('product.destroy', $product )}}" method="POST">
-                                    @csrf
-                                    @method('delete')
-                                    <x-danger-button class="bg-red-300 hover:bg-red-500"> Apagar </x-danger-button>
-                                </form>
-                                <x-primary-button class="w-full" @click="showDelete = false">Cancelar</x-primary-button>
-                            </div>
                         </div>
-                </div>
-                </template>
 
-                <!--
+                        <template x-if="showDelete">
+                            <div class="absolute top-0 button-0 left-0 right-0 bg-gray-800 bg-opacity-20 z-0">
+                                <div class="w-96 bg-white p-4 absolute left-1/4 right-1/4 top-1/4 z-10 ">
+                                    <h2 class="text-xl font-bold text-center">Você tem certeza que quer apagar?</h2>
+                                    <form action="{{ route('product.destroy', $product )}}" method="POST">
+                                        @csrf
+                                        @method('delete')
+                                        <x-danger-button class="bg-red-300 hover:bg-red-500"> Apagar </x-danger-button>
+                                    </form>
+                                    <x-primary-button class="w-full" @click="showDelete = false">Cancelar</x-primary-button>
+                                </div>
+                            </div>
+                    </div>
+                    </template>
+
+                    <!--
                 <template x-if="showEdit">
                     <div class="absolute top-0 button-0 left-0 right-0 bg-gray-800 bg-opacity-20 z-0">
                         <div class="w-96 bg-white p-4 absolute left-1/4 right-1/4 top-1/4 z-10 ">
@@ -243,7 +248,7 @@
 
             </div>-->
 
-            @endif
+                    @endif
 
                 </div>
 

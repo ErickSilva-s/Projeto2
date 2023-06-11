@@ -10,7 +10,7 @@
 
         @if(Auth::user())
         <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-            Olá, {{ Auth::user()->name }}, esse é o seu carrinho de compras <br>
+            Olá, {{ Auth::user()->name }}, veja o produto "{{ $product -> description}}" mais detalhadamente <br>
         </h2>
         <p> Você está logado com {{ Auth::user()->email }}. <br>
             {{ \Carbon\Carbon::now()->format('d/m/Y') }}
@@ -18,7 +18,7 @@
         @endif
     </x-slot>
 
-   
+
 
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
@@ -34,7 +34,7 @@
                             <span class="float-right cursor-point" x-on:click="show=false">&times;</span>
                         </div>
                     </div>
-                    @endif 
+                    @endif
 
 
                     <div class="flex justify-center ">
@@ -65,6 +65,7 @@
                             </div>
 
                             <form action="{{ route('cart.add') }}" method="POST">
+                                @if(Auth::user())
                                 @if(Auth::user()->type=='cliente')
                                 @csrf
 
@@ -76,6 +77,7 @@
 
                                 <x-primary-button>Adicionar ao carrinho</x-primary-button>
                             </form>
+                            @endif
                             @endif
 
                         </div>
