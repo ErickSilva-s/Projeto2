@@ -191,19 +191,20 @@
 
 
 
-                        </div>
                         @endif
                     </div>
 
 
-                    <!--@if(( Auth::user() && Auth::user()->type=='administrador'))
+                 @if(( Auth::user() && Auth::user()->type=='administrador'))
                        <div class="flex gap-2">
                         <div>
                             <span class="cursor-pointer border rounded-md  px-2 bg-red-500 text-white" @click="showDelete = true ">Apagar</span>
                         </div>
-                        <div>
+
+                        <!-- <div>
                             <span class="cursor-pointer px-2 bg-blue-500 border rounded-md text-white" @click="showEdit = true ">Editar </span>
-                        </div>
+                        </div>-->
+
                     </div>
 
                     <template x-if="showDelete">
@@ -221,6 +222,7 @@
                 </div>
                 </template>
 
+                <!--
                 <template x-if="showEdit">
                     <div class="absolute top-0 button-0 left-0 right-0 bg-gray-800 bg-opacity-20 z-0">
                         <div class="w-96 bg-white p-4 absolute left-1/4 right-1/4 top-1/4 z-10 ">
@@ -238,10 +240,10 @@
                         </div>
                     </div>
                 </template>
-                       
-            </div> 
 
-            @endif  -->
+            </div>-->
+
+            @endif
 
                 </div>
 
