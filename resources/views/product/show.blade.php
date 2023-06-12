@@ -1,12 +1,12 @@
 <x-app-layout>
     <x-slot name="header">
 
-        <!-- @if(!Auth::user())
+        @if(!Auth::user())
         <div class="hidden fixed top-0 right-0 px-6 py-4 sm:block ">
             <a href="{{ route('login') }}" class="text-sm text-gray-700 dark:text-gray-500 underline">Entrar</a>
             <a href="{{ route('register') }}" class="ml-4 text-sm text-gray-700 dark:text-gray-500 underline">Cadastre-se</a>
         </div>
-        @endif -->
+        @endif
 
         @if(Auth::user())
         <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
