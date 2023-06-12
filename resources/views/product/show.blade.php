@@ -1,12 +1,12 @@
 <x-app-layout>
     <x-slot name="header">
 
-        <!-- @if(!Auth::user())
+        @if(!Auth::user())
         <div class="hidden fixed top-0 right-0 px-6 py-4 sm:block ">
             <a href="{{ route('login') }}" class="text-sm text-gray-700 dark:text-gray-500 underline">Entrar</a>
             <a href="{{ route('register') }}" class="ml-4 text-sm text-gray-700 dark:text-gray-500 underline">Cadastre-se</a>
         </div>
-        @endif -->
+        @endif
 
         @if(Auth::user())
         <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
@@ -83,6 +83,69 @@
                         </div>
                     </div>
 
+                    <h1 class="text-2xl mt-4 font-bold text-center"> Avaliação dos clientes</h1><br>
+
+
+
+                    @if(( Auth::user() && Auth::user()->type=='cliente'))
+
+                    <div class="text-center" x-data="{ showForm: false }">
+                        <x-primary-button @click="showForm = !showForm">
+                            Fazer uma avaliação
+                        </x-primary-button>
+
+                        <div x-show="showForm" class="text-center">
+                            <form action="{{ route('product.review') }}" method="POST">
+                                @csrf
+                                <input type="hidden" name="product_id" value="{{ $product->id }}">
+
+                                <div class="mt-4">
+                                    <x-input-label for="rating" :value="__('Classificação')" />
+                                    <select name="rating" required>
+                                        <option value="1">1 Estrela</option>
+                                        <option value="2">2 Estrelas</option>
+                                        <option value="3">3 Estrelas</option>
+                                        <option value="4">4 Estrelas</option>
+                                        <option value="5">5 Estrelas</option>
+                                    </select>
+                                </div>
+
+                                <div class="mt-4">
+                                    <x-input-label for="title" :value="__('Título')" />
+                                    <input type="text" name="title" required />
+                                </div>
+
+                                <div class="mt-4">
+                                    <x-input-label for="comment" :value="__('Comentário')" />
+                                    <textarea name="comment" required></textarea>
+                                </div>
+
+                                <x-primary-button>Enviar Avaliação</x-primary-button>
+                            </form>
+                        </div>
+                    </div>
+
+                    @endif
+
+
+
+                    @if ($product->reviews->count() > 0)
+                    @foreach ($product->reviews as $review)
+                    <div class="mt-4 text-center">
+                        <p>Classificação: {{ $review->rating }} Estrela(s)</p>
+                        @if (!empty($review->title))
+                        <p>Título: {{ $review->title }}</p>
+                        @endif
+                        <p>Comentário: {{ $review->comment }}</p>
+                        <p>Avaliado por: {{ $review->user->name }}</p>
+                        <hr>
+                    </div>
+                    @endforeach
+                    @else
+                    <div class="mt-4 text-center">
+                        <p>Nenhuma avaliação disponível para este produto.</p>
+                    </div>
+                    @endif
 
                 </div>
             </div>

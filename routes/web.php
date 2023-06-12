@@ -45,9 +45,10 @@ Route::middleware('auth')->group(function () {
     })->name('purchase.success');
     Route::post('/purchase-complete', [CartController::class, 'completePurchase'])->name('purchase.complete');
 
-    
+
 });
 Route::resource('product', ProductController::class);
 Route::get('/product/{id}', [ProductController::class, 'show'])->name('product.show');
+Route::post('/product/review', [ProductController::class, 'submitReview'])->name('product.review');
 
 require __DIR__ . '/auth.php';

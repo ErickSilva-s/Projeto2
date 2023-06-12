@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Product;
+use App\Models\Review;
 use Illuminate\Auth\Events\Validated;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -46,9 +47,10 @@ class ProductController extends Controller
         $request->validate([
             'imagem' => 'required|file|mimes:jpeg,png,jpg|max:2048',
             // o mimes especifica o tipo dos arquivos; o max esta especificando o tamanho em kilobyte.
-        ], ['imagem.mimes' => 'O tipo de arquivo enviado não é suportado. Por favor, envie um arquivo JPEG, PNG ou JPG.',
-    ]);
-    
+        ], [
+            'imagem.mimes' => 'O tipo de arquivo enviado não é suportado. Por favor, envie um arquivo JPEG, PNG ou JPG.',
+        ]);
+
         $product = new Product;
 
         $product->description =  $request->description;
@@ -82,8 +84,7 @@ class ProductController extends Controller
 
 
         $product->save();
-        return redirect('/product')->with('success', 'Produto adicionado com sucesso!!');      
-    
+        return redirect('/product')->with('success', 'Produto adicionado com sucesso!!');
     }
 
     /**
@@ -91,13 +92,13 @@ class ProductController extends Controller
      */
 
 
-     public function show($id)
-     {
-         $product = Product::findOrFail($id);
-     
-         return view('product.show', compact('product'));
-     }
-     
+    public function show($id)
+    {
+        $product = Product::findOrFail($id);
+
+        return view('product.show', compact('product'));
+    }
+
 
 
     /**
@@ -131,10 +132,27 @@ class ProductController extends Controller
         return redirect('/product');
     }
 
+    public function submitReview(Request $request)
+    {
+        $product = Product::find($request->input('product_id'));
+        $user = Auth::user();
+
+        $review = new Review();
+        $review->product_id = $product->id;
+        $review->user_id = $user->id;
+        $review->rating = $request->input('rating');
+        $review->title = $request->input('title');
+        $review->comment = $request->input('comment');
+        $review->save();
+
+        // Redirecionar de volta à página do produto com uma mensagem de sucesso
+        return redirect()->back()->with('status', 'Avaliação enviada com sucesso!');
+    }
+
+
     /**
      * Summary of pesquisar
      * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
      */
-
 }
