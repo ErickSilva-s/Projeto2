@@ -98,7 +98,7 @@
 
                     <form action="{{ route('cart.empty') }}" method="POST">
                         @csrf
-                        <x-primary-button>Esvaziar Carrinho</x-primary-button>
+                        <x-primary-button class=" bg-green-900">Esvaziar Carrinho</x-primary-button>
                     </form><br>
                     @else
                     <h1 class="text-lg mt-4 text-center">Você ainda não tem nenhum produto adicionado ao carrinho</h1>

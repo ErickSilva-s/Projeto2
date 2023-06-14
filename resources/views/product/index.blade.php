@@ -137,7 +137,7 @@
                         Vendedido por: {{ $product->User->name}} <br>
                         <img src="{{ asset('/img/imgProduct/' . $product->imagem) }}" alt="Imagem do Produto" style="width: 200px; height:auto;">
                         <div>
-                            <x-primary-button><a href="{{ route('product.show', $product->id) }}">Ver Mais</a></x-primary-button>
+                            <x-primary-button class=" bg-green-900"><a href="{{ route('product.show', $product->id) }}">Ver Mais</a></x-primary-button>
                         </div>
 
 
@@ -176,6 +176,9 @@
                             Categoria: {{ $product-> category }} <br>
                             Vendido por: {{ $product->User->name}} <br>
                             <img src="{{ asset('/img/imgProduct/' . $product->imagem) }}" alt="Imagem do Produto" style="width: 200px; height:auto;">
+                        <div>
+                            <x-primary-button class=" bg-green-900"><a href="{{ route('product.show', $product->id) }}">Ver Mais</a></x-primary-button>
+                        </div>
 
 
                             <form action="{{ route('cart.add') }}" method="POST">
@@ -189,9 +192,7 @@
                                 <input type="number" name="quantity" value="1" min="1" max="{{ $product-> stock_product }}" required>
 
 
-                                <x-primary-button><a href="{{ route('product.show', $product->id) }}">Ver Mais</a></x-primary-button>
-
-                                <x-primary-button>Adicionar ao carrinho</x-primary-button>
+                                <x-primary-button class=" bg-green-900">Adicionar ao carrinho</x-primary-button>
                             </form>
 
 
@@ -276,6 +277,10 @@
                         Categoria: {{ $product-> category }} <br>
                         Vendido por: {{ $product->User->name}} <br>
                         <img src="{{ asset('/img/imgProduct/' . $product->imagem) }}" alt="Imagem do Produto" style="width: 200px; height:auto;">
+
+                        <div>
+                            <x-primary-button class=" bg-green-900"><a href="{{ route('product.show', $product->id) }}">Ver Mais</a></x-primary-button>
+                        </div>
                     </div>
 
 

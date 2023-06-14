@@ -10,7 +10,7 @@
 
         @if(Auth::user())
         <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-            Olá, {{ Auth::user()->name }}, veja o produto "{{ $product -> description}}" mais detalhadamente <br>
+            Olá, {{ Auth::user()->name }}, veja o produto "{{ $product -> description}}" mais detalhadamente! <br>
         </h2>
         <p> Você está logado com {{ Auth::user()->email }}. <br>
             {{ \Carbon\Carbon::now()->format('d/m/Y') }}
@@ -75,7 +75,7 @@
 
                                 <input type="number" name="quantity" value="1" min="1" max="{{ $product-> stock_product }}" required>
 
-                                <x-primary-button>Adicionar ao carrinho</x-primary-button>
+                                <x-primary-button class=" bg-green-900">Adicionar ao carrinho</x-primary-button>
                             </form>
                             @endif
                             @endif
@@ -83,14 +83,14 @@
                         </div>
                     </div>
 
-                    <h1 class="text-2xl mt-4 font-bold text-center"> Avaliação dos clientes</h1><br>
+                    <h1 class="text-2xl mt-4 font-bold text-center"> Avaliações dos clientes</h1><br>
 
 
 
                     @if(( Auth::user() && Auth::user()->type=='cliente'))
 
                     <div class="text-center" x-data="{ showForm: false }">
-                        <x-primary-button @click="showForm = !showForm">
+                        <x-primary-button class=" bg-green-900" @click="showForm = !showForm">
                             Fazer uma avaliação
                         </x-primary-button>
 
@@ -112,15 +112,15 @@
 
                                 <div class="mt-4">
                                     <x-input-label for="title" :value="__('Título')" />
-                                    <input type="text" name="title" required />
+                                    <input type="text" name="title"  style="width: 500px; height:50px;" required />
                                 </div>
 
                                 <div class="mt-4">
                                     <x-input-label for="comment" :value="__('Comentário')" />
-                                    <textarea name="comment" required></textarea>
+                                    <textarea name="comment"  style="width: 500px; height:100px;" required></textarea>
                                 </div>
 
-                                <x-primary-button>Enviar Avaliação</x-primary-button>
+                                <x-primary-button class=" bg-green-900">Enviar Avaliação</x-primary-button>
                             </form>
                         </div>
                     </div>
