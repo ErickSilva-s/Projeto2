@@ -1,30 +1,32 @@
 @if(Auth::user())
-<nav x-data="{ open: false }" class="bg-green-400 border-b border-gray-100">
+<nav x-data="{ open: false }" class="bg-green-800 border-b border-gray-100 ">
     <!-- Primary Navigation Menu -->
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex justify-between h-16">
             <div class="flex">
                 <!-- Logo -->
-                <div class="shrink-0 flex items-center">
+                <!-- <div class="shrink-0 flex items-center">
                     <a href="{{ route('dashboard') }}">
                         <x-application-logo class="block h-9 w-auto fill-current text-gray-800" />
                     </a>
-                </div>
+                </div> -->
 
                 <!-- Navigation Links -->
-                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex ">
-                    <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
+                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex text-white">
+
+                   
+                    <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')" class=" text-white">
                         {{ __('Endereços') }}
                     </x-nav-link>
 
                     @if(!(Auth::user() ->type=='entregador'))
-                    <x-nav-link :href="route('product.index')" :active="request()->routeIs('product.index')">
+                    <x-nav-link :href="route('product.index')" :active="request()->routeIs('product.index')" class=" text-white">
                         {{ __('Produtos') }}
                     </x-nav-link>
                     @endif
 
                     @if(Auth::user() ->type=='administrador')
-                    <x-nav-link :href="route('user.index')" :active="request()->routeIs('user.index')">
+                    <x-nav-link :href="route('user.index')" :active="request()->routeIs('user.index')" class=" text-white">
                         {{ __('Usuários') }}
                     </x-nav-link>
                     @endif
@@ -34,16 +36,16 @@
 
             <!-- Settings Dropdown -->
             <div class="hidden sm:flex sm:items-center sm:ml-6">
-            @if(Auth::user() ->type=='cliente')
-            <x-nav-link :href="route('cart.index')" :active="request()->routeIs('cart.index')">
-                        {{ __('Meu carrinho') }}
-                        <img src="{{ asset('meu_carrinho2.png') }}" alt="Ícone do carrinho" class="h-6 w-6">
-                    </x-nav-link>
-            @endif
+                @if(Auth::user() ->type=='cliente')
+                <x-nav-link :href="route('cart.index')" :active="request()->routeIs('cart.index')" class=" text-white">
+                    {{ __('Meu carrinho') }}
+                    <img src="{{ asset('meu_carrinho2.png') }}" alt="Ícone do carrinho" class="h-6 w-6">
+                </x-nav-link>
+                @endif
 
                 <x-dropdown align="right" width="48">
                     <x-slot name="trigger">
-                        <button class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-black bg-green-400 hover:text-gray-700 focus:outline-none transition ease-in-out duration-150">
+                        <button class=" text-white inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-black bg-orange-400 hover:text-gray-700 focus:outline-none transition ease-in-out duration-150">
 
                             <div>{{ Auth::user()->name }} ({{ Auth::user()->type }})</div>
 
