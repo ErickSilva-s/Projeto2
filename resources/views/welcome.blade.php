@@ -28,6 +28,7 @@ overflow-x: scroll;
 <nav class="flex space-x-5">
 <a href="{{ route('login') }}" class="bg-transparent text-white">Entrar</a>
 <a href="{{ route('register') }}" class="bg-transparent text-white">Cadastre-se</a>
+<a href="{{ url('/about') }}" class="bg-transparent text-white">Sobre</a>
 <a href="{{ url('/product') }}" class="bg-transparent text-white">Produtos</a>
 <a href="{{ url('/product') }}" class="bg-transparent text-white flex items-center">
 </a>
@@ -57,7 +58,7 @@ Bem-vindo ao nosso site de compra e venda de produtos de feirantes locais! Nós 
 </div>
 </div>
 
-<!-- </section> 
+<!-- </section>
 <br>
 <section class="mb-8 ">
 <h2 class="text-2xl font-bold mb-4 flex justify-center">Produtos</h2>

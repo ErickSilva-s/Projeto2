@@ -51,4 +51,8 @@ Route::resource('product', ProductController::class);
 Route::get('/product/{id}', [ProductController::class, 'show'])->name('product.show');
 Route::post('/product/review', [ProductController::class, 'submitReview'])->name('product.review');
 
+Route::get('/about', function () {
+    return view('about');
+});
+
 require __DIR__ . '/auth.php';
