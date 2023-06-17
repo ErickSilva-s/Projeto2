@@ -51,7 +51,7 @@
                         </div> -->
 
                             <div class="flex flex-col ml-4 px-2 border rounded-md border-green-900">
-                                <h1 class="text-xl mt-4 font-bold font-sans" >Detalhes do Produto:</h1>
+                                <h1 class="text-xl mt-4 font-bold font-sans">Detalhes do Produto:</h1>
 
                                 <div class="border-b mb-2 hover:bg-gray-300">
                                     <p>Descrição: {{ $product->description }}</p>
@@ -148,18 +148,13 @@
                 @endif
 
 
-
                 @if ($product->reviews->count() > 0)
                 @foreach ($product->reviews as $review)
                 <div class="mt-4 ">
-                    <p class=" font-semibold" style="font-size:20px;" >{{ $review->user->name }}</p>
+                    <p class=" font-semibold" style="font-size:20px;"> {{ $review->title}} </p>
                     <p>Classificação: {{ $review->rating }} Estrela(s)</p>
-                    @if (!empty($review->title))
-                    <p>Título: {{ $review->title }}</p>
-                    @endif
                     <p>Comentário: {{ $review->comment }}</p>
-
-                    <hr>
+                    <p>Avaliado por: {{ $review->user->name }}</p><hr>
 
                 </div>
                 @endforeach

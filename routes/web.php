@@ -55,4 +55,8 @@ Route::get('/about', function () {
     return view('about');
 });
 
+Route::get('/usage_policies', function () {
+    return view('usage_policies');
+});
+
 require __DIR__ . '/auth.php';

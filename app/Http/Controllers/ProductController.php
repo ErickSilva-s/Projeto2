@@ -18,6 +18,10 @@ class ProductController extends Controller
     {
         $pesquisa = $request->input('pesquisa');
 
+        if(Auth::check() && Auth::user()->type == 'entregador') {
+            return redirect('dashboard');
+        }
+
         if (Auth::check() && Auth::user()->type == 'vendedor') {
             $user = Auth::user();
             $products = Product::where('description', 'like', '%' . $pesquisa . '%')

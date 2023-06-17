@@ -34,7 +34,8 @@ class RegisteredUserController extends Controller
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:'.User::class],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
-            'type' => 'required|in: administrador,cliente,vendedor,entregador'
+            'type' => 'required|in: administrador,cliente,vendedor,entregador',
+            'phone' => ['string', 'max:20']
         ]);
 
         $user = User::create([
@@ -42,7 +43,7 @@ class RegisteredUserController extends Controller
             'email' => $request->email,
             'password' => Hash::make($request->password),
             'type' => $request->type,
-
+            'phone' => $request->phone
         ]);
 
         event(new Registered($user));
