@@ -1,5 +1,7 @@
+
+
 <x-app-layout>
-    <x-slot name="header">
+    <x-slot name="header" >
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
             <!-- {{ __('Endereços')}}  -->
 
@@ -17,9 +19,9 @@
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900">
 
-                    <h1 class="text-2xl mt-4 font-bold text-center" > Endereços </h1>
+                    <h1 class="text-2xl mt-4 font-bold text-center font-sans text-orange-600" style="font-size:30px;" > Endereços </h1>
 
-
+                     <br>
                     <fieldset class="border p-2 mb-2 border-black rounded">
                         <legend class="px-2 border rounded-md border-black text-black ">Adicionar novo endereço</legend>
                         <form action="{{ route('address.store')  }}" method="POST">
@@ -132,3 +134,5 @@
         </div>
     </div>
 </x-app-layout>
+
+   

@@ -1,6 +1,22 @@
-<x-guest-layout>
+<div class="flex">
+  <div class="w-1/2 bg-green-800 flex justify-center items-center">
+
+     <img src="{{ asset('fazendeiros.png') }}" alt="imagem da fazenda"> 
+
+
+  </div>
+  <div class="w-1/2 p-8">
+  
+
+<x-guest-layout >
     <!-- Session Status -->
     <x-auth-session-status class="mb-4" :status="session('status')" />
+
+    <h1 class="text-center font-semibold text-orange-600 font-sans" style="font-size:50px;">
+        Login
+    </h1>
+
+    <br>
 
     <form method="POST" action="{{ route('login') }}">
         @csrf
@@ -8,7 +24,7 @@
         <!-- Email Address -->
         <div>
             <x-input-label for="email" :value="__('Email')" />
-            <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autofocus autocomplete="username" />
+            <x-text-input id="email" class="block mt-1 w-full border-orange-600" type="email" name="email" :value="old('email')" required autofocus autocomplete="username" />
             <x-input-error :messages="$errors->get('email')" class="mt-2" />
         </div>
 
@@ -16,7 +32,7 @@
         <div class="mt-4">
             <x-input-label for="password" :value="__('Senha')" />
 
-            <x-text-input id="password" class="block mt-1 w-full"
+            <x-text-input id="password" class="block mt-1 w-full border-orange-600"
                             type="password"
                             name="password"
                             required autocomplete="current-password" />
@@ -39,13 +55,23 @@
                 </a> -->
             @endif
 
-            <a class="underline text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-gray-800" href="{{ route('register') }}">
-                    {{ __('Ainda não tem uma conta? Cadastre-se') }}
-                </a>
-
-            <x-primary-button class="ml-3">
+            <x-primary-button class="ml-3 bg-orange-600 w-full flex justify-center items-center">
                 {{ __('Entrar') }}
             </x-primary-button>
+
+
+          
+
         </div>
+
+        <div>
+            <a class="underline text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-gray-800" href="{{ route('register') }}">
+               <br>    
+            {{ __('Ainda não tem uma conta? Cadastre-se') }}
+                </a>
+        </div>
+
     </form>
 </x-guest-layout>
+</div>
+</div>
