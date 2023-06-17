@@ -169,14 +169,15 @@
                     hover:bg-gray-300" x-data=" { showDelete: false, showEdit: false  } ">
 
                     <a href="{{ route('product.show', $product->id) }}">
-                        <div class="flex justify-between flex-grow">
-
-                            Descrição: {{ $product-> description }} <br>
-                            Estoque: {{ $product-> stock_product }} <br>
-                            Valor: R$ {{ $product-> price }} <br>
-                            Categoria: {{ $product-> category }} <br>
-                            Vendido por: {{ $product->User->name}} <br>
-                            <img src="{{ asset('/img/imgProduct/' . $product->imagem) }}" alt="Imagem do Produto" style="width: 200px; height:auto;">
+                    <div class="flex justify-between border-b mb-2 gap-4
+                        hover:bg-gray-300">
+                        Descrição: {{ $product-> description }} <br>
+                        Estoque: {{ $product-> stock_product }} <br>
+                        Valor: R$ {{ $product-> price }} <br>
+                        Categoria: {{ $product-> category }} <br>
+                        Vendedido por: {{ $product->User->name}} <br>
+                        <img src="{{ asset('/img/imgProduct/' . $product->imagem) }}" alt="Imagem do Produto" style="width: 200px; height:auto;">
+                   
 
                         <!-- <br> -->
                             <form action="{{ route('cart.add') }}" method="POST">
