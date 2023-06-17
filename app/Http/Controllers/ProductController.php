@@ -153,6 +153,14 @@ class ProductController extends Controller
         return redirect()->back()->with('status', 'Avaliação enviada com sucesso!');
     }
 
+    public function destroyReview(Review $review)
+{
+    $review->delete();
+
+    return redirect()->back()->with('success', 'Avaliação apagada com sucesso.');
+}
+
+
 
     /**
      * Summary of pesquisar

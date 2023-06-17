@@ -44,11 +44,15 @@
                             </div>
                             @endif
 
+                            @if (session('success'))
+                            <div x-data="{show:true}">
+                                <div class="p-4 bg-green-300 w-full" x-show="show">
+                                    {{ session('success') }}
+                                    <span class="float-right cursor-point" x-on:click="show=false">&times;</span>
+                                </div>
+                            </div>
+                            @endif
 
-                            <!-- <div class="flex justify-center ">
-                        <div class="flex flex-col ">
-                            <img src="{{ asset('/img/imgProduct/' . $product->imagem) }}" alt="Imagem do Produto" style="width: 300px; height:auto;">
-                        </div> -->
 
                             <div class="flex flex-col ml-4 px-2 border rounded-md border-green-900">
                                 <h1 class="text-xl mt-4 font-bold font-sans">Detalhes do Produto:</h1>
@@ -147,15 +151,36 @@
 
                 @endif
 
-
                 @if ($product->reviews->count() > 0)
                 @foreach ($product->reviews as $review)
-                <div class="mt-4 ">
-                    <p class=" font-semibold" style="font-size:20px;"> {{ $review->title}} </p>
+                <div class="mt-4" x-data="{ showDelete: false }">
+                    <p class="font-semibold" style="font-size:20px;">{{ $review->title}}</p>
                     <p>Classificação: {{ $review->rating }} Estrela(s)</p>
                     <p>Comentário: {{ $review->comment }}</p>
-                    <p>Avaliado por: {{ $review->user->name }}</p><hr>
+                    <p>Avaliado por: {{ $review->user->name }}</p>
 
+
+                    @if ((Auth::user() && (Auth::user()->type == 'administrador') || (Auth::user()->id == $review->user_id)))
+                    <div class="flex gap-2">
+                        <div>
+                            <span class="cursor-pointer border rounded-md px-2 bg-red-500 text-white" @click="showDelete = true">Apagar</span>
+                        </div> <hr>
+
+                        <template x-if="showDelete">
+                            <div class="absolute top-0 button-0 left-0 right-0 bg-gray-800 bg-opacity-20 z-0">
+                                <div class="w-96 bg-white p-4 absolute left-1/4 right-1/4 top-1/4 z-10">
+                                    <h2 class="text-xl font-bold text-center">Você tem certeza que quer apagar?</h2>
+                                    <form action="{{ route('review.destroy', $review) }}" method="POST">
+                                        @csrf
+                                        @method('delete')
+                                        <x-danger-button class="bg-red-300 hover:bg-red-500">Apagar</x-danger-button>
+                                    </form>
+                                    <x-primary-button class="w-full" @click="showDelete = false">Cancelar</x-primary-button>
+                                </div>
+                            </div>
+                        </template>
+                    </div>
+                    @endif
                 </div>
                 @endforeach
                 @else

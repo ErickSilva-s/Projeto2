@@ -139,10 +139,6 @@
                         Categoria: {{ $product-> category }} <br>
                         Vendedido por: {{ $product->User->name}} <br>
                         <img src="{{ asset('/img/imgProduct/' . $product->imagem) }}" alt="Imagem do Produto" style="width: 200px; height:auto;">
-                        <!-- <div>
-                            <x-primary-button class=" bg-green-900"><a href="{{ route('product.show', $product->id) }}">Ver Mais</a></x-primary-button>
-                        </div> -->
-
                     </div>
                 </a>
                     @endif
@@ -171,14 +167,15 @@
 
                     <a href="{{ route('product.show', $product->id) }}">
                         <div class="flex justify-between flex-grow">
-                            
+
                             Descrição: {{ $product-> description }} <br>
                             Estoque: {{ $product-> stock_product }} <br>
                             Valor: R$ {{ $product-> price }} <br>
                             Categoria: {{ $product-> category }} <br>
                             Vendido por: {{ $product->User->name}} <br>
                             <img src="{{ asset('/img/imgProduct/' . $product->imagem) }}" alt="Imagem do Produto" style="width: 200px; height:auto;">
-                        <br>
+
+                        <!-- <br> -->
                             <form action="{{ route('cart.add') }}" method="POST">
                                 @if(Auth::user()->type=='cliente')
                                 @csrf
@@ -193,8 +190,8 @@
                             </form>
                             @endif
                         </div>
-                    </a>    
-                            
+                    </a>
+
 
 
                         @if(( Auth::user() && Auth::user()->type=='administrador'))
@@ -265,7 +262,7 @@
                 @foreach (Auth::user()->myProducts as $product)
                 <div class="flex justify-between border-b mb-2 gap-4
                     hover:bg-gray-300" x-data=" { showDelete: false, showEdit: false  } ">
-                
+
                 <a href="{{ route('product.show', $product->id) }}">
                     <div class="flex justify-between flex-grow">
                         Descrição: {{ $product-> description }} <br>
@@ -275,7 +272,7 @@
                         Vendido por: {{ $product->User->name}} <br>
                         <img src="{{ asset('/img/imgProduct/' . $product->imagem) }}" alt="Imagem do Produto" style="width: 200px; height:auto;">
 
-                        
+
                     </div>
                 </a>
 
