@@ -90,11 +90,6 @@
                                     @endif
 
                                 </div>
-
-
-
-
-
                             </div>
 
                             <x-primary-button class="w-full bg-green-900">Adicionar</x-primary-button>
@@ -137,7 +132,7 @@
                         Estoque: {{ $product-> stock_product }} <br>
                         Valor: R$ {{ $product-> price }} <br>
                         Categoria: {{ $product-> category }} <br>
-                        Vendedido por: {{ $product->User->name}} <br>
+                        Vendido por: {{ $product->User->name}} <br>
                         <img src="{{ asset('/img/imgProduct/' . $product->imagem) }}" alt="Imagem do Produto" style="width: 200px; height:auto;">
                     </div>
                 </a>
@@ -164,22 +159,23 @@
 
                     @foreach (App\Models\Product::all() as $product)
 
-
-                    <div class="flex justify-between border-b mb-2 gap-4
-                    hover:bg-gray-300" x-data=" { showDelete: false, showEdit: false  } ">
-
+                    <div>
                     <a href="{{ route('product.show', $product->id) }}">
                     <div class="flex justify-between border-b mb-2 gap-4
-                        hover:bg-gray-300">
-                        Descrição: {{ $product-> description }} <br>
-                        Estoque: {{ $product-> stock_product }} <br>
-                        Valor: R$ {{ $product-> price }} <br>
-                        Categoria: {{ $product-> category }} <br>
-                        Vendedido por: {{ $product->User->name}} <br>
-                        <img src="{{ asset('/img/imgProduct/' . $product->imagem) }}" alt="Imagem do Produto" style="width: 200px; height:auto;">
-                   
+                    hover:bg-gray-300" x-data=" { showDelete: false, showEdit: false  } " >
 
-                        <!-- <br> -->
+                    <div class="flex justify-between flex-grow"   href="{{ route('product.show', $product->id) }}">
+
+
+
+                            Descrição: {{ $product-> description }} <br>
+                            Estoque: {{ $product-> stock_product }} <br>
+                            Valor: R$ {{ $product-> price }} <br>
+                            Categoria: {{ $product-> category }} <br>
+                            Vendido por: {{ $product->User->name}} <br>
+                            <img src="{{ asset('/img/imgProduct/' . $product->imagem) }}" alt="Imagem do Produto" style="width: 200px; height:auto;">
+
+
                             <form action="{{ route('cart.add') }}" method="POST">
                                 @if(Auth::user()->type=='cliente')
                                 @csrf
@@ -190,11 +186,13 @@
 
                                 <input type="number" name="quantity" value="1" min="1" max="{{ $product-> stock_product }}" required>
 
-                                <x-primary-button class=" bg-green-900">Adicionar ao carrinho</x-primary-button>
+                                <x-primary-button>Adicionar ao carrinho</x-primary-button>
                             </form>
-                            @endif
                         </div>
-                    </a>
+                        @endif
+                    </div>
+                </a>
+
 
 
 
@@ -206,9 +204,9 @@
 
                             <!-- <div>
                             <span class="cursor-pointer px-2 bg-blue-500 border rounded-md text-white" @click="showEdit = true ">Editar </span>
-                        </div>-->
+                        </div> -->
 
-                        </div>
+                    </div>
 
                         <template x-if="showDelete">
                             <div class="absolute top-0 button-0 left-0 right-0 bg-gray-800 bg-opacity-20 z-0">
