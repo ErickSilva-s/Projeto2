@@ -161,7 +161,8 @@
                     <p>Avaliado por: {{ $review->user->name }}</p>
 
 
-                    @if ((Auth::user() && (Auth::user()->type == 'administrador') || (Auth::user()->id == $review->user_id)))
+                    @if((Auth::user()))
+                    @if ((Auth::user()->type == 'administrador') || (Auth::user()->id == $review->user_id))
                     <div class="flex gap-2">
                         <div>
                             <span class="cursor-pointer border rounded-md px-2 bg-red-500 text-white" @click="showDelete = true">Apagar</span>
@@ -181,6 +182,7 @@
                             </div>
                         </template>
                     </div>
+                    @endif
                     @endif
                 </div>
                 @endforeach
