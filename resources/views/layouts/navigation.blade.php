@@ -24,11 +24,6 @@
                         {{ __('Endereços') }}
                     </x-nav-link>
 
-                    @if(!(Auth::user() ->type=='entregador'))
-                    <x-nav-link :href="route('product.index')" :active="request()->routeIs('product.index')">
-                        {{ __('Produtos') }}
-                    </x-nav-link>
-                    @endif
 
                     @if(Auth::user() ->type=='administrador')
                     <x-nav-link :href="route('user.index')" :active="request()->routeIs('user.index')" class=" text-white">
