@@ -12,16 +12,18 @@
                 </div>
 
                 <!-- Navigation Links -->
+                
+                @if(!(Auth::user() ->type=='entregador'))
+                <x-nav-link :href="route('product.index')" :active="request()->routeIs('product.index')">
+                    {{ __('Produtos') }}
+                </x-nav-link>
+                @endif
+
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex ">
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                         {{ __('Endereços') }}
                     </x-nav-link>
 
-                    @if(!(Auth::user() ->type=='entregador'))
-                    <x-nav-link :href="route('product.index')" :active="request()->routeIs('product.index')">
-                        {{ __('Produtos') }}
-                    </x-nav-link>
-                    @endif
 
                     @if(Auth::user() ->type=='administrador')
                     <x-nav-link :href="route('user.index')" :active="request()->routeIs('user.index')">
