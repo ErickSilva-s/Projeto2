@@ -150,7 +150,7 @@ class ProductController extends Controller
         $review->save();
 
         // Redirecionar de volta à página do produto com uma mensagem de sucesso
-        return redirect()->back()->with('status', 'Avaliação enviada com sucesso!');
+        return redirect()->back()->with('sent', 'Avaliação enviada com sucesso!');
     }
 
     public function destroyReview(Review $review)

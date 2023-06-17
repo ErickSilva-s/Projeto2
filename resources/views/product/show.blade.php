@@ -54,6 +54,15 @@
                             </div>
                             @endif
 
+                            @if (session('sent'))
+                            <div x-data="{show:true}">
+                                <div class="p-4 bg-green-300 w-full" x-show="show">
+                                    {{ session('sent') }}
+                                    <span class="float-right cursor-point" x-on:click="show=false">&times;</span>
+                                </div>
+                            </div>
+                            @endif
+
 
                             <div class="flex flex-col ml-4 px-2 border rounded-md border-green-900">
                                 <h1 class="text-xl mt-4 font-bold font-sans">Detalhes do Produto:</h1>
@@ -161,16 +170,18 @@
                     <p>Avaliado por: {{ $review->user->name }}</p>
 
 
-                    @if((Auth::user()))
-                    @if ((Auth::user()->type == 'administrador') || (Auth::user()->id == $review->user_id))
+                    @if(Auth::user())
+                    @if(Auth::user()->type == 'administrador' || Auth::user()->id == $review->user_id)
                     <div class="flex gap-2">
                         <div>
                             <span class="cursor-pointer border rounded-md px-2 bg-red-500 text-white" @click="showDelete = true">Apagar</span>
-                        </div> <hr>
+                        </div>
+                        <hr>
 
                         <template x-if="showDelete">
-                            <div class="absolute top-0 button-0 left-0 right-0 bg-gray-800 bg-opacity-20 z-0">
-                                <div class="w-96 bg-white p-4 absolute left-1/4 right-1/4 top-1/4 z-10">
+                            <div class="fixed inset-0 flex items-center justify-center z-50">
+                                <div class="absolute inset-0 bg-gray-800 bg-opacity-20"></div>
+                                <div class="w-96 bg-white p-4 relative z-10">
                                     <h2 class="text-xl font-bold text-center">Você tem certeza que quer apagar?</h2>
                                     <form action="{{ route('review.destroy', $review) }}" method="POST">
                                         @csrf
@@ -184,6 +195,7 @@
                     </div>
                     @endif
                     @endif
+
                 </div>
                 @endforeach
                 @else

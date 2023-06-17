@@ -9,6 +9,15 @@
         </div>
         @endif
 
+        @if(Auth::user())
+        <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
+            Olá, {{ Auth::user()->name }}!  <br>
+        </h2>
+        <p> Você está logado com {{ Auth::user()->email }}. <br>
+            {{ \Carbon\Carbon::now()->format('d/m/Y') }}
+        </p>
+        @endif
+
     </x-slot>
 
     <div class="py-12">
