@@ -47,6 +47,9 @@ Route::middleware('auth')->group(function () {
 
     Route::post('/mark-review-checked/{reviewId}', [ProductController::class, 'markReviewChecked'])->name('markReviewChecked');
 
+    Route::post('/checkout', [AddressController::class, 'exibirEnderecos'])->name('address.show');
+
+
 });
 
 
