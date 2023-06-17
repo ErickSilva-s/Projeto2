@@ -145,14 +145,17 @@
                     @endforeach
                     @endif
 
+
                     @if (session('status'))
-                    <div x-data="{show:true}">
-                        <div class="p-4 bg-green-300 w-full" x-show="show">
-                            {{ session('status') }}
-                            <span class="float-right cursor-point" x-on:click="show=false">&times;</span>
-                        </div>
-                    </div>
-                    @endif
+                            <div x-data="{show:true}">
+                                <div class="p-4 bg-green-300 w-full" x-show="show">
+                                    {{ session('status') }}
+                                    <a class="underline" href="{{ route('cart.index') }}">Ver meu carrinho</a>
+                                    <span class="float-right cursor-point" x-on:click="show=false">&times;</span>
+                                </div>
+                            </div>
+                            @endif
+
 
                     @if(Auth::user())
                     @if(!((Auth::user()->type=='vendedor') || (Auth::user()->type=='entregador')))

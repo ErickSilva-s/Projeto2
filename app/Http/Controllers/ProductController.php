@@ -161,6 +161,14 @@ class ProductController extends Controller
 }
 
 
+public function markReviewChecked($reviewId)
+{
+    $review = Review::findOrFail($reviewId);
+    $review->checked = true;
+    $review->save();
+
+    return redirect()->back()->with('checked', 'Avaliação marcada como verificada com sucesso');
+}
 
     /**
      * Summary of pesquisar

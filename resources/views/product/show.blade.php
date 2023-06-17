@@ -39,6 +39,7 @@
                             <div x-data="{show:true}">
                                 <div class="p-4 bg-green-300 w-full" x-show="show">
                                     {{ session('status') }}
+                                    <a class="underline" href="{{ route('cart.index') }}">Ver meu carrinho</a>
                                     <span class="float-right cursor-point" x-on:click="show=false">&times;</span>
                                 </div>
                             </div>

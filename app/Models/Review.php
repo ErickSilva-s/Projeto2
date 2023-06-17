@@ -14,7 +14,8 @@ class Review extends Model
         'user_id',
         'title',
         'rating',
-        'comment'
+        'comment',
+        'checked'
     ];
 
 
