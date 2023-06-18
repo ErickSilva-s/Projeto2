@@ -44,21 +44,23 @@
                             </div>
                         </div>
 
-                        <template x-if="showDelete">
-                            <div class="absolute top-0 button-0 left-0 right-0 bg-gray-800 bg-opacity-20 z-0">
-                                <div class="w-96 bg-white p-4 absolute left-1/4 right-1/4 top-1/4 z-10 ">
-                                    <h2 class="text-xl font-bold text-center">Você tem certeza que quer apagar?</h2>
-                                    <form action="{{ route('user.destroy', $user )}}" method="POST">
-                                        @csrf
-                                        @method('delete')
-                                        <x-danger-button class="bg-red-300 hover:bg-red-500"> Apagar </x-danger-button>
-                                    </form>
-                                    <x-primary-button class="w-full" @click="showDelete = false">Cancelar</x-primary-button>
-                                </div>
-                            </div>
+
+                <template x-if="showDelete">
+                <div class="fixed inset-0 flex items-center justify-center z-50">
+                    <div class="absolute inset-0 bg-gray-800 bg-opacity-20"></div>
+                    <div class="w-96 bg-white p-4 relative z-10">
+                        <h2 class="text-xl font-bold text-center">Você tem certeza que quer apagar?</h2>
+                        <form action="{{ route('user.destroy', $user) }}" method="POST">
+                            @csrf
+                            @method('delete')
+                            <x-danger-button class="bg-red-300 hover:bg-red-500">Apagar</x-danger-button>
+                        </form>
+                        <x-primary-button class="w-full" @click="showDelete = false">Cancelar</x-primary-button>
                     </div>
-                    </template>
                 </div>
+                </div>
+            </template>
+        </div>
 
 
                 @endforeach

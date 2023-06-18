@@ -45,14 +45,32 @@ Route::middleware('auth')->group(function () {
     })->name('purchase.success');
     Route::post('/purchase-complete', [CartController::class, 'completePurchase'])->name('purchase.complete');
 
+    Route::post('/mark-review-checked/{reviewId}', [ProductController::class, 'markReviewChecked'])->name('markReviewChecked');
+
+    Route::post('/checkout', [AddressController::class, 'exibirEnderecos'])->name('address.show');
+
 
 });
+
+
+// rotas que os users podem acessar mesmo não estando logado
 Route::resource('product', ProductController::class);
 Route::get('/product/{id}', [ProductController::class, 'show'])->name('product.show');
 Route::post('/product/review', [ProductController::class, 'submitReview'])->name('product.review');
+Route::delete('/review/{review}', [ProductController::class, 'destroyReview'])->name('review.destroy');
+
+
 
 Route::get('/about', function () {
     return view('about');
+});
+
+Route::get('/reviews', function () {
+    return view('reviews');
+});
+
+Route::get('/usage_policies', function () {
+    return view('usage_policies');
 });
 
 require __DIR__ . '/auth.php';

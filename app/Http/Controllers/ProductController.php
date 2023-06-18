@@ -18,6 +18,10 @@ class ProductController extends Controller
     {
         $pesquisa = $request->input('pesquisa');
 
+        if(Auth::check() && Auth::user()->type == 'entregador') {
+            return redirect('dashboard');
+        }
+
         if (Auth::check() && Auth::user()->type == 'vendedor') {
             $user = Auth::user();
             $products = Product::where('description', 'like', '%' . $pesquisa . '%')
@@ -146,9 +150,25 @@ class ProductController extends Controller
         $review->save();
 
         // Redirecionar de volta à página do produto com uma mensagem de sucesso
-        return redirect()->back()->with('status', 'Avaliação enviada com sucesso!');
+        return redirect()->back()->with('sent', 'Avaliação enviada com sucesso!');
     }
 
+    public function destroyReview(Review $review)
+{
+    $review->delete();
+
+    return redirect()->back()->with('success', 'Avaliação apagada com sucesso.');
+}
+
+
+public function markReviewChecked($reviewId)
+{
+    $review = Review::findOrFail($reviewId);
+    $review->checked = true;
+    $review->save();
+
+    return redirect()->back()->with('checked', 'Avaliação marcada como verificada com sucesso');
+}
 
     /**
      * Summary of pesquisar

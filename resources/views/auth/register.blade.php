@@ -1,4 +1,17 @@
 <div class="flex">
+
+    <!-- Importando a biblioteca Input Mask -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js"></script>
+
+    <!-- Adicionando o código JavaScript -->
+    <script>
+        $(document).ready(function() {
+            $('#phone').mask('(00) 0 0000-0000');
+        });
+    </script>
+
+
     <div class="w-1/2 bg-green-800 flex justify-center items-center">
 
         <img src="{{ asset('fazenda.png') }}" alt="imagem da fazenda">
@@ -30,6 +43,28 @@
                     <x-input-error :messages="$errors->get('email')" class="mt-2" />
                 </div>
 
+                <!-- Phone -->
+                <div class="mt-4">
+                    <x-input-label for="phone" :value="__('Telefone')" />
+                    <x-text-input id="phone" class="block mt-1 w-full border-orange-600" type="text" name="phone" :value="old('phone')" />
+                </div>
+
+                <!-- Type user -->
+                <div class="mt-4">
+                    <x-input-label for="type">{{ __('Tipo de usuário') }}</x-input-label>
+                    <select name="type" id="type" required class="block w-full rounded-md border-orange-600 focus:border-indigo-500 focus:ring focus:ring-indigo-500 focus:ring-opacity-50">
+                        <option value=""> -- Selecione -- </option>
+                        <option value="cliente">Cliente</option>
+                        <option value="vendedor">Vendedor</option>
+                        <option value="entregador">Entregador</option>
+                    </select>
+                </div>
+
+
+
+
+
+
 
                 <!-- Password -->
                 <div class="mt-4">
@@ -49,18 +84,7 @@
 
                     <br>
 
-                    <div>
-                        <label for="type">{{ __('Tipo de usuário') }}</label>
 
-                        <br>
-
-                        <select name="type" id="type" required class="block w-full rounded-md border-orange-600 focus:border-indigo-500 focus:ring focus:ring-indigo-500 focus:ring-opacity-50">
-                            <option value=""> -- Selecione -- </option>
-                            <option value="cliente">Cliente</option>
-                            <option value="vendedor">Vendedor</option>
-                            <option value="entregador">Entregador</option>
-                        </select>
-                    </div>
 
                     <x-input-error :messages="$errors->get('password_confirmation')" class="mt-2" />
                 </div>

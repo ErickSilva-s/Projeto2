@@ -39,19 +39,33 @@
                             <div x-data="{show:true}">
                                 <div class="p-4 bg-green-300 w-full" x-show="show">
                                     {{ session('status') }}
+                                    <a class="underline" href="{{ route('cart.index') }}">Ver meu carrinho</a>
+                                    <span class="float-right cursor-point" x-on:click="show=false">&times;</span>
+                                </div>
+                            </div>
+                            @endif
+
+                            @if (session('success'))
+                            <div x-data="{show:true}">
+                                <div class="p-4 bg-green-300 w-full" x-show="show">
+                                    {{ session('success') }}
+                                    <span class="float-right cursor-point" x-on:click="show=false">&times;</span>
+                                </div>
+                            </div>
+                            @endif
+
+                            @if (session('sent'))
+                            <div x-data="{show:true}">
+                                <div class="p-4 bg-green-300 w-full" x-show="show">
+                                    {{ session('sent') }}
                                     <span class="float-right cursor-point" x-on:click="show=false">&times;</span>
                                 </div>
                             </div>
                             @endif
 
 
-                            <!-- <div class="flex justify-center ">
-                        <div class="flex flex-col ">
-                            <img src="{{ asset('/img/imgProduct/' . $product->imagem) }}" alt="Imagem do Produto" style="width: 300px; height:auto;">
-                        </div> -->
-
                             <div class="flex flex-col ml-4 px-2 border rounded-md border-green-900">
-                                <h1 class="text-xl mt-4 font-bold font-sans" >Detalhes do Produto:</h1>
+                                <h1 class="text-xl mt-4 font-bold font-sans">Detalhes do Produto:</h1>
 
                                 <div class="border-b mb-2 hover:bg-gray-300">
                                     <p>Descrição: {{ $product->description }}</p>
@@ -147,19 +161,40 @@
 
                 @endif
 
-
-
                 @if ($product->reviews->count() > 0)
                 @foreach ($product->reviews as $review)
-                <div class="mt-4 ">
-                    <p class=" font-semibold" style="font-size:20px;" >{{ $review->user->name }}</p>
+                <div class="mt-4" x-data="{ showDelete: false }">
+                    <p class="font-semibold" style="font-size:20px;">{{ $review->title}}</p>
                     <p>Classificação: {{ $review->rating }} Estrela(s)</p>
-                    @if (!empty($review->title))
-                    <p>Título: {{ $review->title }}</p>
-                    @endif
                     <p>Comentário: {{ $review->comment }}</p>
+                    <p>Avaliado por: {{ $review->user->name }}</p>
 
-                    <hr>
+
+                    @if(Auth::user())
+                    @if(Auth::user()->type == 'administrador' || Auth::user()->id == $review->user_id)
+                    <div class="flex gap-2">
+                        <div>
+                            <span class="cursor-pointer border rounded-md px-2 bg-red-500 text-white" @click="showDelete = true">Apagar</span>
+                        </div>
+                        <hr>
+
+                        <template x-if="showDelete">
+                            <div class="fixed inset-0 flex items-center justify-center z-50">
+                                <div class="absolute inset-0 bg-gray-800 bg-opacity-20"></div>
+                                <div class="w-96 bg-white p-4 relative z-10">
+                                    <h2 class="text-xl font-bold text-center">Você tem certeza que quer apagar?</h2>
+                                    <form action="{{ route('review.destroy', $review) }}" method="POST">
+                                        @csrf
+                                        @method('delete')
+                                        <x-danger-button class="bg-red-300 hover:bg-red-500">Apagar</x-danger-button>
+                                    </form>
+                                    <x-primary-button class="w-full" @click="showDelete = false">Cancelar</x-primary-button>
+                                </div>
+                            </div>
+                        </template>
+                    </div>
+                    @endif
+                    @endif
 
                 </div>
                 @endforeach

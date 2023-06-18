@@ -43,7 +43,7 @@
 
 
                     <div class="flex justify-end">
-                        <form action="{{ route('purchase.complete') }}" method="POST">
+                        <form action="{{ route('address.show') }}" method="POST">
                             @csrf
                             <button type="submit" class="bg-green-900 text-center">
                                 <x-primary-button class="bg-green-900 text-center">Finalizar compra</x-primary-button>

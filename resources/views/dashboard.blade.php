@@ -1,11 +1,9 @@
-
-
 <x-app-layout>
-    <x-slot name="header" >
+    <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
             <!-- {{ __('Endereços')}}  -->
 
-            Olá, {{ Auth::user()->name }}! Seja bem vindo ({{ Auth::user()->type }}) <br>
+            Olá, {{ Auth::user()->name }}! <br>
 
         </h2>
         <p> Você está logado com {{ Auth::user()->email }}. <br>
@@ -19,9 +17,9 @@
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900">
 
-                    <h1 class="text-2xl mt-4 font-bold text-center font-sans text-orange-600" style="font-size:30px;" > Endereços </h1>
+                    <h1 class="text-2xl mt-4 font-bold text-center font-sans text-orange-600" style="font-size:30px;"> Endereços </h1>
 
-                     <br>
+                    <br>
                     <fieldset class="border p-2 mb-2 border-black rounded">
                         <legend class="px-2 border rounded-md border-black text-black ">Adicionar novo endereço</legend>
                         <form action="{{ route('address.store')  }}" method="POST">
@@ -87,15 +85,15 @@
                         </div>
 
 
-
                         <template x-if="showDelete">
-                            <div class="absolute top-0 button-0 left-0 right-0 bg-gray-800 bg-opacity-20 z-0 display-flex center">
-                                <div class="w-96 bg-white p-4 absolute left-1/4 right-1/4 top-1/4 z-10 ">
+                            <div class="fixed inset-0 flex items-center justify-center z-50">
+                                <div class="absolute inset-0 bg-gray-800 bg-opacity-20"></div>
+                                <div class="w-96 bg-white p-4 relative z-10">
                                     <h2 class="text-xl font-bold text-center">Você tem certeza que quer apagar?</h2>
-                                    <form action="{{ route('address.destroy', $address) }}" method="POST">
+                                    <form action="{{ route('address.destroy',  $address) }}" method="POST">
                                         @csrf
-                                        @method('DELETE')
-                                        <x-danger-button> Apagar </x-danger-button>
+                                        @method('delete')
+                                        <x-danger-button class="bg-red-300 hover:bg-red-500">Apagar</x-danger-button>
                                     </form>
                                     <x-primary-button class="w-full" @click="showDelete = false">Cancelar</x-primary-button>
                                 </div>
@@ -134,5 +132,3 @@
         </div>
     </div>
 </x-app-layout>
-
-   

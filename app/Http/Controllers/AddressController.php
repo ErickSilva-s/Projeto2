@@ -31,11 +31,11 @@ class AddressController extends Controller
     public function store(Request $request)
     {
         Address::create([
-            'number' =>  $request ->number,
-            'road'  =>  $request ->road,
-            'cep'  =>  $request ->cep,
-            'neighborhood'  =>  $request ->neighborhood,
-            'complement'  =>  $request ->complement,
+            'number' =>  $request->number,
+            'road'  =>  $request->road,
+            'cep'  =>  $request->cep,
+            'neighborhood'  =>  $request->neighborhood,
+            'complement'  =>  $request->complement,
             'user_id' => Auth::user()->id
 
         ]);
@@ -49,6 +49,14 @@ class AddressController extends Controller
     public function show(Address $address)
     {
         //
+    }
+
+    public function exibirEnderecos(){
+
+        $userId = Auth::id();
+        $address = Address::where('user_id', $userId)->get();
+
+        return view('checkout.checkout', ['address' => $address]);
     }
 
     /**
@@ -65,11 +73,11 @@ class AddressController extends Controller
     public function update(Request $request, Address $address)
     {
         $address->update([
-            'number' =>  $request ->number,
-            'road'  =>  $request ->road,
-            'cep'  =>  $request ->cep,
-            'neighborhood'  =>  $request ->neighborhood,
-            'complement'  =>  $request ->complement,
+            'number' =>  $request->number,
+            'road'  =>  $request->road,
+            'cep'  =>  $request->cep,
+            'neighborhood'  =>  $request->neighborhood,
+            'complement'  =>  $request->complement,
         ]);
         return redirect('dashboard');
     }
