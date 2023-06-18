@@ -14,7 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::table('reviews', function (Blueprint $table) {
-            $table->unsignedInteger('likes')->default(0);
+            $table->integer('likes')->default(0);
         });
     }
 

@@ -181,7 +181,7 @@ class ProductController extends Controller
     {
 
         $review->increment('likes');
-        return response()->json(['success' => false]);
+        return response()->json(['success' => true]);
     }
 
     public function dislike(Review $review)

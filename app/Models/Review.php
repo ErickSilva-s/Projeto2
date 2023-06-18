@@ -17,10 +17,6 @@ class Review extends Model
         'comment',
         'checked',
         'likes'
-    ];
-
-    protected $casts = [
-        'likes' => 'integer',
     ]; 
     
     public function product()
