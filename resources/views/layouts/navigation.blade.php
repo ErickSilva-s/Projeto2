@@ -24,6 +24,11 @@
                         {{ __('Endereços') }}
                     </x-nav-link>
 
+                    @if(Auth::user()->type == 'administrador')
+                    <x-nav-link :href="url('reviews')"  class="text-white">
+                        {{ __('Avaliações') }}
+                    </x-nav-link>
+                    @endif
 
                     @if(Auth::user() ->type=='administrador')
                     <x-nav-link :href="route('user.index')" :active="request()->routeIs('user.index')" class="text-white">
@@ -39,11 +44,6 @@
                         {{ __('Politicas de uso') }}
                     </x-nav-link>
 
-                    @if(Auth::user()->type == 'administrador')
-                    <x-nav-link :href="url('reviews')"  class="text-white">
-                        {{ __('Avaliações') }}
-                    </x-nav-link>
-                    @endif
 
                 </div>
             </div>
