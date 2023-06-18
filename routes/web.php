@@ -49,6 +49,14 @@ Route::middleware('auth')->group(function () {
 
     Route::post('/checkout', [AddressController::class, 'exibirEnderecos'])->name('address.show');
 
+    Route::post('/reviews/{reviewId}/like', [ProductController::class, 'like'])->name('review.like');
+    Route::post('/reviews/{review}/dislike', [ProductController::class, 'dislike'])->name('review.dislike');
+
+
+
+
+
+
 
 });
 

@@ -159,16 +159,30 @@
                     </div>
                 </div>
 
+
+
+
                 @endif
 
                 @if ($product->reviews->count() > 0)
                 @foreach ($product->reviews as $review)
-                <div class="mt-4" x-data="{ showDelete: false }">
+
+                <div class="mt-4" x-data="{ showDelete: false, likesCount: parseInt('{{ $review->likes }}'), liked: false }">
+
                     <p class="font-semibold" style="font-size:20px;">{{ $review->title}}</p>
                     <p>Classificação: {{ $review->rating }} Estrela(s)</p>
                     <p>Comentário: {{ $review->comment }}</p>
                     <p>Avaliado por: {{ $review->user->name }}</p>
 
+                    <p>Curtidas: <span x-text="likesCount" x-bind:id="'likesCount{{ $review->id }}'"></span></p>
+
+                    <template x-if="!liked">
+                        <button @click="likeReview('{{ $review->id }}')" class="bg-blue-500 text-white px-4 py-2 rounded">Like</button>
+                    </template>
+
+                    <template x-if="liked">
+                        <button @click="likeReview('{{ $review->id }}')" class="bg-red-500 text-white px-4 py-2 rounded">Deslike</button>
+                    </template>
 
                     @if(Auth::user())
                     @if(Auth::user()->type == 'administrador' || Auth::user()->id == $review->user_id)
@@ -208,5 +222,43 @@
         </div>
     </div>
     </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script>
+        function likeReview(reviewId) {
+            const likeButton = event.target;
+
+            if (likeButton.innerText === 'Like') {
+                axios.post(`/reviews/${reviewId}/like`)
+                    .then(response => {
+                        if (response.data.success) {
+                            const likesCount = document.getElementById(`likesCount${reviewId}`);
+                            likesCount.innerText = parseInt(likesCount.innerText) + 1;
+                            likeButton.innerText = 'Deslike';
+                            likeButton.classList.remove('bg-blue-500');
+                            likeButton.classList.add('bg-red-500');
+                        }
+                    })
+                    .catch(error => {
+                        console.error(error);
+                    });
+            } else {
+                axios.post(`/reviews/${reviewId}/dislike`)
+                    .then(response => {
+                        if (response.data.success) {
+                            const likesCount = document.getElementById(`likesCount${reviewId}`);
+                            likesCount.innerText = parseInt(likesCount.innerText) - 1;
+                            likeButton.innerText = 'Like';
+                            likeButton.classList.remove('bg-red-500');
+                            likeButton.classList.add('bg-blue-500');
+                        }
+                    })
+                    .catch(error => {
+                        console.error(error);
+                    });
+            }
+        }
+    </script>
 
 </x-app-layout>
