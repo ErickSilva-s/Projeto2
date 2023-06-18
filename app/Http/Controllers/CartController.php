@@ -27,7 +27,7 @@ class CartController extends Controller
 
         if ($existingItem) {
             // O produto já está no carrinho, você pode escolher como lidar com isso
-            return redirect('/product')->with('status', 'O produto já está no carrinho');
+            return redirect()->back()->with('status', 'O produto já está no carrinho');
         }
 
         // O produto não está no carrinho, então pode ser adicionado
@@ -37,7 +37,9 @@ class CartController extends Controller
             'user_id' => $userId
         ]);
 
-        return redirect('/product')->with('status', 'Produto adicionado ao carrinho');
+        return redirect()->back()->with('status', 'Produto adicionado ao carrinho');
+
+
     }
 
 

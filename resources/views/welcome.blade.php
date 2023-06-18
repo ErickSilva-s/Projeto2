@@ -4,8 +4,10 @@
         <header class="fixed top-0 left-0 right-0 bg-green-800 py-4 px-6 text-white flex justify-between items-center">
             <h1 class="text-2xl font-bold">Feira Na Mão</h1>
             <nav class="flex space-x-5">
+            @if(!(Auth::user()))
                 <a href="{{ route('login') }}" class="bg-transparent text-white">Entrar</a>
                 <a href="{{ route('register') }}" class="bg-transparent text-white">Cadastre-se</a>
+                @endif
                 <a href="{{ url('/about') }}" class="bg-transparent text-white">Sobre</a>
                 <a href="{{ url('/product') }}" class="bg-transparent text-white">Produtos</a>
                 <a href="{{ url('/product') }}" class="bg-transparent text-white flex items-center"></a>

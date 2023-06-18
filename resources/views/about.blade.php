@@ -2,6 +2,7 @@
     <x-slot name="header">
         <header class="fixed top-0 left-0 right-0 bg-green-800 py-4 px-6 text-white flex justify-between items-center">
             <h1 class="text-2xl font-bold">Feira Na Mão</h1>
+            @if(!(Auth::user())) <!--  só mostra o se o usuário não estiver logado -->
             <nav class="flex space-x-5">
                 <a href="{{ route('login') }}" class="bg-transparent text-white">Entrar</a>
                 <a href="{{ route('register') }}" class="bg-transparent text-white">Cadastre-se</a>
@@ -9,7 +10,17 @@
                 <a href="{{ url('/product') }}" class="bg-transparent text-white">Produtos</a>
                 <a href="{{ url('/product') }}" class="bg-transparent text-white flex items-center"></a>
             </nav>
-        </header>
+            @endif
+</header>
+         @if(Auth::user())  <!-- Se o usuario estiver logado vai aparecer isso:  -->
+            <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
+                Olá, {{ Auth::user()->name }}! <br>
+            </h2>
+            <p> Você está logado com {{ Auth::user()->email }}. <br>
+                {{ \Carbon\Carbon::now()->format('d/m/Y') }}
+            </p>
+            @endif
+
     </x-slot>
 
     <div class="flex">
@@ -26,12 +37,12 @@
         </div>
 
         <div class="flex">
-  <div class="w-1/10 bg-green-800 flex justify-center items-center p-14">
+            <div class="w-1/10 bg-green-800 flex justify-center items-center p-14">
 
-     <img src="{{ asset('fazendeiros.png') }}" alt="imagem da fazenda"> 
+                <img src="{{ asset('fazendeiros.png') }}" alt="imagem da fazenda">
 
 
-  </div>
-    </div>
+            </div>
+        </div>
 
 </x-app-layout>
