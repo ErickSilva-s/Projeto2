@@ -54,6 +54,8 @@
                     @foreach (Auth::user()->myCarts as $cartItem)
                     @foreach (App\Models\Product::all() as $product)
                     @if($cartItem->product_id == $product->id)
+                    <a href="{{ route('product.show', $product->id) }}">
+
                     <div class="flex justify-between border-b mb-2 gap-4 hover:bg-gray-300" x-data="{ showEdit: false }">
                         Descrição: {{ $product->description }} <br>
                         Valor por unidade/kg: R$ {{ $product->price }} <br>
@@ -92,6 +94,7 @@
                     @endif
                     @endforeach
                     @endforeach
+                    <a>
 
                     <br>
                     <h1 class="text-lg mt-4 text-center font-bold">Valor total do carrinho R$: {{ $totalCarrinho }}</h1>
