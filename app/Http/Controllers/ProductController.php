@@ -19,7 +19,7 @@ class ProductController extends Controller
         $pesquisa = $request->input('pesquisa');
 
         if (Auth::check() && Auth::user()->type == 'entregador') {
-            return redirect('dashboard');
+            return view('deliveryman.index');
         }
 
         if (Auth::check() && Auth::user()->type == 'vendedor') {
