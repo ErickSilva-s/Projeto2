@@ -186,6 +186,7 @@
                                 @csrf
                                 <input type="hidden" name="product_id" value="{{ $product->id }}">
 
+
                                 <div class="mt-4">
                                     <x-input-label for="rating" :value="__('Classificação')" />
                                     <select name="rating" required>
@@ -196,6 +197,10 @@
                                         <option value="5">5 Estrelas</option>
                                     </select>
                                 </div>
+
+                    <p>Curtidas: <span x-text="likesCount" x-bind:id="'likesCount{{ $review->id }}'"></span></p>
+                    <p><span class="ml-2 text-sm text-gray-500">{{ $review->created_at->diffForHumans() }}</span></p>
+
 
                                 <div class="mt-4">
                                     <x-input-label for="title" :value="__('Título')" />
@@ -230,6 +235,8 @@
                                 </p>
                                 <p>Comentário: {{ $review->comment }}</p>
                                 <p>Avaliado por: {{ $review->user->name }}</p>
+
+                                <span class="ml-2 text-sm text-gray-500">{{ $review->created_at->diffForHumans()}}</span>
 
                                 <p class="flex items-center">
                                     <img src="{{ asset('cora_verm.png') }}" alt="Ícone do coração" class="h-7 w-7">
@@ -293,7 +300,11 @@
     </div>
 
 
+
     <!-- <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
     <script>
         function likeReview(reviewId) {
             const likeButton = event.target;
