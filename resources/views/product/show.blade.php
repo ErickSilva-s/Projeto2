@@ -175,6 +175,7 @@
                     <p>Avaliado por: {{ $review->user->name }}</p>
 
                     <p>Curtidas: <span x-text="likesCount" x-bind:id="'likesCount{{ $review->id }}'"></span></p>
+                    <p><span class="ml-2 text-sm text-gray-500">{{ $review->created_at->diffForHumans() }}</span></p>
 
                     <template x-if="!liked">
                         <button @click="likeReview('{{ $review->id }}')" class="bg-blue-500 text-white px-4 py-2 rounded">Like</button>
@@ -223,7 +224,7 @@
     </div>
     </div>
 
-   
+
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script>
         function likeReview(reviewId) {
