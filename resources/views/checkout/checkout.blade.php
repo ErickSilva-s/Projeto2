@@ -9,7 +9,7 @@
                         Finalizar Compra
                         <img src="{{ asset('meu_carrinho2.png') }}" alt="imagem do carrinho" class="h-7 w-7 ml-2">
                     </h1>
-                   
+
                     <br>
                     <br>
 
@@ -17,9 +17,9 @@
 
                     <div>
                         <h1 class="text-2xl mt-4  text-green-500 font-bold ">Escolha a forma de pagamento: </h1>
-                        
 
-                        <form action=" " method="POST">
+
+                        <form action=" " method="POST" required>
                             @csrf
                             <select name="formPagamento" id="formPagamento" required class="block w-full rounded-md border-orange-600 focus:border-indigo-500 focus:ring focus:ring-indigo-500 focus:ring-opacity-50">>
                                 <option value=""> </option>
@@ -40,9 +40,9 @@
                         <!-- <h2 class="text-lg mt-4   text-center">Seus Endereços:</h2> -->
 
                         <!-- form para retorna para a finalização de compra -->
-                        <form action=" " method="POST">
+                        <form action=" " method="POST" required>
                             @csrf
-                            <select name="endereco" id="endereco" required class="block w-full rounded-md border-orange-600 focus:border-indigo-500 focus:ring focus:ring-indigo-500 focus:ring-opacity-50">>
+                            <select name="endereco" id="endereco" required  class="block w-full rounded-md border-orange-600 focus:border-indigo-500 focus:ring focus:ring-indigo-500 focus:ring-opacity-50">
                                 <option value=""> </option>
 
                                 @foreach ($address as $address)
@@ -64,11 +64,11 @@
                             <br>
                         </form>
 
-                        <div class="text-center">
+                         <div class="text-center">
                             <form action="{{ route('purchase.complete') }}" method="POST">
-                                <x-primary-button type="submit" class=" bg-orange-600"> Continuar </x-primary-button>
+                                  @csrf
+                                <x-primary-button type="submit" class=" bg-orange-600"  > Continuar </x-primary-button>
                             </form>
-
                         </div>
 
 

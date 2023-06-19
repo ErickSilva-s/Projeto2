@@ -101,17 +101,33 @@
                         </template>
 
                         <template x-if="showEdit">
-                            <div class="absolute top-0 button-0 left-0 right-0 bg-gray-800 bg-opacity-20 z-0">
-                                <div class="w-96 bg-white p-4 absolute left-1/4 right-1/4 top-1/4 z-10 ">
+                            <div class="fixed inset-0 flex items-center justify-center z-50">
+                                <div class="absolute inset-0 bg-gray-800 bg-opacity-20"></div>
+                                <div class="w-96 bg-white p-4 relative z-10">
                                     <h2 class="text-xl font-bold text-center">{{ $address->road }} | {{ $address->number }}</h2>
-                                    <form class="my-4" action="{{  route('address.update', $address) }}" method="POST">
+                                    <form class="my-4" action="{{ route('address.update', $address) }}" method="POST">
                                         @csrf
                                         @method('PUT')
-                                        <x-text-input name="road" placeholder="Logradouro" value="{{ $address->road }}" required></x-text-input>
-                                        <x-text-input name="number" placeholder="Número" value="{{ $address->number }}" required></x-text-input>
-                                        <x-text-input name="cep" placeholder="CEP" value="{{ $address->cep }}" required></x-text-input>
-                                        <x-text-input name="neighborhood" placeholder="Bairro" value="{{ $address->neighborhood }}" required></x-text-input>
-                                        <x-text-input name="complement" placeholder="Complement" value="{{ $address->complement }}"></x-text-input>
+                                        <div class="mb-4">
+                                            <label for="road" class="block mb-2">Logradouro:</label>
+                                            <x-text-input name="road" id="road" placeholder="Logradouro" value="{{ $address->road }}" required></x-text-input>
+                                        </div>
+                                        <div class="mb-4">
+                                            <label for="number" class="block mb-2">Número:</label>
+                                            <x-text-input name="number" id="number" placeholder="Número" value="{{ $address->number }}" required></x-text-input>
+                                        </div>
+                                        <div class="mb-4">
+                                            <label for="cep" class="block mb-2">CEP:</label>
+                                            <x-text-input name="cep" id="cep" placeholder="CEP" value="{{ $address->cep }}" required></x-text-input>
+                                        </div>
+                                        <div class="mb-4">
+                                            <label for="neighborhood" class="block mb-2">Bairro:</label>
+                                            <x-text-input name="neighborhood" id="neighborhood" placeholder="Bairro" value="{{ $address->neighborhood }}" required></x-text-input>
+                                        </div>
+                                        <div class="mb-4">
+                                            <label for="complement" class="block mb-2">Complemento:</label>
+                                            <x-text-input name="complement" id="complement" placeholder="Complemento" value="{{ $address->complement }}"></x-text-input>
+                                        </div>
                                         <x-primary-button>Editar</x-primary-button>
                                     </form>
                                     <x-primary-button @click="showEdit = false" class="w-full">Cancelar</x-primary-button>

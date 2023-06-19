@@ -192,41 +192,41 @@
                                 </div>
                                 @endif
                             </div>
-                        <!-- </div> -->
-</a>
+                            <!-- </div> -->
+                        </a>
 
 
-                            @if(( Auth::user() && Auth::user()->type=='administrador'))
-                             <div class="flex gap-2">
-                                <div>
-                                    <span class="cursor-pointer border rounded-md  px-2 bg-red-500 text-white" @click="showDelete = true ">Apagar</span>
-                                </div>
+                        @if(( Auth::user() && Auth::user()->type=='administrador'))
+                        <div class="flex gap-2">
+                            <div>
+                                <span class="cursor-pointer border rounded-md  px-2 bg-red-500 text-white" @click="showDelete = true ">Apagar</span>
+                            </div>
 
                             <!-- <div>
                             <span class="cursor-pointer px-2 bg-blue-500 border rounded-md text-white" @click="showEdit = true ">Editar </span>
                         </div>-->
 
 
-                    </div>
-
-
-
-                    <template x-if="showDelete">
-                        <div class="fixed inset-0 flex items-center justify-center z-50">
-                            <div class="absolute inset-0 bg-gray-800 bg-opacity-20"></div>
-                            <div class="w-96 bg-white p-4 relative z-10">
-                                <h2 class="text-xl font-bold text-center">Você tem certeza que quer apagar?</h2>
-                                <form action="{{ route('product.destroy', $product) }}" method="POST">
-                                    @csrf
-                                    @method('delete')
-                                    <x-danger-button class="bg-red-300 hover:bg-red-500">Apagar</x-danger-button>
-                                </form>
-                                <x-primary-button class="w-full" @click="showDelete = false">Cancelar</x-primary-button>
-                            </div>
                         </div>
-                    </template>
 
-                    <!--
+
+
+                        <template x-if="showDelete">
+                            <div class="fixed inset-0 flex items-center justify-center z-50">
+                                <div class="absolute inset-0 bg-gray-800 bg-opacity-20"></div>
+                                <div class="w-96 bg-white p-4 relative z-10">
+                                    <h2 class="text-xl font-bold text-center">Você tem certeza que quer apagar?</h2>
+                                    <form action="{{ route('product.destroy', $product) }}" method="POST">
+                                        @csrf
+                                        @method('delete')
+                                        <x-danger-button class="bg-red-300 hover:bg-red-500">Apagar</x-danger-button>
+                                    </form>
+                                    <x-primary-button class="w-full" @click="showDelete = false">Cancelar</x-primary-button>
+                                </div>
+                            </div>
+                        </template>
+
+                        <!--
                 <template x-if="showEdit">
                     <div class="absolute top-0 button-0 left-0 right-0 bg-gray-800 bg-opacity-20 z-0">
                         <div class="w-96 bg-white p-4 absolute left-1/4 right-1/4 top-1/4 z-10 ">
@@ -249,95 +249,109 @@
 
 
 
+                        @endif
+
+
+                    </div>
+
+
+                    @endforeach
+                    @endif
                     @endif
 
 
-                </div>
 
+                    @if(Auth::user())
+                    @if((Auth::user()->type=='vendedor'))
+                    @if(count(Auth::user()->myProducts) > 0)
 
-                @endforeach
-                @endif
-                @endif
+                    <h1 class="text-lg mt-4 font-bold text-center" style="font-size:18px;"> Seus produtos cadastrados </h1>
 
-
-
-                @if(Auth::user())
-                @if((Auth::user()->type=='vendedor'))
-                @if(count(Auth::user()->myProducts) > 0)
-
-                <h1 class="text-lg mt-4 font-bold text-center" style="font-size:18px;"> Seus produtos cadastrados </h1>
-
-                @foreach (Auth::user()->myProducts as $product)
-                <div class="flex justify-between border-b mb-2 gap-4
+                    @foreach (Auth::user()->myProducts as $product)
+                    <div class="flex justify-between border-b mb-2 gap-4
                     hover:bg-gray-300" x-data=" { showDelete: false, showEdit: false  } ">
 
-                    <a href="{{ route('product.show', $product->id) }}">
-                        <div class="flex justify-between flex-grow">
-                            Descrição: {{ $product-> description }} <br>
-                            Estoque: {{ $product-> stock_product }} <br>
-                            Valor: R$ {{ $product-> price }} <br>
-                            Categoria: {{ $product-> category }} <br>
-                            Vendido por: {{ $product->User->name}} <br>
-                            <img src="{{ asset('/img/imgProduct/' . $product->imagem) }}" alt="Imagem do Produto" style="width: 200px; height:auto;">
+                        <a href="{{ route('product.show', $product->id) }}">
+                            <div class="flex justify-between flex-grow">
+                                Descrição: {{ $product-> description }} <br>
+                                Estoque: {{ $product-> stock_product }} <br>
+                                Valor: R$ {{ $product-> price }} <br>
+                                Categoria: {{ $product-> category }} <br>
+                                Vendido por: {{ $product->User->name}} <br>
+                                <img src="{{ asset('/img/imgProduct/' . $product->imagem) }}" alt="Imagem do Produto" style="width: 200px; height:auto;">
 
 
-                        </div>
-                    </a>
+                            </div>
+                        </a>
 
-                    <div class="flex gap-2">
-                        <div>
-                            <span class="cursor-pointer px-2 bg-red-500 text-white" @click="showDelete = true ">Apagar</span>
+                        <div class="flex gap-2">
+                            <div>
+                                <span class="cursor-pointer px-2 bg-red-500 text-white" @click="showDelete = true ">Apagar</span>
+                            </div>
+                            <div>
+                                <span class="cursor-pointer px-2 bg-blue-500 text-white" @click="showEdit = true ">Editar </span>
+                            </div>
                         </div>
-                        <div>
-                            <span class="cursor-pointer px-2 bg-blue-500 text-white" @click="showEdit = true ">Editar </span>
-                        </div>
+
+                        <template x-if="showDelete">
+                            <div class="fixed inset-0 flex items-center justify-center z-50">
+                                <div class="absolute inset-0 bg-gray-800 bg-opacity-20"></div>
+                                <div class="w-96 bg-white p-4 relative z-10">
+                                    <h2 class="text-xl font-bold text-center">Você tem certeza que quer apagar?</h2>
+                                    <form action="{{ route('product.destroy', $product) }}" method="POST">
+                                        @csrf
+                                        @method('delete')
+                                        <x-danger-button class="bg-red-300 hover:bg-red-500">Apagar</x-danger-button>
+                                    </form>
+                                    <x-primary-button class="w-full" @click="showDelete = false">Cancelar</x-primary-button>
+                                </div>
+                            </div>
+                        </template>
+
+                        <template x-if="showEdit">
+                            <div class="fixed inset-0 flex items-center justify-center z-50">
+                                <div class="absolute inset-0 bg-gray-800 bg-opacity-20"></div>
+                                <div class="w-96 bg-white p-4 relative z-10">
+                                    <h2 class="text-xl font-bold text-center">{{ $product->description }} | R$: {{ $product->price }}</h2>
+                                    <form class="my-4" action="{{ route('product.destroy', $product) }}" method="POST">
+                                        @csrf
+                                        @method('PUT')
+                                        <div class="mb-4">
+                                            <label for="description" class="block mb-2">Descrição:</label>
+                                            <x-text-input name="description" id="description" placeholder="Descrição" value="{{ $product->description }}" required></x-text-input>
+                                        </div>
+                                        <div class="mb-4">
+                                            <label for="stock_product" class="block mb-2">Estoque:</label>
+                                            <x-text-input name="stock_product" id="stock_product" placeholder="Estoque" value="{{ $product->stock_product }}" required></x-text-input>
+                                        </div>
+                                        <div class="mb-4">
+                                            <label for="price" class="block mb-2">Preço:</label>
+                                            <x-text-input name="price" id="price" placeholder="Preço" value="{{ $product->price }}" required></x-text-input>
+                                        </div>
+                                        <div class="mb-4">
+                                            <label for="category" class="block mb-2">Categoria:</label>
+                                            <x-text-input name="category" id="category" placeholder="Categoria" value="{{ $product->category }}" required></x-text-input>
+                                        </div>
+                                        <x-primary-button>Editar</x-primary-button>
+                                    </form>
+                                    <x-primary-button @click="showEdit = false" class="w-full">Cancelar</x-primary-button>
+                                </div>
+                            </div>
+                        </template>
+
+
                     </div>
 
-                    <template x-if="showDelete">
-                        <div class="fixed inset-0 flex items-center justify-center z-50">
-                            <div class="absolute inset-0 bg-gray-800 bg-opacity-20"></div>
-                            <div class="w-96 bg-white p-4 relative z-10">
-                                <h2 class="text-xl font-bold text-center">Você tem certeza que quer apagar?</h2>
-                                <form action="{{ route('product.destroy', $product) }}" method="POST">
-                                    @csrf
-                                    @method('delete')
-                                    <x-danger-button class="bg-red-300 hover:bg-red-500">Apagar</x-danger-button>
-                                </form>
-                                <x-primary-button class="w-full" @click="showDelete = false">Cancelar</x-primary-button>
-                            </div>
-                        </div>
-                    </template>
-
-                    <template x-if="showEdit">
-                        <div class="absolute top-0 button-0 left-0 right-0 bg-gray-800 bg-opacity-20 z-0">
-                            <div class="w-96 bg-white p-4 absolute left-1/4 right-1/4 top-1/4 z-10 ">
-                                <h2 class="text-xl font-bold text-center">{{ $product ->description }} | {{ $product->price}} </h2>
-                                <form class="my-4" action=" {{ route('product.destroy', $product) }}" method="POST">
-                                    @csrf
-                                    @method('PUT')
-                                    <x-text-input name="description" placeholder="Descrição" value="{{ $product->description }}" required></x-text-input>
-                                    <x-text-input name="stock_product" placeholder="Estoque" value="{{ $product->stock_product }}" required></x-text-input>
-                                    <x-text-input name="price" placeholder="Preço" value="{{ $product->price }}" required></x-text-input>
-                                    <x-text-input name="category" placeholder="Categoria" value="{{ $product->category }}" required></x-text-input>
-                                    <x-primary-button>Editar</x-primary-button>
-                                </form>
-                                <x-primary-button @click="showEdit = false" class="w-full">Cancelar</x-primary-button>
-                            </div>
-                        </div>
-                    </template>
+                    @endforeach
+                    @else
+                    <h1 class="text-lg font-bold bg-text-black text-center"> Você ainda não tem nenhum produto cadastrado! </h1>
+                    @endif
+                    @endif
+                    @endif
 
                 </div>
-
-                @endforeach
-                @else
-                <h1 class="text-lg font-bold bg-text-black text-center"> Você ainda não tem nenhum produto cadastrado! </h1>
-                @endif
-                @endif
-                @endif
-
             </div>
         </div>
-    </div>
     </div>
 
 </x-app-layout>
