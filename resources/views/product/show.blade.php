@@ -155,11 +155,12 @@
                     <div class="flex">
                         @foreach (App\Models\Product::all() as $index => $product)
                         <div class="flex-auto text-gl border text-black border-green-800 mt-3 mb-2 gap-4 hover:bg-amber-300">
-
+                            <a href="{{ route('product.show', $product->id) }}">
                             <img src="{{ asset('/img/imgProduct/' . $product->imagem) }}" alt="Imagem do Produto" style="width: 100px; height:auto;">
                             <p>Descrição: {{ $product->description }}</p>
                             <p>Valor: R$ {{ $product->price }}</p>
                             <p>Vendido por: {{ $product->User->name }}</p>
+                            <a>
                         </div>
 
                         @endforeach
@@ -198,8 +199,6 @@
                                     </select>
                                 </div>
 
-                    <p>Curtidas: <span x-text="likesCount" x-bind:id="'likesCount{{ $review->id }}'"></span></p>
-                    <p><span class="ml-2 text-sm text-gray-500">{{ $review->created_at->diffForHumans() }}</span></p>
 
 
                                 <div class="mt-4">
@@ -231,12 +230,13 @@
                                 <p class="flex items-center">
                                 Classificação: <span class="ml-2">{{ $review->rating }}</span>
                                     <img src="{{ asset('estrelinha.png') }}" alt="Ícone da estrelinha" class="h-7 w-7">
-                                
+
                                 </p>
                                 <p>Comentário: {{ $review->comment }}</p>
                                 <p>Avaliado por: {{ $review->user->name }}</p>
+                                <p><span class="ml-2 text-sm text-gray-500">{{ $review->created_at->diffForHumans() }}</span></p>
 
-                                <span class="ml-2 text-sm text-gray-500">{{ $review->created_at->diffForHumans()}}</span>
+
 
                                 <p class="flex items-center">
                                     <img src="{{ asset('cora_verm.png') }}" alt="Ícone do coração" class="h-7 w-7">
@@ -259,7 +259,7 @@
                                 @if(Auth::user()->type == 'administrador' || Auth::user()->id == $review->user_id)
                                 <div class="flex gap-2">
                                     <div class="ml-auto mb-3">
-                                        <span class="cursor-pointer border rounded-md px-2 bg-red-500 text-white" @click="showDelete = true">Apagar Comentario</span>
+                                        <span class="cursor-pointer border rounded-md px-2 bg-red-500 text-white" @click="showDelete = true">Apagar Avaliação</span>
                                     </div>
                                     <hr>
 
