@@ -1,13 +1,3 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Feira na Mão</title>
-    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
-
-</head>
-<body>
 <x-app-layout>
 <x-slot name="header">
         <header class="fixed top-0 left-0 right-0 bg-green-800 py-4 px-6 text-white flex justify-between items-center">
@@ -20,7 +10,7 @@
                 <a href="{{ url('/about') }}" class="bg-transparent text-white">Sobre</a>
                 <a href="{{ url('/product') }}" class="bg-transparent text-white">Produtos</a>
                 <a href="{{ url('/cart') }}" class="bg-transparent text-white">Meu carrinho</a>
-            
+
             </nav>
             @endif
 
@@ -29,7 +19,7 @@
                 <a href="{{ url('/product') }}" class="bg-transparent text-white text-xl">Produtos</a>
                 <a href="{{ route('login') }}" class="bg-transparent text-white text-xl">Entrar</a>
                 <a href="{{ route('register') }}" class="bg-transparent text-white text-xl">Cadastre-se</a>
-            
+
             </nav>
             @endif
 </header>
@@ -55,4 +45,4 @@
 </div>
 
 </x-app-layout>
-</body>
+

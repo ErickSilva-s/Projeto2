@@ -18,8 +18,8 @@ class ProductController extends Controller
     {
         $pesquisa = $request->input('pesquisa');
 
-        if(Auth::check() && Auth::user()->type == 'entregador') {
-            return redirect('dashboard');
+        if (Auth::check() && Auth::user()->type == 'entregador') {
+            return view('deliveryman.index');
         }
 
         if (Auth::check() && Auth::user()->type == 'vendedor') {
@@ -154,25 +154,39 @@ class ProductController extends Controller
     }
 
     public function destroyReview(Review $review)
-{
-    $review->delete();
+    {
+        $review->delete();
 
-    return redirect()->back()->with('success', 'Avaliação apagada com sucesso.');
-}
+        return redirect()->back()->with('success', 'Avaliação apagada com sucesso.');
+    }
 
 
-public function markReviewChecked($reviewId)
-{
-    $review = Review::findOrFail($reviewId);
-    $review->checked = true;
-    $review->save();
+    public function markReviewChecked($reviewId)
+    {
+        $review = Review::findOrFail($reviewId);
+        $review->checked = true;
+        $review->save();
 
-    return redirect()->back()->with('checked', 'Avaliação marcada como verificada com sucesso');
-}
+        return redirect()->back()->with('checked', 'Avaliação marcada como verificada com sucesso');
+    }
 
     /**
      * Summary of pesquisar
      * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
      */
+
+
+    public function like(Review $review)
+    {
+
+        $review->increment('likes');
+        return response()->json(['success' => true]);
+    }
+
+    public function dislike(Review $review)
+    {
+        $review->decrement('likes');
+        return response()->json(['success' => true]);
+    }
 }

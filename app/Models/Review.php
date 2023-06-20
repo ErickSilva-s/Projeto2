@@ -15,10 +15,10 @@ class Review extends Model
         'title',
         'rating',
         'comment',
-        'checked'
-    ];
-
-
+        'checked',
+        'likes'
+    ]; 
+    
     public function product()
 {
     return $this->belongsTo(Product::class);

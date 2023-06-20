@@ -29,7 +29,7 @@
 
             <!-- Page Content -->
             <!-- mudar o fundo de todas as telas -->
-            <main class="bg-green-200">
+            <main class="bg-transparent">
                 {{ $slot }}
             </main>
         </div>
