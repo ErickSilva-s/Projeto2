@@ -38,7 +38,7 @@
         <div class="swiper-slide">
             <img src="{{ asset('abreu2.jpg') }}" alt="https://abreuelima.pe.gov.br/a-cidade/" class="w-[1900px] h-[600px]">
         </div>
-   
+
     <div class="swiper-pagination"></div>
 </div>
  </div>
@@ -83,6 +83,7 @@
         <div class="flex flex-wrap justify-center">
             @foreach (App\Models\Product::limit(3)->get() as $product)
                 <div class="w-1/4 p-4">
+                    <a href="{{ route('product.show', $product->id) }}">
                     <img src="{{ asset('/img/imgProduct/' . $product->imagem) }}" alt="Imagem do Produto" style="width: 200px; height:auto;">
                     <br>
                     <div class="text-left text-lg">
@@ -92,6 +93,7 @@
                         Categoria: {{ $product->category }} <br>
                         Vendido por: {{ $product->User->name}} <br>
                     </div>
+                    </a>
                 </div>
             @endforeach
         </div>
@@ -107,7 +109,7 @@
         <div class="grid grid-cols-2 gap-8">
             <div>
                 <h3 class="text-3xl font-bold mb-2">Horário de Funcionamento</h3>
-                <p class="text-lg">Seg - Sex: 08hs - 17hs 
+                <p class="text-lg">Seg - Sex: 08hs - 17hs
                     <br>
                     Sábado: 08hs - 14hs
                     <br>
@@ -130,6 +132,6 @@
 
 
 </x-app-layout>
-    
+
 </body>
 </html>
