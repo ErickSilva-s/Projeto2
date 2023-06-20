@@ -44,7 +44,6 @@
                         {{ __('Avaliações') }}
                     </x-nav-link>
                     @endif
-
                 </div>
             </div>
 
