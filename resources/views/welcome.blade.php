@@ -1,83 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Feira na Mão</title>
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
+
+</head>
+<body>
 <x-app-layout>
 
     <x-slot name="header">
         <header class="fixed top-0 left-0 right-0 bg-green-800 py-4 px-6 text-white flex justify-between items-center">
+        <div style="display: flex; align-items: center;">
+                <img src="{{ asset('logo2.png') }}" alt="imagem do logotipo" style="width: 150px; margin-right: 0px;">
             <h1 class="text-2xl font-bold">Feira Na Mão</h1>
+</div>
             <nav class="flex space-x-5">
             @if(!(Auth::user()))
-                <a href="{{ route('login') }}" class="bg-transparent text-white">Entrar</a>
-                <a href="{{ route('register') }}" class="bg-transparent text-white">Cadastre-se</a>
+                <a href="{{ route('login') }}" class="bg-transparent text-white text-xl">Entrar</a>
+                <a href="{{ route('register') }}" class="bg-transparent text-white text-xl">Cadastre-se</a>
                 @endif
-                <a href="{{ url('/about') }}" class="bg-transparent text-white">Sobre</a>
-                <a href="{{ url('/product') }}" class="bg-transparent text-white">Produtos</a>
-                <a href="{{ url('/product') }}" class="bg-transparent text-white flex items-center"></a>
+                <a href="{{ url('/about') }}" class="bg-transparent text-white text-xl">Sobre</a>
+                <a href="{{ url('/product') }}" class="bg-transparent text-white text-xl">Produtos</a>
             </nav>
         </header>
     </x-slot>
-
     <!-- Seção de Imagens -->
-    <div class="bg-gray-200 flex justify-center items-center py-16">
-        <div class="container mx-auto">
-            <div class="relative">
-                <img id="image-slider" src="{{ asset('image1.jpg') }}" alt="Imagem 1" class="max-w-full">
-                <div class="absolute top-1/2 left-4 transform -translate-y-1/2">
-                    <button onclick="previousImage()" class="bg-transparent text-white text-xl">&#9001;</button>
-                </div>
-                <div class="absolute top-1/2 right-4 transform -translate-y-1/2">
-                    <button onclick="nextImage()" class="bg-transparent text-white text-xl">&#9002;</button>
-                </div>
-            </div>
-            <div class="text-center mt-4">
-                <h2 class="text-2xl font-bold">Nome da Imagem</h2>
-            </div>
+    <div class="swiper-container mt-20">
+    <div class="swiper-wrapper">
+        <div class="swiper-slide">
+            <img src="{{ asset('abreu1.jpg') }}" alt="https://abreuelima.pe.gov.br/a-cidade/" class="w-[1900px] h-[600px]">
         </div>
-    </div>
-
-    <!-- Seção de Ajuda aos Feirantes -->
-    <div class="bg-white py-16">
-        <div class="container mx-auto text-center">
-            <h2 class="text-3xl font-bold mb-4">Ajudando os Feirantes</h2>
-            <p class="text-lg">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam eleifend ipsum vel mi elementum tincidunt. In bibendum auctor quam sed sagittis.</p>
-            <button class="bg-green-800 text-white px-4 py-2 mt-4">Comprar Agora</button>
+        <div class="swiper-slide">
+            <img src="{{ asset('abreu3.jpg') }}" alt="https://abreuelima.pe.gov.br/a-cidade/" class="w-[1900px] h-[600px]">
         </div>
-    </div>
-
-    <!-- Seção de Produtos -->
-    <div class="bg-gray-200 py-16">
-        <div class="container mx-auto text-center">
-            <h2 class="text-3xl font-bold mb-4">Produtos</h2>
-            @foreach (App\Models\Product::all() as $product)
-
-{{ $product-> description }} <br>
-Estoque: {{ $product-> stock_product }} <br>
-Valor: R$ {{ $product-> price }} <br>
-Categoria: {{ $product-> category }} <br>
-Vendedido por: {{ $product->User->name}} <br>
-<img src="{{ asset('/img/imgProduct/' . $product->imagem) }}" alt="Imagem do Produto" style="width: 200px; height:auto;">
-
-@endforeach
+        <div class="swiper-slide">
+            <img src="{{ asset('abreu2.jpg') }}" alt="https://abreuelima.pe.gov.br/a-cidade/" class="w-[1900px] h-[600px]">
         </div>
-    </div>
+   
+    <div class="swiper-pagination"></div>
+</div>
+ </div>
+<!-- Botões de passar imagens -->
+<div class="swiper-button-next"></div>
+    <div class="swiper-button-prev"></div>
 
+
+    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
     <script>
-        // Funções para alternar as imagens
-        var images = ['image1.jpg', 'image2.jpg', 'image3.jpg'];
-        var currentImageIndex = 0;
-
-        function previousImage() {
-            currentImageIndex = (currentImageIndex - 1 + images.length) % images.length;
-            updateImage();
-        }
-
-        function nextImage() {
-            currentImageIndex = (currentImageIndex + 1) % images.length;
-            updateImage();
-        }
-
-        function updateImage() {
-            var image = document.getElementById('image-slider');
-            image.src = "{{ asset('') }}" + images[currentImageIndex];
-        }
+        new Swiper('.swiper-container', {
+            slidesPerView: 1,
+            spaceBetween: 10,
+            pagination: {
+                el: '.swiper-pagination',
+                clickable: true,
+            },
+            navigation: {
+                nextEl: '.swiper-button-next',
+                prevEl: '.swiper-button-prev',
+            },
+        });
     </script>
 
+    <!-- Seção de Ajuda aos Feirantes -->
+    <div class="bg-amber-50 py-40">
+        <div class="container mx-auto text-center">
+            <h2 class="text-left font-bold text-3xl">Ajudando os Feirantes</h2>
+            <p class="text-left text-xl">Compre produtos e venda de maneira fácil.</p>
+            <div class="flex mr-0 mt-8">
+                <div class="w-1/8">
+                    <a href="{{ route('register') }}" class=" bg-orange-500 text-black px-4 py-2 text-center">Cadastre-se</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+   <!-- Seção de Produtos -->
+<div class="bg-green-800 py-16 mt-0">
+    <div class="container mx-auto text-center">
+        <h2 class="text-3xl font-bold mb-4 text-white">Produtos</h2>
+        <div class="flex flex-wrap justify-center">
+            @foreach (App\Models\Product::limit(3)->get() as $product)
+                <div class="w-1/4 p-4">
+                    <img src="{{ asset('/img/imgProduct/' . $product->imagem) }}" alt="Imagem do Produto" style="width: 200px; height:auto;">
+                    <br>
+                    <div class="text-left text-lg">
+                        {{ $product->description }} <br>
+                        Estoque: {{ $product->stock_product }} <br>
+                        Valor: R$ {{ $product->price }} <br>
+                        Categoria: {{ $product->category }} <br>
+                        Vendido por: {{ $product->User->name}} <br>
+                    </div>
+                </div>
+            @endforeach
+        </div>
+        <div class="mt-4">
+            <a href="{{ url('/product') }}" class="bg-orange-500 text-black font-bold px-4 py-2 text-center text-lg">Ver mais produtos</a>
+        </div>
+    </div>
+</div>
+
+<!-- Horarios-->
+<div class="bg-amber-50 py-16">
+    <div class="container mx-auto text-center">
+        <div class="grid grid-cols-2 gap-8">
+            <div>
+                <h3 class="text-3xl font-bold mb-2">Horário de Funcionamento</h3>
+                <p class="text-lg">Seg - Sex: 08hs - 17hs 
+                    <br>
+                    Sábado: 08hs - 14hs
+                    <br>
+                    Domingo: 08hs - 12hs</p>
+            </div>
+            <div>
+                <h3 class="text-3xl font-bold mb-2">Delivery</h3>
+                <p class="text-lg">Seg - Sex: 08hs - 17hs
+                    <br>
+                    Sábado: 08hs - 14hs
+                    <br>
+                    Domingo: 08hs - 12hs</p>
+            </div>
+        </div>
+    </div>
+</div>
+<br>
+
+
+
+
 </x-app-layout>
+    
+</body>
+</html>
