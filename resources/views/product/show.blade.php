@@ -281,9 +281,9 @@
                                         </div>
                                     </template>
                                 </div>
+                                @endif
+                                @endif
                             </div>
-                            @endif
-                            @endif
 
                         </div>
                         @endforeach
