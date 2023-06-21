@@ -1,27 +1,29 @@
 <x-app-layout>
+<x-slot name="header">
+<header class="fixed top-0 left-0 right-0 bg-green-800 py-4 px-6 text-white flex justify-between items-center">
+<div style="display: flex; align-items: center;">
+<a href="{{ url('/') }}">
+<img src="{{ asset('logo2.png') }}" alt="imagem do logotipo" style="width: 170px; margin-right: 0px;">
+<h1 class="text-2xl font-bold ml-4">Feira Na Mão</h1>
+</div>
+<div class="flex space-x-5">
+@if(!Auth::user())
+<a href="{{ route('login') }}" class="bg-transparent text-white text-2xl">Entrar</a>
+<a href="{{ route('register') }}" class="bg-transparent text-white text-2xl">Cadastre-se</a>
+</div>
 
-    <x-slot name="header">
-
-        @if(!Auth::user())
-        <div class="hidden fixed top-0 right-0 px-6 py-4 sm:block ">
-            <a href="{{ route('login') }}" class="text-sm text-gray-700 dark:text-gray-500 underline">Entrar</a>
-            <a href="{{ route('register') }}" class="ml-4 text-sm text-gray-700 dark:text-gray-500 underline">Cadastre-se</a>
-        </div>
-        @endif
-
+@endif
 
         @if(Auth::user())
-        <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
+        <h2 class="font-semibold text-xl text-gray-800 text-white leading-tight mr-10">
+                Olá, {{ Auth::user()->name }}! Seja bem-vindo ({{ Auth::user()->type }})
+            </h2>
+            
+            <a href="{{ url('/cart') }}" class="bg-transparent text-white text-xl font-bold mr-10" >Meu carrinho</a>
 
-
-            Olá, {{ Auth::user()->name }}! Seja bem vindo ({{ Auth::user()->type }}) <br>
-        </h2>
-        <p> Você está logado com {{ Auth::user()->email }}. <br>
-            {{ \Carbon\Carbon::now()->format('d/m/Y') }}
-        </p>
         @endif
     </x-slot>
-
+    <h1 class="text-center font-bold text-orange-600 font-sans" style="font-size:45px;">Produtos </h1> <br>
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
@@ -29,7 +31,7 @@
 
 
 
-                    <h1 class="text-center font-semibold text-orange-600 font-sans" style="font-size:30px;"> Produtos </h1> <br>
+                    <h1 class="text-center font-bold text-orange-600 font-sans" style="font-size:45px;"> Produtos </h1> <br>
 
                     @if(Auth::user())
                     @if (Auth::user()->type=='vendedor')
@@ -105,12 +107,13 @@
                             <input type="text" name="pesquisa" placeholder="Pesquisar produtos" value="{{ $pesquisa ?? '' }}">
                             <x-primary-button class="bg-green-900 ">Pesquisar</x-primary-button>
                         </form>
+                        <br>
                         @if (!empty($pesquisa))
                         <div class="border rounded-md border-green-500">
                             @if ($products->count() > 0)
                             @foreach ($products as $product)
                             <div>
-                                <a href="{{ route('product.show', $product->id) }}">
+                                <a href="{{ route('product.show', $product->id) }}" class="hover:bg-orange-200 text-lg font-bold text-bg-black">
                                     {{ $product->description }} (R$ {{ $product->price }})
                             </div>
                             @endforeach
@@ -120,27 +123,24 @@
                         </div>
                         @endif
                     </div><br>
-
                     @if(!Auth::user())
+<div class="grid grid-cols-3 gap-4">
+@foreach (App\Models\Product::all() as $product)
+@if(!Auth::user())
 
-                    @foreach (App\Models\Product::all() as $product)
-                    @if(!Auth::user())
-
-                    <a href="{{ route('product.show', $product->id) }}">
-                        <div class="flex justify-between border-b mb-2 gap-4
-                        hover:bg-gray-300">
-                            Descrição: {{ $product-> description }} <br>
-                            Estoque: {{ $product-> stock_product }} <br>
-                            Valor: R$ {{ $product-> price }} <br>
-                            Categoria: {{ $product-> category }} <br>
-                            Vendido por: {{ $product->User->name}} <br>
-                            <img src="{{ asset('/img/imgProduct/' . $product->imagem) }}" alt="Imagem do Produto" style="width: 200px; height:auto;">
-                        </div>
-                    </a>
-                    @endif
-                    @endforeach
-                    @endif
-
+<a href="{{ route('product.show', $product->id) }}">
+<div class="flex flex-col items-center border-black p-6 mb-2 gap-4 hover:bg-gray-300">
+<img src="{{ asset('/img/imgProduct/' . $product->imagem) }}" alt="Imagem do Produto" style="width: 400px; height:auto;">
+<div>
+<p class="text-xl">Descrição: {{ $product->description }}</p>
+<p class="text-xl">Valor: R$ {{ $product->price }}</p>
+<p class="text-xl">Vendido por: {{ $product->User->name }}</p>
+</div>
+</div>
+</a>
+@endif
+@endforeach
+@endif
 
                     @if (session('status'))
                     <div x-data="{show:true}">
@@ -154,29 +154,22 @@
 
 
                     @if(Auth::user())
-                    @if(!((Auth::user()->type=='vendedor') || (Auth::user()->type=='entregador')))
-                    <h2 class="text-lg font-bold bg-text-black text-center"> Produtos cadastrados: </h2>
+@if(!((Auth::user()->type=='vendedor') || (Auth::user()->type=='entregador')))
+<h2 class="text-lg font-bold bg-text-black text-center"> Produtos cadastrados: </h2>
 
+@foreach (App\Models\Product::all() as $product)
 
-                    @foreach (App\Models\Product::all() as $product)
+<div>
+                                       <a href="{{ route('product.show', $product->id) }}">
+                                        <div class="flex flex-col items-center border-black p-8 mb-2 gap-4 hover:bg-gray-400" x-data=" { showDelete: false, showEdit: false } ">
+                                        <img src="{{ asset('/img/imgProduct/' . $product->imagem) }}" alt="Imagem do Produto" style="width: 300px; height:auto;">
+                                     <div class="flex justify-between flex-grow" href="{{ route('product.show', $product->id) }}">
 
-                    <div>
-                        <a href="{{ route('product.show', $product->id) }}">
-                            <div class="flex justify-between border-b mb-2 gap-4
-                    hover:bg-gray-300" x-data=" { showDelete: false, showEdit: false  } ">
-
-                                <div class="flex justify-between flex-grow" href="{{ route('product.show', $product->id) }}">
-
-
-
-                                    Descrição: {{ $product-> description }} <br>
-                                    Estoque: {{ $product-> stock_product }} <br>
-                                    Valor: R$ {{ $product-> price }} <br>
-                                    Categoria: {{ $product-> category }} <br>
-                                    Vendido por: {{ $product->User->name}} <br>
-                                    <img src="{{ asset('/img/imgProduct/' . $product->imagem) }}" alt="Imagem do Produto" style="width: 200px; height:auto;">
-
-
+<div class="p-8 text-lg font-bold text-bg-black">
+                                       Descrição: {{ $product-> description }} <br>
+                                       Valor: R$ {{ $product-> price }} <br>
+                                       Vendido por: {{ $product->User->name}} <br>
+</div>
                                     @if(Auth::user()->type=='cliente')
                                     <form action="{{ route('cart.add') }}" method="POST">
                                         @csrf
