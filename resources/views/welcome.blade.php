@@ -3,21 +3,23 @@
     <x-slot name="header">
         <header class="fixed top-0 left-0 right-0 bg-green-800 py-4 px-6 text-white flex justify-between items-center">
         <div style="display: flex; align-items: center;">
-                <img src="{{ asset('logo2.png') }}" alt="imagem do logotipo" style="width: 150px; margin-right: 0px;">
-            <h1 class="text-2xl font-bold">Feira Na Mão</h1>
+        <a href="{{ url('/') }}">
+                <img src="{{ asset('logo2.png') }}" alt="imagem do logotipo" style="width: 170px; margin-right: 0px;">
+            <h1 class="text-2xl font-bold ml-4">Feira Na Mão</h1>
 </div>
             <nav class="flex space-x-5">
             @if(!(Auth::user()))
-                <a href="{{ route('login') }}" class="bg-transparent text-white text-xl">Entrar</a>
-                <a href="{{ route('register') }}" class="bg-transparent text-white text-xl">Cadastre-se</a>
+                <a href="{{ route('login') }}" class="bg-transparent text-white text-2xl">Entrar</a>
+                <a href="{{ route('register') }}" class="bg-transparent text-white text-2xl">Cadastre-se</a>
                 @endif
-                <a href="{{ url('/about') }}" class="bg-transparent text-white text-xl">Sobre</a>
-                <a href="{{ url('/product') }}" class="bg-transparent text-white text-xl">Produtos</a>
+                <a href="{{ url('/about') }}" class="bg-transparent text-white text-2xl">Sobre</a>
+                <a href="{{ url('/product') }}" class="bg-transparent text-white text-2xl">Produtos</a>
+                
             </nav>
         </header>
     </x-slot>
     <!-- Seção de Imagens -->
-    <div class="swiper-container mt-20">
+    <div class="swiper-container mt-28">
     <div class="swiper-wrapper">
         <div class="swiper-slide">
             <img src="{{ asset('abreu1.jpg') }}" alt="https://abreuelima.pe.gov.br/a-cidade/" class="w-[1900px] h-[600px]">
@@ -56,8 +58,9 @@
     <!-- Seção de Ajuda aos Feirantes -->
     <div class="bg-amber-50 py-40">
         <div class="container mx-auto text-center">
-            <h2 class="text-left font-bold text-3xl">Ajudando os Feirantes</h2>
-            <p class="text-left text-xl">Compre produtos e venda de maneira fácil.</p>
+            <h2 class="text-left font-bold text-3xl">Apoie os feirantes de sua localidade</h2>
+            <br>
+            <p class="text-left text-xl">Compre e venda produtos de maneira fácil e rápida.</p>
             <div class="flex mr-0 mt-8">
                 <div class="w-1/8">
                     <a href="{{ route('register') }}" class=" bg-orange-500 text-black px-4 py-2 text-center">Cadastre-se</a>
@@ -76,11 +79,9 @@
                     <a href="{{ route('product.show', $product->id) }}">
                     <img src="{{ asset('/img/imgProduct/' . $product->imagem) }}" alt="Imagem do Produto" style="width: 200px; height:auto;">
                     <br>
-                    <div class="text-left text-lg">
+                    <div class="text-left text-lg font-bold">
                         {{ $product->description }} <br>
-                        Estoque: {{ $product->stock_product }} <br>
                         Valor: R$ {{ $product->price }} <br>
-                        Categoria: {{ $product->category }} <br>
                         Vendido por: {{ $product->User->name}} <br>
                     </div>
                     </a>
