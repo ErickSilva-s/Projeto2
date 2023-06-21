@@ -11,7 +11,9 @@
             <nav class="flex space-x-8">
                 <a href="{{ url('/about') }}" class="bg-transparent text-white">Sobre</a>
                 <a href="{{ url('/product') }}" class="bg-transparent text-white">Produtos</a>
+                @if((Auth::user()->type == 'cliente'))
                 <a href="{{ url('/cart') }}" class="bg-transparent text-white">Meu carrinho</a>
+                @endif
 
             </nav>
             @endif

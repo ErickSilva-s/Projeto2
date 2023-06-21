@@ -31,10 +31,6 @@
                     </x-nav-link>
                     @endif
 
-                    <x-nav-link :href="url('/about')" class=" text-white">
-                        {{ __('Sobre') }}
-                    </x-nav-link>
-
                     <x-nav-link :href="url('/usage_policies')" class=" text-white">
                         {{ __('Politicas de uso') }}
                     </x-nav-link>
