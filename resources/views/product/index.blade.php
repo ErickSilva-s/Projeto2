@@ -1,12 +1,6 @@
 <x-app-layout>
 <x-slot name="header">
-<header class="fixed top-0 left-0 right-0 bg-green-800 py-4 px-6 text-white flex justify-between items-center">
-<div style="display: flex; align-items: center;">
-<a href="{{ url('/') }}">
-<img src="{{ asset('logo2.png') }}" alt="imagem do logotipo" style="width: 170px; margin-right: 0px;">
-<h1 class="text-2xl font-bold ml-4">Feira Na Mão</h1>
-</div>
-<div class="flex space-x-5">
+
 @if(!Auth::user())
 <a href="{{ route('login') }}" class="bg-transparent text-white text-2xl">Entrar</a>
 <a href="{{ route('register') }}" class="bg-transparent text-white text-2xl">Cadastre-se</a>
@@ -18,12 +12,12 @@
         <h2 class="font-semibold text-xl text-gray-800 text-white leading-tight mr-10">
                 Olá, {{ Auth::user()->name }}! Seja bem-vindo ({{ Auth::user()->type }})
             </h2>
-            
+
             <a href="{{ url('/cart') }}" class="bg-transparent text-white text-xl font-bold mr-10" >Meu carrinho</a>
 
         @endif
     </x-slot>
-    <h1 class="text-center font-bold text-orange-600 font-sans" style="font-size:45px;">Produtos </h1> <br>
+    <br>
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
