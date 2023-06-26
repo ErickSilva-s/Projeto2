@@ -105,6 +105,8 @@
                             </div>
                             @endif
 
+                            <!-- DETALHES DO PRODUTO -->
+
                             <div class="flex items-center flex-col bg-white ml-5 px-2 border rounded-md">
                                 <h1 class="text-2xl mt-4 font-bold font-sans">Detalhes do Produto:</h1>
                                 <br>
@@ -145,15 +147,16 @@
 
                         </div>
                     </div>
-                </div>
+               
            
-
+            <!-- CARROSSEL DE PRODUTOS -->
 
             <div class="bg-lime-100">
                 <div class="max-w-screen mx-auto mt-20 swiper-container">
                 <h1 class="text-green-800 mt-2 ml-5 text-gl font-semibold">Passe para o lado para conferir mais produtos!!</h1>
                     <div class="swiper-wrapper flex">
-                        @foreach (App\Models\Product::all() as $index => $product)
+
+                    @foreach (App\Models\Product::all() as $product)
                         <div class="swiper-slide w-auto">
                             <div class="swiper-button-next "></div>
                             <div class="swiper-button-prev"></div>
@@ -167,15 +170,11 @@
                                     </div>
                                 </a>
                             </div>
-
                         </div>
                         @endforeach
                     </div>
                     <br>
                 </div>
-
-
-
 
                 <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
                 <script>
@@ -194,13 +193,17 @@
                 </script>
             </div>
         </div>
+ 
 
+        <!-- FAZER AVALIAÇÃO -->
 
 
         <div class="bg-amber-100">
             <br>
             <h1 class="text-3xl mt-5  text-center text-black  font-semibold"> Avaliações dos clientes </h1>
             <br>
+
+          
 
 
             @if(( Auth::user() && Auth::user()->type=='cliente'))
@@ -248,10 +251,16 @@
             </div>
             @endif
 
+
+            <!-- LISTAR AVALIAÇÃO -->
+
             <div class="bg-amber-100">
 
+
                 @if ($product->reviews->count() > 0)
-                @foreach ($product->reviews as $review)
+                @foreach ($reviews as $review)
+
+              
 
                 <div class="mt-4 ml-5 mr-5 mb-4" x-data="{ showDelete: false, likesCount: parseInt('{{ $review->likes }}'), liked: false }">
 
@@ -315,6 +324,7 @@
                     </div>
                     @endif
                     @endif
+                   
 
                 </div>
                 @endforeach
@@ -326,9 +336,12 @@
             @endif
 
         </div>
+        </div>
+        </div> 
     </div>
-    </div>
-   </div>
+    
+   
+  
 
 
 

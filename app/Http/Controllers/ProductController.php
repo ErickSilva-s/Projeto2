@@ -99,8 +99,9 @@ class ProductController extends Controller
     public function show($id)
     {
         $product = Product::findOrFail($id);
+        $reviews = Review::where('product_id', $product->id)->get();
 
-        return view('product.show', compact('product'));
+        return view('product.show', compact('product', 'reviews'));
     }
 
 
