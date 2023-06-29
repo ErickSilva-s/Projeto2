@@ -14,7 +14,7 @@
                 @endif
                 <a href="{{ url('/about') }}" class="bg-transparent text-white text-2xl">Sobre</a>
                 <a href="{{ url('/product') }}" class="bg-transparent text-white text-2xl">Produtos</a>
-
+                
             </nav>
         </header>
     </x-slot>
@@ -23,6 +23,9 @@
     <div class="swiper-wrapper">
         <div class="swiper-slide">
             <img src="{{ asset('abreu1.jpg') }}" alt="https://abreuelima.pe.gov.br/a-cidade/" class="w-[1900px] h-[600px]">
+        </div>
+        <div class="swiper-slide">
+            <img src="{{ asset('abreu3.jpg') }}" alt="https://abreuelima.pe.gov.br/a-cidade/" class="w-[1900px] h-[600px]">
         </div>
         <div class="swiper-slide">
             <img src="{{ asset('abreu2.jpg') }}" alt="https://abreuelima.pe.gov.br/a-cidade/" class="w-[1900px] h-[600px]">
