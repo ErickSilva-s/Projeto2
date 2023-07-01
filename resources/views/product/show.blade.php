@@ -153,17 +153,17 @@
                     <div class="max-w-screen mx-auto mt-20 swiper-container">
                         <h1 class="text-green-800 mt-2 ml-5 text-gl font-semibold">Passe para o lado para conferir mais produtos!!</h1>
                         <div class="swiper-wrapper flex">
-                            @foreach (App\Models\Product::all() as $index => $product)
+                            @foreach (App\Models\Product::all() as $index => $product2)
                             <div class="swiper-slide w-auto">
                                 <div class="swiper-button-next "></div>
                                 <div class="swiper-button-prev"></div>
                                 <div class="flex items-center flex-col text-gl  text-black mt-3 mb-2 gap-4 hover:bg-lime-200">
-                                    <a href="{{ route('product.show', $product->id) }}" class="flex">
-                                        <img src="{{ asset('/img/imgProduct/' . $product->imagem) }}" alt="Imagem do Produto" style="width: 100px; height:auto;">
+                                    <a href="{{ route('product.show', $product2->id) }}" class="flex">
+                                        <img src="{{ asset('/img/imgProduct/' . $product2->imagem) }}" alt="Imagem do Produto" style="width: 100px; height:auto;">
                                         <div class="ml-4">
-                                            <p>Descrição: {{ $product->description }}</p>
-                                            <p>Valor: R$ {{ $product->price }}</p>
-                                            <p>Vendido por: {{ $product->User->name }}</p>
+                                            <p>Descrição: {{ $product2->description }}</p>
+                                            <p>Valor: R$ {{ $product2->price }}</p>
+                                            <p>Vendido por: {{ $product2->User->name }}</p>
                                         </div>
                                     </a>
                                 </div>
