@@ -159,11 +159,11 @@
                                 <div class="swiper-button-prev"></div>
                                 <div class="flex items-center flex-col text-gl  text-black mt-3 mb-2 gap-4 hover:bg-lime-200">
                                     <a href="{{ route('product.show', $product2->id) }}" class="flex">
-                                        <img src="{{ asset('/img/imgProduct/' . $product2->imagem) }}" alt="Imagem do Produto" style="width: 100px; height:auto;">
+                                        <img src="{{ asset('/img/imgProduct/' . $product2->imagem) }}" alt="Imagem do Produto" style="width: 170px; height:auto;">
                                         <div class="ml-4">
                                             <p>Descrição: {{ $product2->description }}</p>
-                                            <p>Valor: R$ {{ $product2->price }}</p>
                                             <p>Vendido por: {{ $product2->User->name }}</p>
+                                            <p class="text-xl">Valor: R$ {{ $product2->price }}</p>
                                         </div>
                                     </a>
                                 </div>
@@ -197,9 +197,9 @@
 
 
 
-            <div class="bg-amber-100">
+            <div class="bg-amber-50">
                 <br>
-                <h1 class="text-3xl mt-5  text-center text-black  font-semibold"> Avaliações dos clientes </h1>
+                <h1 class="text-3xl mt-5  text-center text-green-800 font-semibold underline"> Avaliações dos clientes </h1>
                 <br>
 
 
@@ -248,7 +248,7 @@
                 </div>
                 @endif
 
-                <div class="bg-amber-100">
+                <div class="bg-amber-50">
 
                     @if ($product->reviews->count() == 0)
                     <div class="mt-4 text-center">

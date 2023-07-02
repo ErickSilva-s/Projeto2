@@ -40,6 +40,12 @@
                         {{ __('Avaliações') }}
                     </x-nav-link>
                     @endif
+
+                    @if(Auth::user()->type == 'entregador')
+                    <x-nav-link :href="route('deliveries.index')"  class="text-white">
+                        {{ __('Entregador') }}
+                    </x-nav-link>
+                    @endif
                 </div>
             </div>
 
