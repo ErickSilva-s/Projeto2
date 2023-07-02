@@ -3,6 +3,7 @@
 use App\Http\Controllers\AddressController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\DeliverymanController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
@@ -49,6 +50,7 @@ Route::middleware('auth')->group(function () {
     Route::post('/mark-review-checked/{reviewId}', [ProductController::class, 'markReviewChecked'])->name('markReviewChecked');
 
     Route::post('/checkout', [AddressController::class, 'exibirEnderecos'])->name('address.show');
+    Route::post('/checkouts', [CheckoutController::class, 'store'])->name('checkout.store');
 
     Route::post('/reviews/{reviewId}/like', [ProductController::class, 'like'])->name('review.like');
     Route::post('/reviews/{review}/dislike', [ProductController::class, 'dislike'])->name('review.dislike');

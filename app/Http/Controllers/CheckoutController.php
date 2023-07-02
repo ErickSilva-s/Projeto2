@@ -20,39 +20,70 @@ class CheckoutController extends Controller
 
   
 
-  public function checkout( Request $request){
+  /**
+   * Summary of store
+   * @param \Illuminate\Http\Request $request
+   * @return \Illuminate\Http\RedirectResponse|mixed
+   */
+  public function store( Request $request){
 
-    $cartItemsId = $request->cart_id;
-    $addressId = $request->address_id;
-    $userId = Auth::user()->id;
 
-    Checkout::create([
-        'cartItems' => $cartItemsId,
-        'formPagamento' => $request->paymentMethod,
-        'endereco' => $request->$addressId,
-        'user_id' => $userId
+    // Validação dos campos do formulário
+    $request->validate([
+        'paymentMethod' => 'required',
+        'address_id' => 'required',
     ]);
-    return redirect()->route('purchase.complete');
-}
 
-   
+    $cartId = session('cart_id');
 
-    // $request->validate([
-    //     'formPagamento' => 'required',
-    //     'endereco' => 'required',
-    // ]);
-
-    //  $checkout = new Checkout();
-    //     $checkout->paymentMethod = $request->input('formPagamento');
-    //     $checkout->address_id = $request->input('endereco');
-    //     $checkout->cart_id = // Obtenha o ID do carrinho de compras do usuário;
-    //     $checkout->user_id = Auth::id(); // Obtenha o ID do usuário atualmente logado
-    //     $checkout->save();
-
-    //     // Redirecionar para a página de sucesso ou retornar uma resposta adequada
-    //     return redirect()->route('purchase.complete');
-  }
-   
-
+    // Criação de um novo objeto Checkout
+    $checkout = new Checkout();
+    $checkout->paymentMethod = $request->input('paymentMethod');
+    $checkout->address_id = $request->input('address_id');
+    $checkout->cart_id = $cartId ;
+    $checkout->user_id = Auth::id(); 
     
 
+    // Salva o objeto Checkout no banco de dados
+    $checkout->save();
+
+    // Redireciona ou executa outras ações após salvar no banco de dados
+
+    // Exemplo de redirecionamento
+    return redirect()->route('purchase.complete');
+
+
+
+
+
+    // $cartItemsId = $request->cart_id;
+    // $addressId = $request->address_id;
+    // $userId = Auth::user()->id;
+
+    // Checkout::create([
+    //     'cartItems' => $cartItemsId,
+    //     'paymentMethod' => $request->paymentMethod,
+    //     'address_id' => $request->$addressId,
+    //     'user_id' => $userId
+    // ]);
+    // return redirect()->route('purchase.complete');
+
+
+   
+
+//     $request->validate([
+//         'paymentMethod' => 'required',
+//         'address_id' => 'required',
+//     ]);
+
+//      $checkout = new Checkout();
+//         $checkout->paymentMethod = $request->input('paymentMethod');
+//         $checkout->address_id = $request->input('address_id');
+//         $checkout->cart_id = // Obtenha o ID do carrinho de compras do usuário;
+//         $checkout->user_id = Auth::id(); // Obtenha o ID do usuário atualmente logado
+//         $checkout->save();
+
+//         // Redirecionar para a página de sucesso ou retornar uma resposta adequada
+//         return redirect()->route('purchase.complete');
+ }
+}
