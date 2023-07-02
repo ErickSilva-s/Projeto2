@@ -1,7 +1,7 @@
 <x-app-layout>
 
     <head>
-        <!-- Outros cabeçalhos -->
+        <!-- SCRIPT DO LIKE -->
         <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
         <script>
             function likeReview(reviewId) {
@@ -65,6 +65,8 @@
             <div class="bg-amber-50 dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900 dark:text-gray-100">
                     <div class="flex">
+
+                        <!-- DIVISÃO DA PAGINA -->
                         <div class="w-1/2 mt-4  bg-transparent flex justify-center items-center">
 
 
@@ -73,6 +75,9 @@
                             </div>
 
                         </div>
+
+                        <!-- DIVISÃO 2 -->
+
                         <div class="w-1/2 p-12">
                             <h1 class="text-2xl mt-4 font-bold text-center font-sans text-orange-600" style="font-size:30px;">{{ $product->description }}</h1>
                             <br>
@@ -104,6 +109,8 @@
                                 </div>
                             </div>
                             @endif
+
+                            <!-- DETALHES DO PRODUTO -->
 
                             <div class="flex items-center flex-col bg-white ml-5 px-2 border rounded-md">
                                 <h1 class="text-2xl mt-4 font-bold font-sans">Detalhes do Produto:</h1>
@@ -147,7 +154,7 @@
                     </div>
                 </div>
 
-
+                <!-- CARROSEL DE PRODUTOS -->
 
                 <div class="bg-lime-100">
                     <div class="max-w-screen mx-auto mt-20 swiper-container">
@@ -175,7 +182,7 @@
                     </div>
 
 
-
+                    <!-- SCRIPT DO CARROSEL -->
 
                     <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
                     <script>
@@ -196,12 +203,14 @@
             </div>
 
 
+            <!-- AVALIAÇÃOES -->
 
             <div class="bg-amber-50">
                 <br>
                 <h1 class="text-3xl mt-5  text-center text-green-800 font-semibold underline"> Avaliações dos clientes </h1>
                 <br>
 
+                <!-- FAZER AVALIAÇÃO -->
 
                 @if(( Auth::user() && Auth::user()->type=='cliente'))
 
@@ -248,6 +257,8 @@
                 </div>
                 @endif
 
+                <!-- LISTAR AVALIAÇÕES -->
+
                 <div class="bg-amber-50">
 
                     @if ($product->reviews->count() == 0)
@@ -292,6 +303,8 @@
                                 </button>
                             </template>
 
+                            <!-- DELETAR AVALIAÇÃO -->
+
                             @if(Auth::user())
                             @if(Auth::user()->type == 'administrador' || Auth::user()->id == $review->user_id)
                             <div class="flex gap-2">
@@ -332,47 +345,5 @@
         </div>
     </div>
     </div>
-
-
-
-    <!-- <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-
-    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-
-    <script>
-        function likeReview(reviewId) {
-            const likeButton = event.target;
-
-            if (likeButton.innerText === 'Like') {
-                axios.post(`/reviews/${reviewId}/like`)
-                    .then(response => {
-                        if (response.data.success) {
-                            const likesCount = document.getElementById(`likesCount${reviewId}`);
-                            likesCount.innerText = parseInt(likesCount.innerText) + 1;
-                            likeButton.innerText = 'Deslike';
-                            likeButton.classList.remove('bg-blue-500');
-                            likeButton.classList.add('bg-red-500');
-                        }
-                    })
-                    .catch(error => {
-                        console.error(error);
-                    });
-            } else {
-                axios.post(`/reviews/${reviewId}/dislike`)
-                    .then(response => {
-                        if (response.data.success) {
-                            const likesCount = document.getElementById(`likesCount${reviewId}`);
-                            likesCount.innerText = parseInt(likesCount.innerText) - 1;
-                            likeButton.innerText = 'Like';
-                            likeButton.classList.remove('bg-red-500');
-                            likeButton.classList.add('bg-blue-500');
-                        }
-                    })
-                    .catch(error => {
-                        console.error(error);
-                    });
-            }
-        }
-    </script> -->
 
 </x-app-layout>
