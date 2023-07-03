@@ -32,7 +32,6 @@ class CheckoutController extends Controller
         'address_id' =>  $request->address_id,
         'product_id' =>  $request->product_id,
         'user_id' => $userId,
-        // 'cart_id' => 5
     ]);
     return redirect()->route('purchase.success');
 }
@@ -56,5 +55,9 @@ class CheckoutController extends Controller
   }
 
 
+
+
+
+    // $checkout->save();
 
 
