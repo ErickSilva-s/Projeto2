@@ -6,6 +6,7 @@ use App\Http\Controllers\CartController;
 use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\DeliverymanController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\QuestionController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 
@@ -55,13 +56,12 @@ Route::middleware('auth')->group(function () {
     Route::post('/reviews/{reviewId}/like', [ProductController::class, 'like'])->name('review.like');
     Route::post('/reviews/{reviewId}/dislike', [ProductController::class, 'dislike'])->name('review.dislike');
 
-    Route::get('/deliveries', [DeliverymanController::class, 'index' ])->name('deliveries.index');
+    Route::get('/deliveries', [DeliverymanController::class, 'index'])->name('deliveries.index');
 
+    Route::get('/questions', [QuestionController::class, 'index'])->name('questions.index');
+    Route::post('/questions', [QuestionController::class, 'store'])->name('questions.store');
 
-
-
-
-
+    Route::post('/questions/{question}/answer', [QuestionController::class, 'answer'])->name('questions.answer');
 });
 
 

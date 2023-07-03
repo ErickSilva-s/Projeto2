@@ -3,25 +3,14 @@
     <head>
         <!-- SCRIPT DO LIKE -->
         <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
         <script>
             function likeReview(reviewId) {
                 const likeButton = event.target;
 
-                if (likeButton.innerText === 'Like') {
-                    axios.post(`/reviews/${reviewId}/like`)
-                        .then(response => {
-                            if (response.data.success) {
-                                const likesCount = document.getElementById(`likesCount${reviewId}`);
-                                likesCount.innerText = parseInt(likesCount.innerText) + 1;
-                                likeButton.innerText = 'Deslike';
-                                likeButton.classList.remove('bg-blue-500');
-                                likeButton.classList.add('bg-red-500');
-                            }
-                        })
-                        .catch(error => {
-                            console.error(error);
-                        });
-                } else {
+                // Verifica se a avaliação já foi curtida pelo usuário
+                const hasLiked = localStorage.getItem(`liked_${reviewId}`);
+                if (hasLiked) {
                     axios.post(`/reviews/${reviewId}/dislike`)
                         .then(response => {
                             if (response.data.success) {
@@ -30,6 +19,26 @@
                                 likeButton.innerText = 'Like';
                                 likeButton.classList.remove('bg-red-500');
                                 likeButton.classList.add('bg-blue-500');
+
+                                // Remove a informação de que a avaliação foi curtida pelo usuário do armazenamento local
+                                localStorage.removeItem(`liked_${reviewId}`);
+                            }
+                        })
+                        .catch(error => {
+                            console.error(error);
+                        });
+                } else {
+                    axios.post(`/reviews/${reviewId}/like`)
+                        .then(response => {
+                            if (response.data.success) {
+                                const likesCount = document.getElementById(`likesCount${reviewId}`);
+                                likesCount.innerText = parseInt(likesCount.innerText) + 1;
+                                likeButton.innerText = 'Deslike';
+                                likeButton.classList.remove('bg-blue-500');
+                                likeButton.classList.add('bg-red-500');
+
+                                // Salva a informação de que a avaliação foi curtida pelo usuário no armazenamento local
+                                localStorage.setItem(`liked_${reviewId}`, true);
                             }
                         })
                         .catch(error => {
@@ -38,6 +47,8 @@
                 }
             }
         </script>
+
+
     </head>
 
     <x-slot name="header">
@@ -269,7 +280,8 @@
                     @foreach ($product->reviews as $review)
                     @if ($review->product_id == $product->id)
 
-                    <div class="mt-4 ml-5 mr-5 mb-4" x-data="{ showDelete: false, likesCount: parseInt('{{ $review->likes }}'), liked: false }">
+                    <div class="mt-4 ml-5 mr-5 mb-4" x-data="{ showDelete: false, likesCount: parseInt('{{ $review->likes }}'), liked: false }" 
+                    x-init="liked = localStorage.getItem(`liked_${{ $review->id }}`) === 'true'">
 
                         <div class="border bg-white">
 
@@ -282,7 +294,7 @@
                             <p>Comentário: {{ $review->comment }}</p>
                             <p>Avaliado por: {{ $review->user->name }}</p>
                             <p><span class="ml-2 text-sm text-gray-500">{{ $review->created_at->diffForHumans() }}</span></p>
-  
+
                             <!-- CURTIDAS -->
 
                             <p class="flex items-center">
@@ -301,7 +313,7 @@
                                     Deslike
                                 </button>
                             </template>
-                            
+
 
                             <!-- DELETAR AVALIAÇÃO -->
 
