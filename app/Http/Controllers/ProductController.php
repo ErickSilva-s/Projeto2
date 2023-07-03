@@ -178,15 +178,16 @@ class ProductController extends Controller
      */
 
 
-    public function like(Review $review)
+    public function like($reviewId)
     {
-
+        $review = Review::findOrFail($reviewId);
         $review->increment('likes');
         return response()->json(['success' => true]);
     }
 
-    public function dislike(Review $review)
+    public function dislike($reviewId)
     {
+        $review = Review::findOrFail($reviewId);
         $review->decrement('likes');
         return response()->json(['success' => true]);
     }
