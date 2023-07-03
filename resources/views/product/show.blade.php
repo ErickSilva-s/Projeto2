@@ -282,9 +282,8 @@
                             <p>Comentário: {{ $review->comment }}</p>
                             <p>Avaliado por: {{ $review->user->name }}</p>
                             <p><span class="ml-2 text-sm text-gray-500">{{ $review->created_at->diffForHumans() }}</span></p>
-
-
-
+  
+                            <!-- CURTIDAS -->
 
                             <p class="flex items-center">
                                 <img src="{{ asset('cora_verm.png') }}" alt="Ícone do coração" class="h-7 w-7">
@@ -302,6 +301,7 @@
                                     Deslike
                                 </button>
                             </template>
+                            
 
                             <!-- DELETAR AVALIAÇÃO -->
 

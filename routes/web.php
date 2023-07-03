@@ -53,7 +53,7 @@ Route::middleware('auth')->group(function () {
     Route::post('/checkouts', [CheckoutController::class, 'store'])->name('checkout.store');
 
     Route::post('/reviews/{reviewId}/like', [ProductController::class, 'like'])->name('review.like');
-    Route::post('/reviews/{review}/dislike', [ProductController::class, 'dislike'])->name('review.dislike');
+    Route::post('/reviews/{reviewId}/dislike', [ProductController::class, 'dislike'])->name('review.dislike');
 
     Route::get('/deliveries', [DeliverymanController::class, 'index' ])->name('deliveries.index');
 
