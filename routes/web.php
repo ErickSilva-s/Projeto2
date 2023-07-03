@@ -36,6 +36,7 @@ Route::middleware('auth')->group(function () {
 
     Route::resource('address', AddressController::class);
     Route::resource('user', ProfileController::class);
+    Route::resource('checkout', CheckoutController::class);
 
     Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
     Route::post('/cart/add', [CartController::class, 'add'])->name('cart.add');
