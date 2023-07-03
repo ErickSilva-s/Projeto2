@@ -8,9 +8,6 @@
 
                     <h2 class="text-lg mt-4   text-center"> Obrigado, {{ Auth::user()->name}}, por comprar conosco!</h2>
 
-
-                    
-
                     <div class="text-center">
                         <a href="{{ route('product.index') }}" class="ml-4 text-sm text-gray-700 dark:text-gray-500 underline">Ver mais produtos</a>
                     </div>

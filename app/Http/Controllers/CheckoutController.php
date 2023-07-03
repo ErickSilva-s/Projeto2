@@ -18,24 +18,26 @@ class CheckoutController extends Controller
         //
     }
 
-  
 
-  public function checkout( Request $request){
+
+  public function create( Request $request){
 
     $cartItemsId = $request->cart_id;
-    $addressId = $request->address_id;
+    // $addressId = $request->address_id;
     $userId = Auth::user()->id;
 
     Checkout::create([
-        'cartItems' => $cartItemsId,
-        'formPagamento' => $request->paymentMethod,
-        'endereco' => $request->$addressId,
-        'user_id' => $userId
+        'cart_id' => $cartItemsId,
+        'paymentMethod' => $request->paymentMethod,
+        'address_id' =>  $request->address_id,
+        'product_id' =>  $request->product_id,
+        'user_id' => $userId,
+        // 'cart_id' => 5
     ]);
-    return redirect()->route('purchase.complete');
+    return redirect()->route('purchase.success');
 }
 
-   
+
 
     // $request->validate([
     //     'formPagamento' => 'required',
@@ -52,7 +54,7 @@ class CheckoutController extends Controller
     //     // Redirecionar para a página de sucesso ou retornar uma resposta adequada
     //     return redirect()->route('purchase.complete');
   }
-   
 
-    
+
+
 
