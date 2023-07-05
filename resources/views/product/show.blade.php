@@ -3,31 +3,11 @@
     <head>
         <!-- SCRIPT DO LIKE -->
         <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
         <script>
             function likeReview(reviewId) {
                 const likeButton = event.target;
 
-                // Verifica se a avaliação já foi curtida pelo usuário
-                const hasLiked = localStorage.getItem(`liked_${reviewId}`);
-                if (hasLiked) {
-                    axios.post(`/reviews/${reviewId}/dislike`)
-                        .then(response => {
-                            if (response.data.success) {
-                                const likesCount = document.getElementById(`likesCount${reviewId}`);
-                                likesCount.innerText = parseInt(likesCount.innerText) - 1;
-                                likeButton.innerText = 'Like';
-                                likeButton.classList.remove('bg-red-500');
-                                likeButton.classList.add('bg-blue-500');
-
-                                // Remove a informação de que a avaliação foi curtida pelo usuário do armazenamento local
-                                localStorage.removeItem(`liked_${reviewId}`);
-                            }
-                        })
-                        .catch(error => {
-                            console.error(error);
-                        });
-                } else {
+                if (likeButton.innerText === 'Like') {
                     axios.post(`/reviews/${reviewId}/like`)
                         .then(response => {
                             if (response.data.success) {
@@ -36,9 +16,20 @@
                                 likeButton.innerText = 'Deslike';
                                 likeButton.classList.remove('bg-blue-500');
                                 likeButton.classList.add('bg-red-500');
-
-                                // Salva a informação de que a avaliação foi curtida pelo usuário no armazenamento local
-                                localStorage.setItem(`liked_${reviewId}`, true);
+                            }
+                        })
+                        .catch(error => {
+                            console.error(error);
+                        });
+                } else {
+                    axios.post(`/reviews/${reviewId}/dislike`)
+                        .then(response => {
+                            if (response.data.success) {
+                                const likesCount = document.getElementById(`likesCount${reviewId}`);
+                                likesCount.innerText = parseInt(likesCount.innerText) - 1;
+                                likeButton.innerText = 'Like';
+                                likeButton.classList.remove('bg-red-500');
+                                likeButton.classList.add('bg-blue-500');
                             }
                         })
                         .catch(error => {
@@ -47,8 +38,6 @@
                 }
             }
         </script>
-
-
     </head>
 
     <x-slot name="header">

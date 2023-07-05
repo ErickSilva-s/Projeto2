@@ -1,6 +1,15 @@
 <x-app-layout>
 
-    <div class="py-12 bg-green-400">
+    <x-slot name="header">
+        <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
+            Olá, {{ Auth::user()->name }}, escolha o endereço e a forma de pagamento para concluir sua compra!<br>
+        </h2>
+            <p>{{ \Carbon\Carbon::now()->format('d/m/Y') }}
+        </p>
+
+    </x-slot>
+
+    <div class="py-12 ">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-amber-50 dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900 dark:text-gray-100">
@@ -14,11 +23,11 @@
                     <br>
 
                     <div>
-                        <h1 class="text-2xl mt-4  text-green-500 font-bold ">Escolha a forma de pagamento: </h1>
+                        <h1 class="text-xl mt-4  text-green-800 font-bold ">Escolha a forma de pagamento: </h1>
 
-                        <form action="{{ route('checkout.create') }}" >
+                        <form action="{{ route('checkout.create') }}">
                             @csrf
-                            <select name="paymentMethod" id="paymentMethod" required class="block w-full rounded-md border-orange-600 focus:border-indigo-500 focus:ring focus:ring-indigo-500 focus:ring-opacity-50">>
+                            <select name="paymentMethod" id="paymentMethod" required class="block w-full rounded-md border-lime-200 focus:border-indigo-500 focus:ring focus:ring-indigo-500 focus:ring-opacity-50">>
                                 <option value=""> </option>
                                 <option value="pix"> Pix </option>
                                 <option value="transf_bancaria"> Trasferencia Bancaria</option>
@@ -31,31 +40,31 @@
 
 
                     <div>
-                        <h1 class="text-2xl mt-4  text-green-500 font-bold ">Escolher endereço de entrega: </h1>
+                        <h1 class="text-xl mt-4  text-green-800 font-bold ">Escolher endereço de entrega: </h1>
 
                         @if(count(Auth::user()->myAddress) > 0)
                         <!-- <h2 class="text-lg mt-4   text-center">Seus Endereços:</h2> -->
                         <!-- form para retorna para a finalização de compra -->
-                            <select name="address_id" id="address_id" required  class="block w-full rounded-md border-orange-600 focus:border-indigo-500 focus:ring focus:ring-indigo-500 focus:ring-opacity-50">
-                                <option value=""> </option>
-                                @foreach ($address as $address)
-                                <option value="{{ $address->id }}">
-                                    <div class="flex justify-between flex-grow px-2 border rounded-md border-green-500">
-                                        CEP:{{ $address->cep }}
-                                        Rua: {{ $address->road}},
-                                        Número: {{ $address->number }},
-                                        Bairro: {{ $address->neighborhood}}
-                                        Complemento: {{ $address->complement}}
-                                    </div>
-                                </option>
+                        <select name="address_id" id="address_id" required class="block w-full rounded-md border-lime-200 focus:border-indigo-500 focus:ring focus:ring-indigo-500 focus:ring-opacity-50">
+                            <option value=""> </option>
+                            @foreach ($address as $address)
+                            <option value="{{ $address->id }}">
+                                <div class="flex justify-between flex-grow px-2 border rounded-md border-green-500">
+                                    CEP:{{ $address->cep }}
+                                    Rua: {{ $address->road}},
+                                    Número: {{ $address->number }},
+                                    Bairro: {{ $address->neighborhood}}
+                                    Complemento: {{ $address->complement}}
+                                </div>
+                            </option>
 
-                                    <br>
-                                    @endforeach
-                            </select>
                             <br>
+                            @endforeach
+                        </select>
+                        <br>
 
-                         <div class="text-center">
-                                <x-primary-button type="submit" class=" bg-orange-600"  > Continuar </x-primary-button>
+                        <div class="text-center">
+                            <x-primary-button type="submit" class=" bg-orange-600"> Continuar </x-primary-button>
                             </form>
                         </div>
 
@@ -69,6 +78,7 @@
                         </div>
                         @endif
                         <br>
+
                     </div>
 
                     <div class="text-right">
