@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AddressController;
+use App\Http\Controllers\PDFController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\CheckoutController;
@@ -54,6 +55,7 @@ Route::middleware('auth')->group(function () {
     Route::post('/checkout', [AddressController::class, 'exibirEnderecos'])->name('address.show');
     Route::post('/checkouts', [CheckoutController::class, 'store'])->name('checkout.store');
 
+
     Route::post('/reviews/{reviewId}/like', [ProductController::class, 'like'])->name('review.like');
     Route::post('/reviews/{reviewId}/dislike', [ProductController::class, 'dislike'])->name('review.dislike');
 
@@ -63,6 +65,9 @@ Route::middleware('auth')->group(function () {
     Route::post('/questions', [QuestionController::class, 'store'])->name('questions.store');
 
     Route::post('/questions/{question}/answer', [QuestionController::class, 'answer'])->name('questions.answer');
+
+    // Route::get('/gerar-pdf', [PDFController::class, 'gerarPDF']);
+    Route::get('/makePDF', [PDFController::class, 'makePDF'])->name('makePDF');
 });
 
 

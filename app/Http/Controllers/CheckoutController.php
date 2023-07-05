@@ -52,6 +52,8 @@ class CheckoutController extends Controller
 
     //     // Redirecionar para a página de sucesso ou retornar uma resposta adequada
     //     return redirect()->route('purchase.complete');
+
+  
   }
 
 

@@ -80,30 +80,32 @@
                                 <p>Vendedor: {{ $product->User->name }}</p>
                                 <p>Email do vendedor: {{ $product->User->email }}</p>
                                 <p>Valor: R$ {{ $product->price }}</p>
-                                <p>Quantidade: {{ $cartItem->quantity }}</p> 
-                                <p>Valor total do produto: R${{ $cartItem-> quantity * $product->price }}<p>
-                                    <p class="text-sm">**Valor calculado com o preço da unidade multiplicado pela quantidade</p>
+                                <p>Quantidade: {{ $cartItem->quantity }}</p>
+                                <p>Valor total do produto: R${{ $cartItem-> quantity * $product->price }}
+                                <p>
+                                <p class="text-sm">**Valor calculado com o preço da unidade multiplicado pela quantidade</p>
 
                             </div><br>
 
-                                    @endif
-                                    @endforeach
-                                    @endforeach
+                            @endif
+                            @endforeach
+                            @endforeach
 
 
-                                    <h1 class="text-right"> DATA: {{ \Carbon\Carbon::now()->format('d/m/Y') }} </h1>
+                            <h1 class="text-right"> DATA: {{ \Carbon\Carbon::now()->format('d/m/Y') }} </h1>
 
 
-                                </div>
-                            </div><br>
-                        <div class="">
-                            <div class="text-left">
-                                <a href="{{ route('product.index') }}" class="ml-4 text-sm text-gray-700 dark:text-gray-500 "> <x-primary-button class="bg-green-800">Ver mais produtos</x-primary-button></a>  
-                            </div>
-                            <div class="text-right mr-8">
-                                <x-primary-button class="bg-orange-600">Baixar PDF</x-primary-button>
-                            </div>
-                        <div>    
+                        </div>
+                    </div><br>
+                    <div class="">
+                        <div class="text-left">
+                            <a href="{{ route('product.index') }}" class="ml-4 text-sm text-gray-700 dark:text-gray-500 "> <x-primary-button class="bg-green-800">Ver mais produtos</x-primary-button></a>
+                        </div>
+                        <div class="text-right">
+                        <a href="{{ route('makePDF') }}" class="ml-4 text-sm text-gray-700 dark:text-gray-500">
+                            <x-primary-button class="bg-orange-600">Baixar PDF</x-primary-button>
+                        </a>
+                        <div>
 
                         </div>
                     </div>
