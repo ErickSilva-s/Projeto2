@@ -49,7 +49,7 @@
 
                     @if(!(Auth::user() ->type=='entregador'))
                     <x-nav-link :href="route('questions.index')" class="text-white">
-                        {{ __('??') }}
+                        {{ __('Ajuda?') }}
                     </x-nav-link>
                     @endif
                 </div>
