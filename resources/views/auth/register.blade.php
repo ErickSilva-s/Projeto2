@@ -16,7 +16,7 @@
 
         <img src="{{ asset('fazenda.png') }}" alt="imagem da fazenda">
     </div>
-    <div class="w-1/2 p-8">
+    <div class="w-1/2 p-8 bg-amber-50">
 
 
         <x-guest-layout>
@@ -92,12 +92,12 @@
                 <br>
 
 
-                <x-primary-button class="ml-3 bg-orange-600 w-full flex justify-center items-center">
+                <x-primary-button class="ml-3 bg-orange-600 hover:bg-green-800 text-md w-full flex justify-center items-center">
                     {{ __('Cadastrar-se') }}
                 </x-primary-button>
 
                 <div class="flex items-center justify-end mt-4">
-                    <a class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" href="{{ route('login') }}">
+                    <a class="underline text-md text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" href="{{ route('login') }}">
                         {{ __('Já tem uma conta? Entrar') }}
                     </a>
                 </div>
