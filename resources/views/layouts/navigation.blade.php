@@ -13,6 +13,12 @@
 
                 <!-- Navigation Links -->
 
+                @if(Auth::user()->type == 'entregador')
+                    <x-nav-link :href="route('deliveries.index')" class="text-white">
+                        {{ __('Entregador') }}
+                    </x-nav-link>
+                    @endif
+
                 @if(!(Auth::user() ->type=='entregador'))
                 <x-nav-link :href="route('product.index')" :active="request()->routeIs('product.index')" class="text-white">
                     {{ __('Produtos') }}
@@ -41,11 +47,6 @@
                     </x-nav-link>
                     @endif
 
-                    @if(Auth::user()->type == 'entregador')
-                    <x-nav-link :href="route('deliveries.index')" class="text-white">
-                        {{ __('Entregador') }}
-                    </x-nav-link>
-                    @endif
 
                     @if(!(Auth::user() ->type=='entregador'))
                     <x-nav-link :href="route('questions.index')" class="text-white">
