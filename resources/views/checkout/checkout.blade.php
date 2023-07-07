@@ -30,13 +30,13 @@
                             <select name="paymentMethod" id="paymentMethod" required class="block w-full rounded-md border-lime-200 focus:border-indigo-500 focus:ring focus:ring-indigo-500 focus:ring-opacity-50">>
                                 <option value=""> </option>
                                 <option value="pix"> Pix </option>
-                                <option value="transf_bancaria"> Trasferencia Bancaria</option>
+                                <option value="transf_bancaria"> Transferência Bancaria</option>
 
                             </select>
 
                     </div>
 
-                    <input type="hidden" name="cart_id" id="cart_id" value="{{ Auth::user()->myCarts->first()->id }}">
+                    <!-- <input type="hidden" name="cart_id" id="cart_id" value="{{ Auth::user()->myCarts->first()->id }}"> -->
 
 
                     <div>

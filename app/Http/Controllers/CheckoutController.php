@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\CartItem;
 use App\Models\Checkout;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -20,46 +21,21 @@ class CheckoutController extends Controller
 
 
 
-  public function create( Request $request){
+    public function create(Request $request)
+    {
+        $userId = Auth::user()->id;
+        $cartItems = CartItem::where('user_id', $userId)->get();
+        $productIds = $cartItems->pluck('product_id');
 
-    $cartItemsId = $request->cart_id;
-    // $addressId = $request->address_id;
-    $userId = Auth::user()->id;
-        
-    $checkout= Checkout::create([
-        'cart_id' => $cartItemsId,
-        'paymentMethod' => $request->paymentMethod,
-        'address_id' =>  $request->address_id,
-        'product_id' =>  $request->product_id,
-        'user_id' => $userId,
-    ]);
-    return redirect()->route('purchase.success', ['checkout' => $checkout]);
-}
+        foreach ($productIds as $productId) {
+            $checkout = Checkout::create([
+                'paymentMethod' => $request->paymentMethod,
+                'address_id' => $request->address_id,
+                'user_id' => $userId,
+                'product_id' => $productId
+            ]);
+        }
 
-
-
-    // $request->validate([
-    //     'formPagamento' => 'required',
-    //     'endereco' => 'required',
-    // ]);
-
-    //  $checkout = new Checkout();
-    //     $checkout->paymentMethod = $request->input('formPagamento');
-    //     $checkout->address_id = $request->input('endereco');
-    //     $checkout->cart_id = // Obtenha o ID do carrinho de compras do usuário;
-    //     $checkout->user_id = Auth::id(); // Obtenha o ID do usuário atualmente logado
-    //     $checkout->save();
-
-    //     // Redirecionar para a página de sucesso ou retornar uma resposta adequada
-    //     return redirect()->route('purchase.complete');
-
-  
+        return redirect()->route('purchase.success', ['checkout' => $checkout]);
+    }
   }
-
-
-
-
-
-    // $checkout->save();
-
-

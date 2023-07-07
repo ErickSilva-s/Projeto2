@@ -2,7 +2,7 @@
 <div>
 
                                 <h1 class="text-xl font-bold ml-4">Feira Na Mão</h1>
-    
+
     <h2 class="text-2xl mt-4 text-black font-bold text-center">Resumo do Pedido </h2><br>
 
     <!-- NÃO APAGAR ISSO -->
@@ -55,9 +55,9 @@
 
     <h3>Detalhe dos produtos</h3>
 
-    @foreach (Auth::user()->myCarts as $cartItem)
+    @foreach (Auth::user()->myCheckouts as $checkouts)
     @foreach (App\Models\Product::all() as $product)
-    @if($cartItem->product_id == $product->id)
+    @if($checkouts->product_id == $product->id)
 
     <div class="border ml-3">
         <p>Descrição: {{ $product->description }}</p>
@@ -76,7 +76,7 @@
     @endforeach
     @endforeach
 
-   
+
     <p  style="margin-left: 0px;">Obrigada por comprar conosco!<p>
     <p>att, equipe do Feira na Mão</p>
     <p class="text-right"> Abreu e Lima,{{ \Carbon\Carbon::now()->format('d/m/Y') }} </p>

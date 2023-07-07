@@ -11,14 +11,14 @@ class Checkout extends Model
     protected $fillable = [
         'paymentMethod',
         'address_id',
-        'cart_id',
+        'product_id',
         'user_id'
 
     ];
 
-    public function cartItems()
+    public function products()
     {
-        return $this->belongsToMany(CartItem::class);
+        return $this->belongsToMany(Product::class);
     }
 
     public function address()
@@ -30,6 +30,4 @@ class Checkout extends Model
     {
         return $this->belongsTo(User::class);
     }
-
-
 }

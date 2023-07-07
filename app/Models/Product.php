@@ -27,4 +27,15 @@ public function reviews()
     return $this->hasMany(Review::class);
 }
 
+public function products()
+{
+    return $this->belongsToMany(Checkout::class);
+}
+
+public function carts()
+{
+    return $this->belongsToMany(CartItem::class);
+}
+
+
 }

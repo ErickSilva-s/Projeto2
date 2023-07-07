@@ -48,7 +48,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/purchase-success', function () {
         return view('purchase-success');
     })->name('purchase.success');
-    Route::post('/purchase-complete', [CartController::class, 'completePurchase'])->name('purchase.complete');
+    Route::GET('/purchase-complete', [CartController::class, 'completePurchase'])->name('purchase.complete');
 
     Route::post('/mark-review-checked/{reviewId}', [ProductController::class, 'markReviewChecked'])->name('markReviewChecked');
 

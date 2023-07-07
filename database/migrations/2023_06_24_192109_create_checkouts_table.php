@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->string('paymentMethod');
             $table->foreignId('address_id')->references('id')->on('addresses');
-            $table->foreignId('cart_id')->references('id')->on('cart_items');
+            $table->foreignId('product_id')->references('id')->on('products');
             $table->foreignId('user_id')->constrained();
             $table->timestamps();
         });
