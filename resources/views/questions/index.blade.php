@@ -16,11 +16,11 @@
 
                     <div class="flex border border-green-800">
 
-                        <div class="w-1/2  bg-lime-100 flex justify-center items-center">
+                        <div class="w-1/2  border border-green-800 bg-lime-100 flex justify-center items-center">
                             <div class="text-xl ">
                                 <p class="bg-green-800 text-white"> -Como editar minhas informações?</p>
                                 <br>
-                                <p class="border ml-8 mr-8 text-lg">Para editar suas informaçãoes de login, <br>
+                                <p class="border ml-8 mr-8 text-lg ">Para editar suas informaçãoes de login, <br>
                                     va na parte superio da pagina e aperte no <br>
                                     botão laranja que contem seu nome e clique em "profile"</p>
                                 <br>
@@ -39,19 +39,36 @@
                                     um vendedor especifico ou mandar sua duvida aqui para que alguns dos vendedores do Feira na Mão
                                     possam responder você.
                                 </p>
+                                <br>
+                                <br>
                             </div>
                         </div>
                         <!-- DIVISÃO 2 -->
-                        <div class="w-1/2 p-12 bg-green-200 ">
-                            <div class="text-xl ml-0 mt-0">
-                                <p class="bg-green-800 text-white">4-Quais as formas de pagamento?</p>
+                        <div class="w-1/2  bg-lime-100  border border-green-800 ">
+                            <div class="text-xl ">
+                                <p class="bg-green-800 text-white">-Quais as formas de pagamento?</p>
                                 <br>
+                                
                                 <p class="border ml-8 mr-8 text-lg">
+                                Aqui no Feira na Mão voce pode pagar por trasferencia bancaria ou pix, direto para a conta do vendedor.
 
                                 </p>
-                                <p class="bg-green-800 text-white">5-Como pagar?</p>
                                 <br>
-                                <p class="bg-green-800 text-white">6-Como funciona a entrega?</p>
+                                <br>
+                                <p class="bg-green-800 text-white">-Como pagar?</p>
+                                <br>
+                                <p class="border ml-8 mr-8 text-lg">
+                                   Após finalizar a compra, os vendedores correspondentes aos  proidutos que voce comprou
+                                   irão lhe enviar suas determinadas informaçãoes de pagamento (de acordo com a opção que voce selecionou:pix ou tranferencia bancaria)
+
+                                </p>
+                                <br>
+                                <p class="bg-green-800 text-white">-Como funciona a entrega?</p>
+                                <br>
+                                <p class="border ml-8 mr-8 text-lg">
+                                   Após voce finalizar sua compra algum dos nossos enregadores disponiveis irão aceitar fazer a entrega, que são
+                                   profissionais que ja trabalham, moram e portanto conhecem muito bem o municipio; ele entrará em contato com voce para informar o custo da corrida, e voces manteram comunição.
+                                </p>
                                 <br>
                             </div>
 
