@@ -7,7 +7,7 @@
 
                     <h1 class="text-3xl mt-4 text-green-800 font-bold text-center underline">Tire Suas Dúvidas Aqui</h1>
                     <br>
-                    <p class="font-bold text-lg text-center">Confira as dúvidas mais frequetes de clientes como você, <br> ou faça uma pergunta para nossa equipe e para os vendedores!</p>
+                    <p class="font-bold text-lg text-center">Confira as dúvidas mais frequentes de clientes como você, <br> ou faça uma pergunta para nossa equipe e para os vendedores!</p>
                     <br>
                     <br>
 
@@ -20,8 +20,8 @@
                             <div class="text-xl ">
                                 <p class="bg-green-800 text-white"> -Como editar minhas informações?</p>
                                 <br>
-                                <p class="border ml-8 mr-8 text-lg">Para editar suas informaçãoes de login, <br>
-                                    va na parte superio da pagina e aperte no <br>
+                                <p class="border ml-8 mr-8 text-lg">Para editar suas informações de login, <br>
+                                    va na parte superior da pagina e aperte no <br>
                                     botão laranja que contem seu nome e clique em "profile"</p>
                                 <br>
 
@@ -59,6 +59,7 @@
                     </div>
 
                     <br>
+
                     <div class="mt-4 center text-center flex items-center justify-center ">
                     <img src="{{ asset('logo.png') }}" alt="imagem do logotipo"  style="width: 100px;">
                     </div>
@@ -100,7 +101,7 @@
                     <br>
                     <br>
 
-                    <h1 class="font-semibold text-2xl text-black text-center">Confira as dúvidas de outros usuarios:</h1>
+                    <h1 class="font-semibold text-2xl text-black text-center">Confira as dúvidas de outros usuários:</h1>
 
                     @if (session('success'))
                     <div class="alert alert-success">

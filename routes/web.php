@@ -5,6 +5,7 @@ use App\Http\Controllers\PDFController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\CheckoutController;
+use App\Http\Controllers\CompletedPurchaseController;
 use App\Http\Controllers\DeliverymanController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\QuestionController;
@@ -68,6 +69,8 @@ Route::middleware('auth')->group(function () {
 
     // Route::get('/gerar-pdf', [PDFController::class, 'gerarPDF']);
     Route::get('/makePDF', [PDFController::class, 'makePDF'])->name('makePDF');
+
+    Route::get('send-mail', [CompletedPurchaseController::class, 'index']);
 });
 
 

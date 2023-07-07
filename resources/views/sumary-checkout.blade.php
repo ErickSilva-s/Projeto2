@@ -55,9 +55,9 @@
 
     <h3>Detalhe dos produtos</h3>
 
-    @foreach (Auth::user()->myCheckouts as $checkouts)
+    @foreach (Auth::user()->myCarts as $cartItem)
     @foreach (App\Models\Product::all() as $product)
-    @if($checkouts->product_id == $product->id)
+    @if($cartItem->product_id == $product->id)
 
     <div class="border ml-3">
         <p>Descrição: {{ $product->description }}</p>
@@ -84,4 +84,3 @@
 
 </div>
 </div>
-
