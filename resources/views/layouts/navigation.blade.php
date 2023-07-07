@@ -36,14 +36,20 @@
                     </x-nav-link>
 
                     @if(Auth::user()->type == 'administrador')
-                    <x-nav-link :href="url('reviews')"  class="text-white">
+                    <x-nav-link :href="url('reviews')" class="text-white">
                         {{ __('Avaliações') }}
                     </x-nav-link>
                     @endif
 
                     @if(Auth::user()->type == 'entregador')
-                    <x-nav-link :href="route('deliveries.index')"  class="text-white">
+                    <x-nav-link :href="route('deliveries.index')" class="text-white">
                         {{ __('Entregador') }}
+                    </x-nav-link>
+                    @endif
+
+                    @if(!(Auth::user() ->type=='entregador'))
+                    <x-nav-link :href="route('questions.index')" class="text-white">
+                        {{ __('Ajuda?') }}
                     </x-nav-link>
                     @endif
                 </div>

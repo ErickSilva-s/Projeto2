@@ -3,6 +3,7 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+use App\Models\Question;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -57,8 +58,18 @@ class User extends Authenticatable
         return $this->hasMany(CartItem::class, 'user_id');
     }
 
+    public function myCheckouts()
+    {
+        return $this->hasMany(Checkout::class, 'user_id');
+    }
+
     public function myReviews()
     {
         return $this->hasMany(Review::class);
+    }
+
+    public function myQuestions()
+    {
+        return $this->hasMany(Question::class);
     }
 }

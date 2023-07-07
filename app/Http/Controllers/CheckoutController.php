@@ -25,15 +25,15 @@ class CheckoutController extends Controller
     $cartItemsId = $request->cart_id;
     // $addressId = $request->address_id;
     $userId = Auth::user()->id;
-
-    Checkout::create([
+        
+    $checkout= Checkout::create([
         'cart_id' => $cartItemsId,
         'paymentMethod' => $request->paymentMethod,
         'address_id' =>  $request->address_id,
         'product_id' =>  $request->product_id,
         'user_id' => $userId,
     ]);
-    return redirect()->route('purchase.success');
+    return redirect()->route('purchase.success', ['checkout' => $checkout]);
 }
 
 
@@ -52,6 +52,8 @@ class CheckoutController extends Controller
 
     //     // Redirecionar para a página de sucesso ou retornar uma resposta adequada
     //     return redirect()->route('purchase.complete');
+
+  
   }
 
 

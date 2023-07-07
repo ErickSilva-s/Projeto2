@@ -269,7 +269,8 @@
                     @foreach ($product->reviews as $review)
                     @if ($review->product_id == $product->id)
 
-                    <div class="mt-4 ml-5 mr-5 mb-4" x-data="{ showDelete: false, likesCount: parseInt('{{ $review->likes }}'), liked: false }">
+                    <div class="mt-4 ml-5 mr-5 mb-4" x-data="{ showDelete: false, likesCount: parseInt('{{ $review->likes }}'), liked: false }" 
+                    x-init="liked = localStorage.getItem(`liked_${{ $review->id }}`) === 'true'">
 
                         <div class="border bg-white">
 
@@ -282,7 +283,7 @@
                             <p>Comentário: {{ $review->comment }}</p>
                             <p>Avaliado por: {{ $review->user->name }}</p>
                             <p><span class="ml-2 text-sm text-gray-500">{{ $review->created_at->diffForHumans() }}</span></p>
-  
+
                             <!-- CURTIDAS -->
 
                             <p class="flex items-center">
@@ -301,7 +302,7 @@
                                     Deslike
                                 </button>
                             </template>
-                            
+
 
                             <!-- DELETAR AVALIAÇÃO -->
 
