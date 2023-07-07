@@ -13,8 +13,12 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::table('reviews', function (Blueprint $table) {
-            $table->integer('likes')->default(0);
+        Schema::create('answers', function (Blueprint $table) {
+            $table->id();
+            $table->string('answer');
+            $table->foreignId('question_id')->references('id')->on('questions');
+            $table->foreignId('user_id');
+            $table->timestamps();
         });
     }
 
@@ -25,8 +29,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::table('reviews', function (Blueprint $table) {
-            //
-        });
+        Schema::dropIfExists('answers');
     }
 };

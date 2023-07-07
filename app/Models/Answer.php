@@ -5,14 +5,14 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Question extends Model
+class Answer extends Model
 {
     use HasFactory;
-
     protected $fillable = [
-        'question',
-        'user_id',
-
+        'question_id',
+        'answer',
+        'user_id'
+        
     ];
 
     public function user()
@@ -20,8 +20,8 @@ class Question extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function answers()
+    public function questions()
     {
-        return $this->hasMany(Answer::class, 'question_id');
+        return $this->belongsTo(Question::class, 'question_id');
     }
 }

@@ -1,5 +1,4 @@
 <x-app-layout>
-
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-amber-50 dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
@@ -7,7 +6,12 @@
 
                     <h1 class="text-3xl mt-4 text-green-800 font-bold text-center underline">Tire Suas Dúvidas Aqui</h1>
                     <br>
+                    @if(Auth::user()->type == 'cliente')
                     <p class="font-bold text-lg text-center">Confira as dúvidas mais frequetes de clientes como você, <br> ou faça uma pergunta para nossa equipe e para os vendedores!</p>
+                    @else
+                    <p class="font-bold text-lg text-center">Confira as duvidas de seus clientes e ajude-os a melhoras suas experienci no Feira na Mão. <br>
+                        Voce pode responde-los!</p>
+                    @endif
                     <br>
                     <br>
 
@@ -15,9 +19,8 @@
                     <br>
 
                     <div class="flex border border-green-800">
-
                         <div class="w-1/2  border border-green-800 bg-lime-100 flex justify-center items-center">
-                            <div class="text-xl ">
+                            <div class="text-xl">
                                 <p class="bg-green-800 text-white"> -Como editar minhas informações?</p>
                                 <br>
                                 <p class="border ml-8 mr-8 text-lg ">Para editar suas informaçãoes de login, <br>
@@ -48,9 +51,9 @@
                             <div class="text-xl ">
                                 <p class="bg-green-800 text-white">-Quais as formas de pagamento?</p>
                                 <br>
-                                
+
                                 <p class="border ml-8 mr-8 text-lg">
-                                Aqui no Feira na Mão voce pode pagar por trasferencia bancaria ou pix, direto para a conta do vendedor.
+                                    Aqui no Feira na Mão voce pode pagar por trasferencia bancaria ou pix, direto para a conta do vendedor.
 
                                 </p>
                                 <br>
@@ -58,66 +61,62 @@
                                 <p class="bg-green-800 text-white">-Como pagar?</p>
                                 <br>
                                 <p class="border ml-8 mr-8 text-lg">
-                                   Após finalizar a compra, os vendedores correspondentes aos  proidutos que voce comprou
-                                   irão lhe enviar suas determinadas informaçãoes de pagamento (de acordo com a opção que voce selecionou:pix ou tranferencia bancaria)
+                                    Após finalizar a compra, os vendedores correspondentes aos proidutos que voce comprou
+                                    irão lhe enviar suas determinadas informaçãoes de pagamento (de acordo com a opção que voce selecionou:pix ou tranferencia bancaria)
 
                                 </p>
                                 <br>
                                 <p class="bg-green-800 text-white">-Como funciona a entrega?</p>
                                 <br>
                                 <p class="border ml-8 mr-8 text-lg">
-                                   Após voce finalizar sua compra algum dos nossos enregadores disponiveis irão aceitar fazer a entrega, que são
-                                   profissionais que ja trabalham, moram e portanto conhecem muito bem o municipio; ele entrará em contato com voce para informar o custo da corrida, e voces manteram comunição.
+                                    Após voce finalizar sua compra algum dos nossos enregadores disponiveis irão aceitar fazer a entrega, que são
+                                    profissionais que ja trabalham, moram e portanto conhecem muito bem o municipio; ele entrará em contato com voce para informar o custo da corrida, e voces manteram comunição.
                                 </p>
                                 <br>
                             </div>
-
                         </div>
                     </div>
 
                     <br>
                     <div class="mt-4 center text-center flex items-center justify-center ">
-                    <img src="{{ asset('logo.png') }}" alt="imagem do logotipo"  style="width: 100px;">
+                        <img src="{{ asset('logo.png') }}" alt="imagem do logotipo" style="width: 100px;">
                     </div>
                     <h1 class="text-lg text-center font-bold ml-4">Feira Na Mão</h1>
                     <br>
 
-                    @if((Auth::user()->type=='cliente'))
-                <div class="bg-white border border-lime-100">
-                    <h1 class="font-semibold text-2xl text-green-800 text-center">Faça uma pergunta aos vendedores ou a nossa equipe:</h1>
-                     <br>
-                    <div class="text-center" x-data="{ showForm: false }">
-                    <x-primary-button class=" bg-orange-600" @click="showForm = !showForm">
-                        Fazer uma Pergunta
-                    </x-primary-button>
-                    <br>
-                    <br>
-
-                    <div x-show="showForm" class="text-center">
-                    <form method="POST" action="{{ route('questions.store') }}">
-                        @csrf
-
-                        <div class="mt-4 text-center">
+                    @if(Auth::user()->type == 'cliente')
+                    <div class="bg-white border border-orange-600">
+                        <br>
+                        <h1 class="font-semibold text-2xl text-green-800 text-center">Faça uma pergunta aos vendedores ou à nossa equipe:</h1>
+                        <br>
+                        <div class="text-center" x-data="{ showForm: false }">
+                            <x-primary-button class="bg-orange-600" @click="showForm = !showForm">
+                                Fazer uma Pergunta
+                            </x-primary-button>
                             <br>
-                            <div>
-                                <x-input-label for="question" :value="__('Fazer pergunta')" />
-                                <textarea name="question" class="" style="width: 900px; height:100px;" required></textarea>
+                            <br>
+                            <div x-show="showForm" class="text-center">
+                                <form method="POST" action="{{ route('questions.store') }}">
+                                    @csrf
+                                    <div class="mt-4 text-center">
+                                        <br>
+                                        <div>
+                                            <x-input-label for="question" :value="__('Fazer pergunta')" />
+                                            <textarea name="question" class="" style="width: 900px; height:100px;" required></textarea>
+                                        </div>
+                                        <div>
+                                            <x-primary-button type="submit" class="bg-orange-600">Perguntar</x-primary-button>
+                                        </div>
+                                    </div>
+                                </form>
                             </div>
-
-                            <div>
-                                <x-primary-button type="submit" class="bg-orange-600">Perguntar </x-primary-button>
-                            </div>
-
                         </div>
-                    </form>
                     </div>
-                    </div>
+                    <br>
+                    <br>
                     @endif
-                </div>
-                    <br>
-                    <br>
 
-                    <h1 class="font-semibold text-2xl text-black text-center">Confira as dúvidas de outros usuarios:</h1>
+                    <h1 class="font-semibold text-2xl text-black text-center">Confira as dúvidas de outros usuários:</h1>
 
                     @if (session('success'))
                     <div class="alert alert-success">
@@ -129,46 +128,47 @@
                     <div class="text-xl border  rounded mt-5 bg-white">
                         <p class="font-bold ml-2">{{ $question->user->name}}</p>
                         <p class="ml-4">{{ $question->question }}</p>
-
                         <br>
-                        @if ($question->answer)
+                        
+                        @if ($question->answers)
+                        @foreach ($question->answers as $answer)
                         <div class="border border-lime-200 ml-9 mr-9 mb-5 rounded">
-                            <!-- <h4 class="text-green-800">Respostas:</h4>
-                            <br> -->
-                            <p class="font-bold ml-2">{{ $question->user->name }} </p>
-                            <p class="text-sm ml-2">({{ $question->user->type}}) </p> <br>
-                            <p class="ml-4">{{ $question->answer }}</p>
+                            <p class="font-bold ml-2">{{ $answer->user->name }} ({{ $answer->user->type }})</p>
+                            <p><span class="ml-2 text-sm text-gray-500">{{ $answer->created_at->diffForHumans() }}</span></p>
+                            <br>
+                            <p class="ml-4">{{ $answer->answer }}</p>
+                        </div>
+                        @endforeach
+                        @else
+                        <p>Aguardando resposta...</p>
+                        @endif
+
+
+                    @if(Auth::user()->type == 'vendedor' || Auth::user()->type == 'administrador' )
+                    <div class="bg-white border border-orange-600 ml-9 mr-9">
+                        <h1 class="font-semibold text-xl text-green-800 text-center">Responda a essa pergunta:</h1>
+                        <br>
+                        <div class="text-center" x-data="{ showForm: false }">
+                            <x-primary-button class="bg-orange-600" @click="showForm = !showForm">
+                                Responder
+                            </x-primary-button>
+                            <br>
+                            <br>
+                            <div x-show="showForm" class="text-center">
+                                <form action="{{ route('answers.store') }}" method="POST">
+                                    @csrf
+                                    <input type="hidden" name="question_id" value="{{ $question->id }}">
+                                    <textarea name="answer" style="width: 900px; height:100px;" required placeholder="Digite sua resposta"></textarea>
+                                    <br>
+                                    <x-primary-button type="submit" class="bg-orange-600">Enviar</x-primary-button>
+                                </form>
+                            </div>
                         </div>
                     </div>
-
-                    @else
-                    <p>Aguardando resposta...</p>
-                    @endif
-
-                    @if((Auth::user()->type=='vendedor' || (Auth::user()->type=='administrador')))
-                    <form method="POST" action="{{ route('questions.answer', $question->id) }}">
-                        @csrf
-
-                        <div class="mt-4 text-center">
-                            <div>
-                                <x-input-label for="answer" :value="__('Reponder')" />
-                                <textarea name="answer" class="" style="width: 900px; height:100px;" required></textarea>
-                            </div>
-
-                            <div>
-                                <x-primary-button type="submit" class="bg-green-900">Responder </x-primary-button>
-                            </div>
-
-                        </div>
-                    </form>
                     @endif
                     @endforeach
-
-
-
                 </div>
             </div>
         </div>
     </div>
-
 </x-app-layout>
