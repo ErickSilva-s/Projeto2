@@ -9,10 +9,10 @@
 
             @if((Auth::user())) <!--  só mostra o se o usuário estiver logado -->
             <nav class="flex space-x-8">
-                <a href="{{ url('/about') }}" class="bg-transparent text-white">Sobre</a>
-                <a href="{{ url('/product') }}" class="bg-transparent text-white">Produtos</a>
+                <a href="{{ url('/about') }}" class="bg-transparent text-white  text-2xl">Sobre</a>
+                <a href="{{ url('/product') }}" class="bg-transparent text-white text-2xl">Produtos</a>
                 @if((Auth::user()->type == 'cliente'))
-                <a href="{{ url('/cart') }}" class="bg-transparent text-white">Meu carrinho</a>
+                <a href="{{ url('/cart') }}" class="bg-transparent text-white  text-2xl">Meu carrinho</a>
                 @endif
 
             </nav>
