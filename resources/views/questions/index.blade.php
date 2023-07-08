@@ -23,11 +23,7 @@
                             <div class="text-xl">
                                 <p class="bg-green-800 text-white"> -Como editar minhas informações?</p>
                                 <br>
-<<<<<<< HEAD
-                                <p class="border ml-8 mr-8 text-lg">Para editar suas informações de login, <br>
-=======
                                 <p class="border ml-8 mr-8 text-lg ">Para editar suas informações de login, <br>
->>>>>>> test
                                     va na parte superior da pagina e aperte no <br>
                                     botão laranja que contem seu nome e clique em "profile"</p>
                                 <br>
@@ -206,9 +202,6 @@
                 </div>
             </div>
         </div>
-<<<<<<< HEAD
-    </div>
+    <!-- </div> -->
 
-=======
->>>>>>> test
 </x-app-layout>
