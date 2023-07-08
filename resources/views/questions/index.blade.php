@@ -125,50 +125,80 @@
                     @endif
 
                     @foreach ($questions as $question)
-                    <div class="text-xl border  rounded mt-5 bg-white">
-                        <p class="font-bold ml-2">{{ $question->user->name}}</p>
-                        <p class="ml-4">{{ $question->question }}</p>
-                        <br>
+                    <div class="text-xl rounded mt-5 ">
+                        <div class="border border-green-800 rounded bg-lime-100">
+                        <p class="font-bold ml-2 mt-2">{{ $question->user->name}}</p>
+                        <p><span class="ml-2 text-sm text-gray-500">{{ $question->created_at->diffForHumans() }}</span></p>
                         
-                        @if ($question->answers)
-                        @foreach ($question->answers as $answer)
-                        <div class="border border-lime-200 ml-9 mr-9 mb-5 rounded">
+                        <p class="ml-4 mt-3">{{ $question->question }}</p>
+                        </div>
+                        <br>
+
+                        @if ($question->answers->count() > 0)
+                        @php
+                        $answers = $question->answers->take(2); // Pegar apenas as duas primeiras respostas
+                        $remainingAnswers = $question->answers->slice(2); // Pegar as respostas restantes
+                        @endphp
+
+                        @foreach ($answers as $answer)
+                        <div class="border bg-white border-lime-200 ml-9 mr-9 mb-5 rounded">
                             <p class="font-bold ml-2">{{ $answer->user->name }} ({{ $answer->user->type }})</p>
                             <p><span class="ml-2 text-sm text-gray-500">{{ $answer->created_at->diffForHumans() }}</span></p>
                             <br>
                             <p class="ml-4">{{ $answer->answer }}</p>
                         </div>
                         @endforeach
+
+                        @if (count($remainingAnswers) > 0)
+                        <div class="" x-data="{ showMore: false }">
+                            <div class="text-sm text-right mr-8">
+                                <a class="underline" @click="showMore = !showMore">
+                                    Ver outras respostas
+                                </a>
+                            </div>
+                            <br>
+                            <div x-show="showMore" class="text-center">
+                                @foreach ($remainingAnswers as $answer)
+                                <div class="border border-lime-200 ml-9 mr-9 mb-5 rounded">
+                                    <p class="font-bold ml-2">{{ $answer->user->name }} ({{ $answer->user->type }})</p>
+                                    <p><span class="ml-2 text-sm text-gray-500">{{ $answer->created_at->diffForHumans() }}</span></p>
+                                    <br>
+                                    <p class="ml-4">{{ $answer->answer }}</p>
+                                </div>
+                                @endforeach
+                            </div>
+                        </div>
+                        @endif
                         @else
-                        <p>Aguardando resposta...</p>
+                        <p class="text-sm ml-8">Aguardando resposta...</p>
                         @endif
 
 
-                    @if(Auth::user()->type == 'vendedor' || Auth::user()->type == 'administrador' )
-                    <div class="bg-white border border-orange-600 ml-9 mr-9">
-                        <h1 class="font-semibold text-xl text-green-800 text-center">Responda a essa pergunta:</h1>
-                        <br>
-                        <div class="text-center" x-data="{ showForm: false }">
-                            <x-primary-button class="bg-orange-600" @click="showForm = !showForm">
-                                Responder
-                            </x-primary-button>
+
+                        @if(Auth::user()->type == 'vendedor' || Auth::user()->type == 'administrador' )
+                        
                             <br>
-                            <br>
-                            <div x-show="showForm" class="text-center">
-                                <form action="{{ route('answers.store') }}" method="POST">
-                                    @csrf
-                                    <input type="hidden" name="question_id" value="{{ $question->id }}">
-                                    <textarea name="answer" style="width: 900px; height:100px;" required placeholder="Digite sua resposta"></textarea>
-                                    <br>
-                                    <x-primary-button type="submit" class="bg-orange-600">Enviar</x-primary-button>
-                                </form>
+                            <div class="text-center" x-data="{ showForm: false }">
+                                <x-primary-button class="bg-orange-600" @click="showForm = !showForm">
+                                    Responder
+                                </x-primary-button>
+                                <br>
+                                <br>
+                                <div x-show="showForm" class="text-center">
+                                    <form action="{{ route('answers.store') }}" method="POST">
+                                        @csrf
+                                        <input type="hidden" name="question_id" value="{{ $question->id }}">
+                                        <textarea name="answer" style="width: 900px; height:100px;" required placeholder="Digite sua resposta"></textarea>
+                                        <br>
+                                        <x-primary-button type="submit" class="bg-orange-600">Enviar</x-primary-button>
+                                    </form>
+                                </div>
                             </div>
-                        </div>
+                        
+                        @endif
+                        @endforeach
                     </div>
-                    @endif
-                    @endforeach
                 </div>
             </div>
         </div>
-    </div>
 </x-app-layout>
