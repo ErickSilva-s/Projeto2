@@ -6,25 +6,25 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Application Name
+    | Nome da Aplicação
     |--------------------------------------------------------------------------
     |
-    | This value is the name of your application. This value is used when the
-    | framework needs to place the application's name in a notification or
-    | any other location as required by the application or its packages.
+    | Este valor é o nome da sua aplicação. Ele é usado quando o framework
+    | precisa exibir o nome da aplicação em uma notificação ou em qualquer
+    | outra localização conforme exigido pela aplicação ou seus pacotes.
     |
     */
 
-    'name' => env('APP_NAME', 'Laravel'),
+    'name' => env('APP_NAME', 'Feira na Mão'),
 
     /*
     |--------------------------------------------------------------------------
-    | Application Environment
+    | Ambiente da Aplicação
     |--------------------------------------------------------------------------
     |
-    | This value determines the "environment" your application is currently
-    | running in. This may determine how you prefer to configure various
-    | services the application utilizes. Set this in your ".env" file.
+    | Este valor determina o "ambiente" em que a sua aplicação está sendo
+    | executada. Isso pode determinar como você prefere configurar vários
+    | serviços utilizados pela aplicação. Defina isso no arquivo ".env".
     |
     */
 
@@ -32,12 +32,12 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Application Debug Mode
+    | Modo de Depuração da Aplicação
     |--------------------------------------------------------------------------
     |
-    | When your application is in debug mode, detailed error messages with
-    | stack traces will be shown on every error that occurs within your
-    | application. If disabled, a simple generic error page is shown.
+    | Quando a sua aplicação está no modo de depuração, mensagens de erro detalhadas
+    | com rastreamentos de pilha serão exibidas em cada erro que ocorrer na
+    | aplicação. Se desativado, uma página de erro genérica simples será exibida.
     |
     */
 
@@ -45,12 +45,12 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Application URL
+    | URL da Aplicação
     |--------------------------------------------------------------------------
     |
-    | This URL is used by the console to properly generate URLs when using
-    | the Artisan command line tool. You should set this to the root of
-    | your application so that it is used when running Artisan tasks.
+    | Esta URL é usada pelo console para gerar corretamente URLs ao usar
+    | a ferramenta de linha de comando Artisan. Você deve definir isso como
+    | a raiz da sua aplicação para que seja usada ao executar tarefas do Artisan.
     |
     */
 
@@ -60,64 +60,64 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Application Timezone
+    | Timezone da Aplicação
     |--------------------------------------------------------------------------
     |
-    | Here you may specify the default timezone for your application, which
-    | will be used by the PHP date and date-time functions. We have gone
-    | ahead and set this to a sensible default for you out of the box.
-    |
-    */
-
-    'timezone' => 'UTC',
-
-    /*
-    |--------------------------------------------------------------------------
-    | Application Locale Configuration
-    |--------------------------------------------------------------------------
-    |
-    | The application locale determines the default locale that will be used
-    | by the translation service provider. You are free to set this value
-    | to any of the locales which will be supported by the application.
+    | Aqui você pode especificar o fuso horário padrão da sua aplicação,
+    | que será usado pelas funções de data e hora do PHP. Já definimos um
+    | valor padrão razoável para você.
     |
     */
 
-    'locale' => 'en',
+    'timezone' => 'America/Sao_Paulo',
 
     /*
     |--------------------------------------------------------------------------
-    | Application Fallback Locale
+    | Configuração de Localidade da Aplicação
     |--------------------------------------------------------------------------
     |
-    | The fallback locale determines the locale to use when the current one
-    | is not available. You may change the value to correspond to any of
-    | the language folders that are provided through your application.
+    | A localidade da aplicação determina a localidade padrão que será usada
+    | pelo provedor de serviços de tradução. Você pode definir este valor
+    | para qualquer uma das localidades que serão suportadas pela aplicação.
     |
     */
 
-    'fallback_locale' => 'en',
+    'locale' => 'pt-BR',
 
     /*
     |--------------------------------------------------------------------------
-    | Faker Locale
+    | Localidade de Fallback da Aplicação
     |--------------------------------------------------------------------------
     |
-    | This locale will be used by the Faker PHP library when generating fake
-    | data for your database seeds. For example, this will be used to get
-    | localized telephone numbers, street address information and more.
+    | A localidade de fallback determina a localidade a ser usada quando a
+    | localidade atual não estiver disponível. Você pode alterar o valor para
+    | corresponder a qualquer uma das pastas de idioma fornecidas pela aplicação.
     |
     */
 
-    'faker_locale' => 'en_US',
+    'fallback_locale' => 'pt-BR',
 
     /*
     |--------------------------------------------------------------------------
-    | Encryption Key
+    | Localidade do Faker
     |--------------------------------------------------------------------------
     |
-    | This key is used by the Illuminate encrypter service and should be set
-    | to a random, 32 character string, otherwise these encrypted strings
-    | will not be safe. Please do this before deploying an application!
+    | Esta localidade será usada pela biblioteca Faker PHP ao gerar dados falsos
+    | para as suas sementes de banco de dados. Por exemplo, isso será usado para
+    | obter números de telefone localizados, informações de endereço, etc.
+    |
+    */
+
+    'faker_locale' => 'pt_BR',
+
+    /*
+    |--------------------------------------------------------------------------
+    | Chave de Criptografia
+    |--------------------------------------------------------------------------
+    |
+    | Esta chave é usada pelo serviço de criptografia Illuminate e deve ser definida
+    | como uma string aleatória de 32 caracteres. Caso contrário, essas strings
+    | criptografadas não serão seguras. Faça isso antes de implantar a aplicação!
     |
     */
 
@@ -127,14 +127,14 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Maintenance Mode Driver
+    | Driver do Modo de Manutenção
     |--------------------------------------------------------------------------
     |
-    | These configuration options determine the driver used to determine and
-    | manage Laravel's "maintenance mode" status. The "cache" driver will
-    | allow maintenance mode to be controlled across multiple machines.
+    | Essas opções de configuração determinam o driver usado para determinar e
+    | gerenciar o status de "modo de manutenção" do Laravel. O driver "file" irá
+    | permitir que o modo de manutenção seja controlado em várias máquinas.
     |
-    | Supported drivers: "file", "cache"
+    | Drivers suportados: "file", "cache"
     |
     */
 
@@ -145,19 +145,20 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Autoloaded Service Providers
+    | Provedores de Serviços Carregados Automaticamente
     |--------------------------------------------------------------------------
     |
-    | The service providers listed here will be automatically loaded on the
-    | request to your application. Feel free to add your own services to
-    | this array to grant expanded functionality to your applications.
+    | Os provedores de serviços listados aqui serão carregados automaticamente
+    | quando a sua aplicação for solicitada. Fique à vontade para adicionar
+    | os seus próprios serviços a esta matriz para conceder funcionalidades
+    | expandidas à sua aplicação.
     |
     */
 
     'providers' => [
 
         /*
-         * Laravel Framework Service Providers...
+         * Provedores de Serviços do Framework Laravel...
          */
         Illuminate\Auth\AuthServiceProvider::class,
         Illuminate\Broadcasting\BroadcastServiceProvider::class,
@@ -183,11 +184,11 @@ return [
         Illuminate\View\ViewServiceProvider::class,
 
         /*
-         * Package Service Providers...
+         * Provedores de Serviços de Pacotes...
          */
 
         /*
-         * Application Service Providers...
+         * Provedores de Serviços da Aplicação...
          */
         App\Providers\AppServiceProvider::class,
         App\Providers\AuthServiceProvider::class,
@@ -199,17 +200,18 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Class Aliases
+    | Aliases de Classes
     |--------------------------------------------------------------------------
     |
-    | This array of class aliases will be registered when this application
-    | is started. However, feel free to register as many as you wish as
-    | the aliases are "lazy" loaded so they don't hinder performance.
+    | Este array de aliases de classe será registrado quando a aplicação
+    | for iniciada. No entanto, sinta-se à vontade para registrar quantos
+    | você desejar, pois os aliases são carregados de forma "lazy" e não
+    | prejudicam o desempenho.
     |
     */
 
     'aliases' => Facade::defaultAliases()->merge([
-        // 'ExampleClass' => App\Example\ExampleClass::class,
+        // 'ClasseExemplo' => App\Exemplo\ClasseExemplo::class,
     ])->toArray(),
 
 ];

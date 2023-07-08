@@ -10,11 +10,22 @@
             <nav class="flex space-x-5">
             @if(!(Auth::user()))
                 <a href="{{ route('login') }}" class="bg-transparent text-white text-2xl">Entrar</a>
-                <!-- como foi conversando com o prof de ihc, é melhor deixar o butão de entrar -->
-                <!-- <a href="{{ route('register') }}" class="bg-transparent text-white text-2xl">Cadastre-se</a> -->
+
                 @endif
                 <a href="{{ url('/about') }}" class="bg-transparent text-white text-2xl">Sobre</a>
+
+
+                @if(Auth::user())
+                @if((Auth::user()->type=='entregador'))
+                <a href="{{ url('/deliveries') }}" class="bg-transparent text-white text-2xl">Entregas</a>
+                @else
                 <a href="{{ url('/product') }}" class="bg-transparent text-white text-2xl">Produtos</a>
+                @endif
+                @endif
+
+                @if(!(Auth::user()))
+                <a href="{{ url('/product') }}" class="bg-transparent text-white text-2xl">Produtos</a>
+                @endif
 
             </nav>
         </header>
