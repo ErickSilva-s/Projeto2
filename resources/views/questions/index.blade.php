@@ -7,9 +7,9 @@
                     <h1 class="text-3xl mt-4 text-green-800 font-bold text-center underline">Tire Suas Dúvidas Aqui</h1>
                     <br>
                     @if(Auth::user()->type == 'cliente')
-                    <p class="font-bold text-lg text-center">Confira as dúvidas mais frequetes de clientes como você, <br> ou faça uma pergunta para nossa equipe e para os vendedores!</p>
+                    <p class="font-bold text-lg text-center">Confira as dúvidas mais frequentes de clientes como você, <br> ou faça uma pergunta para nossa equipe e para os vendedores!</p>
                     @else
-                    <p class="font-bold text-lg text-center">Confira as duvidas de seus clientes e ajude-os a melhoras suas experienci no Feira na Mão. <br>
+                    <p class="font-bold text-lg text-center">Confira as duvidas de seus clientes e ajude-os a melhoras suas experiência no Feira na Mão. <br>
                         Voce pode responde-los!</p>
                     @endif
                     <br>
@@ -23,8 +23,8 @@
                             <div class="text-xl">
                                 <p class="bg-green-800 text-white"> -Como editar minhas informações?</p>
                                 <br>
-                                <p class="border ml-8 mr-8 text-lg ">Para editar suas informaçãoes de login, <br>
-                                    va na parte superio da pagina e aperte no <br>
+                                <p class="border ml-8 mr-8 text-lg ">Para editar suas informações de login, <br>
+                                    va na parte superior da pagina e aperte no <br>
                                     botão laranja que contem seu nome e clique em "profile"</p>
                                 <br>
 
@@ -53,7 +53,7 @@
                                 <br>
 
                                 <p class="border ml-8 mr-8 text-lg">
-                                    Aqui no Feira na Mão voce pode pagar por trasferencia bancaria ou pix, direto para a conta do vendedor.
+                                    Aqui no Feira na Mão voce pode pagar por transferência bancaria ou pix, direto para a conta do vendedor.
 
                                 </p>
                                 <br>
@@ -61,16 +61,16 @@
                                 <p class="bg-green-800 text-white">-Como pagar?</p>
                                 <br>
                                 <p class="border ml-8 mr-8 text-lg">
-                                    Após finalizar a compra, os vendedores correspondentes aos proidutos que voce comprou
-                                    irão lhe enviar suas determinadas informaçãoes de pagamento (de acordo com a opção que voce selecionou:pix ou tranferencia bancaria)
+                                    Após finalizar a compra, os vendedores correspondentes aos produtos que você comprou
+                                    irão lhe enviar suas determinadas informações de pagamento (de acordo com a opção que voce selecionou:pix ou transferência bancaria)
 
                                 </p>
                                 <br>
                                 <p class="bg-green-800 text-white">-Como funciona a entrega?</p>
                                 <br>
                                 <p class="border ml-8 mr-8 text-lg">
-                                    Após voce finalizar sua compra algum dos nossos enregadores disponiveis irão aceitar fazer a entrega, que são
-                                    profissionais que ja trabalham, moram e portanto conhecem muito bem o municipio; ele entrará em contato com voce para informar o custo da corrida, e voces manteram comunição.
+                                    Após voce finalizar sua compra algum dos nossos enregadores disponíveis irão aceitar fazer a entrega, que são
+                                    profissionais que ja trabalham, moram e portanto conhecem muito bem o município; ele entrará em contato com voce para informar o custo da corrida, e voces manterão comunicação.
                                 </p>
                                 <br>
                             </div>
@@ -129,7 +129,7 @@
                         <div class="border border-green-800 rounded bg-lime-100">
                         <p class="font-bold ml-2 mt-2">{{ $question->user->name}}</p>
                         <p><span class="ml-2 text-sm text-gray-500">{{ $question->created_at->diffForHumans() }}</span></p>
-                        
+
                         <p class="ml-4 mt-3">{{ $question->question }}</p>
                         </div>
                         <br>
@@ -176,7 +176,7 @@
 
 
                         @if(Auth::user()->type == 'vendedor' || Auth::user()->type == 'administrador' )
-                        
+
                             <br>
                             <div class="text-center" x-data="{ showForm: false }">
                                 <x-primary-button class="bg-orange-600" @click="showForm = !showForm">
@@ -194,7 +194,7 @@
                                     </form>
                                 </div>
                             </div>
-                        
+
                         @endif
                         @endforeach
                     </div>
