@@ -33,6 +33,8 @@ class AuthenticatedSessionController extends Controller
 
         if ($user->type == 'entregador') {
             return redirect()->route('deliveries.index');
+        } elseif ($user->type == 'vendedor' && !$user->email_verified_at) {
+            return redirect()->route('verification.notice');
         } else {
             return redirect()->route('product.index');
         }
