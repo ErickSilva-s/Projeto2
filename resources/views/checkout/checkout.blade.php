@@ -28,7 +28,7 @@
                         <form action="{{ route('checkout.create') }}">
                             @csrf
                             <select name="paymentMethod" id="paymentMethod" required class="block w-full rounded-md border-lime-200 focus:border-indigo-500 focus:ring focus:ring-indigo-500 focus:ring-opacity-50">>
-                                <option value=""> </option>
+                                <option  hidden value=""> </option>
                                 <option value="pix"> Pix </option>
                                 <option value="transf_bancaria"> Transferência Bancaria</option>
 
@@ -46,9 +46,9 @@
                         <!-- <h2 class="text-lg mt-4   text-center">Seus Endereços:</h2> -->
                         <!-- form para retorna para a finalização de compra -->
                         <select name="address_id" id="address_id" required class="block w-full rounded-md border-lime-200 focus:border-indigo-500 focus:ring focus:ring-indigo-500 focus:ring-opacity-50">
-                            <option value=""> </option>
+                            <option hidden value=""> </option>
                             @foreach ($address as $address)
-                            <option value="{{ $address->id }}">
+                            <option  value="{{ $address->id }}">
                                 <div class="flex justify-between flex-grow px-2 border rounded-md border-green-500">
                                     CEP:{{ $address->cep }}
                                     Rua: {{ $address->road}},
