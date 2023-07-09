@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AddressController;
+use App\Http\Controllers\AnswerController;
 use App\Http\Controllers\PDFController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CartController;
@@ -63,10 +64,14 @@ Route::middleware('auth')->group(function () {
     Route::post('/reviews/{reviewId}/dislike', [ProductController::class, 'dislike'])->name('review.dislike');
 
 
-    Route::get('/questions', [QuestionController::class, 'index'])->name('questions.index');
-    Route::post('/questions', [QuestionController::class, 'store'])->name('questions.store');
+    // Route::get('/questions', [QuestionController::class, 'index'])->name('questions.index');
+    // Route::post('/questions', [QuestionController::class, 'store'])->name('questions.store');
 
-    Route::post('/questions/{question}/answer', [QuestionController::class, 'answer'])->name('questions.answer');
+    // Route::resource('answers', AnswerController::class);
+    Route::resource('questions', QuestionController::class);
+    Route::resource('answers', AnswerController::class);
+    // Route::post('/answers/{question_id}', [AnswerController::class, 'store'])->name('answers.store');
+    
 
     // Route::get('/gerar-pdf', [PDFController::class, 'gerarPDF']);
     Route::get('/makePDF', [PDFController::class, 'makePDF'])->name('makePDF');
