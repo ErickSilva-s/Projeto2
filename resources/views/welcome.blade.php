@@ -9,15 +9,20 @@
 </div>
             <nav class="flex space-x-6 mr-4 ">
             @if(!(Auth::user()))
-                <a href="{{ route('login') }}" class="bg-transparent hover:bg-amber-500 border-x-4 border-transparent  rounded-md text-white text-2xl">Entrar</a>
+
+                <a href="{{ route('login') }}" class="bg-transparent text-white text-2xl">Entrar</a>
+                <!-- como foi conversando com o prof de ihc, é melhor deixar o butão de entrar -->
+                <!-- <a href="{{ route('register') }}" class="bg-transparent text-white text-2xl">Cadastre-se</a> -->
                 @endif
-                <a href="{{ url('/about') }}" class="bg-transparent hover:bg-amber-500 border-x-4 border-transparent  rounded-md text-white text-2xl">Sobre</a>
-                
+                <a href="{{ url('/about') }}" class="bg-transparent text-white text-2xl">Sobre</a>
+                <a href="{{ url('/product') }}" class="bg-transparent text-white text-2xl">Produtos</a>
+
+
             </nav>
         </header>
     </x-slot>
-    <!-- Seção de Imagens -->
-    <div class="swiper-container mt-28">
+   
+<div class="swiper-container mt-28">
     <div class="swiper-wrapper">
         <div class="swiper-slide">
             <img src="{{ asset('abreu1.jpg') }}" alt="https://abreuelima.pe.gov.br/a-cidade/" class="w-[1900px] h-[600px]">
@@ -49,6 +54,8 @@
             },
         });
     </script>
+
+
 
     <!-- Seção de Ajuda aos Feirantes -->
     <div class="bg-amber-50 py-40">

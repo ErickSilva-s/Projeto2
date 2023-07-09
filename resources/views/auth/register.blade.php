@@ -16,7 +16,7 @@
 
         <img src="{{ asset('fazenda.png') }}" alt="imagem da fazenda">
     </div>
-    <div class="w-1/2 p-8 bg-amber-50">
+    <div class="w-1/2 p-8 bg-orange-100">
 
 
         <x-guest-layout>
@@ -31,7 +31,7 @@
 
                 <!-- Name -->
                 <div>
-                    <x-input-label for="name" :value="__('Nome')" />
+                    <x-input-label for="name" :value="__('Nome Completo')" />
                     <x-text-input id="name" class="block mt-1 w-full border-orange-600" type="text" name="name" :value="old('name')" required autofocus autocomplete="name" />
                     <x-input-error :messages="$errors->get('name')" class="mt-2" />
                 </div>

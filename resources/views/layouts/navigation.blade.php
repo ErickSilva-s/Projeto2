@@ -1,64 +1,67 @@
 @if(Auth::user())
-<nav x-data="{ open: false }" class="bg-green-800 border-b border-gray-100 ">
+<nav x-data="{ open: false }" class="bg-green-800 border-b border-gray-100 fixed top-0 left-0 right-0">
     <!-- Primary Navigation Menu -->
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="flex justify-between h-16">
-            <div class="flex">
-                <!-- Logo -->
-                <!-- <div class="shrink-0 flex items-center">
-                    <a href="{{ route('dashboard') }}">
-                        <x-application-logo class="block h-9 w-auto fill-current text-gray-800" />
-                    </a>
-                </div> -->
-
+    <div class="max-w-8xl mx-auto px-4 mt-4 flex justify-between items-center">
+        <div class="flex items-center">
+            <!-- Logo -->
+                <a href="{{ url('product') }}">
+                    <img src="{{ asset('logo2.png') }}" alt="imagem do logotipo" style="width:170px;">
+                    <h1 class="text-2xl font-bold text-white text-right">Feira Na Mão</h1>
+            </div>
                 <!-- Navigation Links -->
-
+                <div class="hidden space-x-8 sm:my-14 sm:ml-10 sm:flex">
                 @if(!(Auth::user() ->type=='entregador'))
-                <x-nav-link :href="route('product.index')" :active="request()->routeIs('product.index')" class="text-white">
+                <x-nav-link :href="route('product.index')" :active="request()->routeIs('product.index')" class="text-white text-xl hover:text-orange-400">
                     {{ __('Produtos') }}
                 </x-nav-link>
                 @endif
 
-                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex  ">
-                    <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')" class="text-white">
+                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                    <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')" class="text-white text-xl hover:text-orange-400">
                         {{ __('Endereços') }}
                     </x-nav-link>
 
-
                     @if(Auth::user() ->type=='administrador')
-                    <x-nav-link :href="route('user.index')" :active="request()->routeIs('user.index')" class="text-white">
+                    <x-nav-link :href="route('user.index')" :active="request()->routeIs('user.index')" class="text-white text-xl hover:text-orange-400">
                         {{ __('Usuários') }}
                     </x-nav-link>
                     @endif
 
-                    <x-nav-link :href="url('/about')" class=" text-white">
-                        {{ __('Sobre') }}
-                    </x-nav-link>
-
-                    <x-nav-link :href="url('/usage_policies')" class=" text-white">
+                    <x-nav-link :href="url('/usage_policies')" class=" text-white text-xl hover:text-orange-400">
                         {{ __('Politicas de uso') }}
                     </x-nav-link>
 
                     @if(Auth::user()->type == 'administrador')
-                    <x-nav-link :href="url('reviews')"  class="text-white">
+                    <x-nav-link :href="url('reviews')" class="text-white text-xl hover:text-orange-400">
                         {{ __('Avaliações') }}
                     </x-nav-link>
                     @endif
+
+                    @if(Auth::user()->type == 'entregador')
+                    <x-nav-link :href="route('deliveries.index')" class="text-white text-xl hover:text-orange-400">
+                        {{ __('Entregador') }}
+                    </x-nav-link>
+                    @endif
+
+                    @if(!(Auth::user() ->type=='entregador'))
+                    <x-nav-link :href="route('questions.index')" class="text-white text-xl hover:text-orange-400">
+                        {{ __('Ajuda?') }}
+                    </x-nav-link>
+                    @endif
                 </div>
-            </div>
 
             <!-- Settings Dropdown -->
             <div class="hidden sm:flex sm:items-center sm:ml-6">
                 @if(Auth::user() ->type=='cliente')
-                <x-nav-link :href="route('cart.index')" :active="request()->routeIs('cart.index')" class=" text-white">
-                    {{ __('Meu carrinho') }}
-                    <img src="{{ asset('meu_carrinho2.png') }}" alt="Ícone do carrinho" class="h-6 w-6">
-                </x-nav-link>
+                
+                <a href="/cart" class="mr-4">
+  <img src="{{ asset('meu_carrinho2.png') }}" class="h-6 w-6 color-white ">
+</a>
                 @endif
 
                 <x-dropdown align="right" width="48">
                     <x-slot name="trigger">
-                        <button class=" text-white inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-black bg-orange-400 hover:text-gray-700 focus:outline-none transition ease-in-out duration-150">
+                        <button class=" text-white inline-flex items-center px-3 py-2 border border-transparent text-md leading-4 font-medium rounded-md text-black bg-orange-400 hover:text-gray-700 focus:outline-none transition ease-in-out duration-150">
 
                             <div>{{ Auth::user()->name }} ({{ Auth::user()->type }})</div>
 
@@ -69,10 +72,9 @@
                             </div>
                         </button>
                     </x-slot>
-
                     <x-slot name="content">
                         <x-dropdown-link :href="route('profile.edit')">
-                            {{ __('Profile') }}
+                            {{ __('Conta') }}
                         </x-dropdown-link>
 
                         <!-- Authentication -->
@@ -81,10 +83,11 @@
 
                             <x-dropdown-link :href="route('logout')" onclick="event.preventDefault();
                                                 this.closest('form').submit();">
-                                {{ __('Log Out') }}
+                                {{ __('Sair') }}
                             </x-dropdown-link>
                         </form>
                     </x-slot>
+</div>
                 </x-dropdown>
             </div>
 

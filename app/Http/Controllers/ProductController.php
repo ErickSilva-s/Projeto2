@@ -99,8 +99,9 @@ class ProductController extends Controller
     public function show($id)
     {
         $product = Product::findOrFail($id);
+        $reviews = Review::where('product_id', $product->id)->get();
 
-        return view('product.show', compact('product'));
+        return view('product.show', compact('product', 'reviews'));
     }
 
 
@@ -177,15 +178,16 @@ class ProductController extends Controller
      */
 
 
-    public function like(Review $review)
+    public function like($reviewId)
     {
-
+        $review = Review::findOrFail($reviewId);
         $review->increment('likes');
         return response()->json(['success' => true]);
     }
 
-    public function dislike(Review $review)
+    public function dislike($reviewId)
     {
+        $review = Review::findOrFail($reviewId);
         $review->decrement('likes');
         return response()->json(['success' => true]);
     }

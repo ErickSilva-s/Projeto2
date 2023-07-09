@@ -13,7 +13,7 @@
 
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class=" bg-amber-100 dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
+            <div class=" bg-amber-50 dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900 dark:text-gray-100">
                     <h1 class="text-4xl mt-4 font-bold text-center text-black  flex items-center justify-center"> 
                         <img src="{{ asset('entregador.png') }}" alt="Ícone do entregador" class="h-11 w-11  mr-2 ">

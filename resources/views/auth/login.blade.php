@@ -5,7 +5,7 @@
 
 
   </div>
-  <div class="w-1/2 p-8 bg-amber-50">
+  <div class="w-1/2 p-8 bg-orange-100">
   
 
 <x-guest-layout >
