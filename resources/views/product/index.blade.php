@@ -14,19 +14,19 @@
 
             </nav>
         </header><br><br><br>
-            @endif
+        @endif
 
 
-            @if(Auth::user())
-            <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
+        @if(Auth::user())
+        <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
 
 
-                Olá, {{ Auth::user()->name }}! Seja bem vindo ({{ Auth::user()->type }}) <br>
-            </h2>
-            <p> Você está logado com {{ Auth::user()->email }}. <br>
-                {{ \Carbon\Carbon::now()->format('d/m/Y') }}
-            </p>
-            @endif
+            Olá, {{ Auth::user()->name }}! Seja bem vindo ({{ Auth::user()->type }}) <br>
+        </h2>
+        <p> Você está logado com {{ Auth::user()->email }}. <br>
+            {{ \Carbon\Carbon::now()->format('d/m/Y') }}
+        </p>
+        @endif
     </x-slot>
 
     <div class="py-12">
@@ -100,7 +100,11 @@
                                 </div>
                             </div>
 
-                            <x-primary-button class="w-full bg-green-900">Adicionar</x-primary-button>
+                            <div class="flex justify-center mt-8">
+                                <x-primary-button class="bg-green-900 hover:bg-orange-600 text-center w-48 justify-center ">
+                                    Adicionar
+                                </x-primary-button>
+                            </div>
                         </form>
                     </fieldset>
 

@@ -47,8 +47,11 @@
                                 </div>
                             </div>
 
-                            <x-primary-button class="w-full bg-green-900"> Adicionar </x-primary-button>
-
+                            <div class="flex justify-center mt-8">
+                                     <x-primary-button class="bg-green-900 hover:bg-orange-600 text-center w-48 justify-center ">
+                                        Adicionar
+                                    </x-primary-button>
+                            </div>
 
 
                         </form>
