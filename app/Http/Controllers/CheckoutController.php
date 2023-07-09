@@ -38,6 +38,7 @@ class CheckoutController extends Controller
 
 
 
+
     // $request->validate([
     //     'formPagamento' => 'required',
     //     'endereco' => 'required',

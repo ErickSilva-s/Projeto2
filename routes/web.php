@@ -61,6 +61,9 @@ Route::middleware('auth')->group(function () {
     Route::post('/reviews/{reviewId}/dislike', [ProductController::class, 'dislike'])->name('review.dislike');
 
     Route::get('/deliveries', [DeliverymanController::class, 'index'])->name('deliveries.index');
+    
+    Route::put('/deliveries', [DeliverymanController::class, 'assignDeliveryman'])
+    ->name('assignDeliveryman');
 
     // Route::get('/questions', [QuestionController::class, 'index'])->name('questions.index');
     // Route::post('/questions', [QuestionController::class, 'store'])->name('questions.store');
