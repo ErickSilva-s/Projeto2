@@ -38,13 +38,13 @@
                     @endif
 
                     @if(Auth::user()->type == 'entregador')
-                    <x-nav-link :href="route('deliveries.index')" class="text-white text-xl hover:text-orange-400">
+                    <x-nav-link :href="route('deliveries.index')" :active="request()->routeIs('deliveries.index')" class="text-white text-xl hover:text-orange-400">
                         {{ __('Entregador') }}
                     </x-nav-link>
                     @endif
 
                     @if(!(Auth::user() ->type=='entregador'))
-                    <x-nav-link :href="route('questions.index')" class="text-white text-xl hover:text-orange-400">
+                    <x-nav-link :href="route('questions.index')"   :active="request()->routeIs('questions.index')" class="text-white text-xl hover:text-orange-400">
                         {{ __('Ajuda?') }}
                     </x-nav-link>
                     @endif
@@ -53,7 +53,7 @@
             <!-- Settings Dropdown -->
             <div class="hidden sm:flex sm:items-center sm:ml-6">
                 @if(Auth::user() ->type=='cliente')
-                
+
                 <a href="/cart" class="mr-4">
   <img src="{{ asset('meu_carrinho2.png') }}" class="h-6 w-6 color-white ">
 </a>

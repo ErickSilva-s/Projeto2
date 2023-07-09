@@ -14,16 +14,16 @@
 
             </nav>
         </header><br><br><br>
-            @endif
-           
+        @endif
 
-            @if(Auth::user())
-                Olá, {{ Auth::user()->name }}! Seja bem vindo ({{ Auth::user()->type }}) <br>
-            </h2>
-            <p> Você está logado com {{ Auth::user()->email }}. <br>
-                {{ \Carbon\Carbon::now()->format('d/m/Y') }}
-            </p>
-            @endif
+
+        @if(Auth::user())
+        Olá, {{ Auth::user()->name }}! Seja bem vindo ({{ Auth::user()->type }}) <br>
+        </h2>
+        <p> Você está logado com {{ Auth::user()->email }}. <br>
+            {{ \Carbon\Carbon::now()->format('d/m/Y') }}
+        </p>
+        @endif
     </x-slot>
 
     <div class="py-20">
@@ -97,7 +97,11 @@
                                 </div>
                             </div>
 
-                            <x-primary-button class="w-full bg-green-900">Adicionar</x-primary-button>
+                            <div class="flex justify-center mt-8">
+                                <x-primary-button class="bg-green-900 hover:bg-orange-600 text-center w-48 justify-center ">
+                                    Adicionar
+                                </x-primary-button>
+                            </div>
                         </form>
                     </fieldset>
 
@@ -105,52 +109,52 @@
                     @endif
 
                     <div class="text-center">
-    <form action="{{ route('product.index') }}" method="GET">
-        <input type="text" name="pesquisa" placeholder="Pesquisar produtos" value="{{ $pesquisa ?? '' }}" class="bg-white">
-        <button type="submit" class="bg-green-900 hover:bg-orange-400 text-white py-2 px-4 rounded-md">Pesquisar</button>
-    </form>
-    @if (!empty($pesquisa))
-    <div class="border rounded-md border-orange-500 mt-4 font-bold">
-        @if ($products->count() > 0)
-        @foreach ($products as $product)
-        <a href="{{ route('product.show', $product->id) }}" class="block p-4 hover:bg-green-100">
-            <div>
-                {{ $product->description }} (R$ {{ $product->price }})
-            </div>
-        </a>
-        @endforeach
-        @else
-        <p class="p-4">Nenhum resultado encontrado.</p>
-        @endif
-    </div>
-    @endif
-</div><br>
+                        <form action="{{ route('product.index') }}" method="GET">
+                            <input type="text" name="pesquisa" placeholder="Pesquisar produtos" value="{{ $pesquisa ?? '' }}" class="bg-white">
+                            <button type="submit" class="bg-green-900 hover:bg-orange-400 text-white py-2 px-4 rounded-md">Pesquisar</button>
+                        </form>
+                        @if (!empty($pesquisa))
+                        <div class="border rounded-md border-orange-500 mt-4 font-bold">
+                            @if ($products->count() > 0)
+                            @foreach ($products as $product)
+                            <a href="{{ route('product.show', $product->id) }}" class="block p-4 hover:bg-green-100">
+                                <div>
+                                    {{ $product->description }} (R$ {{ $product->price }})
+                                </div>
+                            </a>
+                            @endforeach
+                            @else
+                            <p class="p-4">Nenhum resultado encontrado.</p>
+                            @endif
+                        </div>
+                        @endif
+                    </div><br>
 
 
                     @if(!Auth::user())
 
                     @foreach (App\Models\Product::all() as $product)
                     @if(!Auth::user())
-    <a href="{{ route('product.show', $product->id) }}">
-        <div class="flex flex-col items-center border-black p-6 mb-2 gap-4 hover:bg-lime-200">
-                <div class="flex flex-col items-center">
-                <img src="{{ asset('/img/imgProduct/' . $product->imagem) }}" alt="Imagem do Produto" class="w-48 h-100 mb-4">
-                <div>
-                    <span class="font-bold text-lg">Descrição:</span> {{ $product->description }}
-                </div>
-                <div>
-                    <span class="font-bold text-lg">Estoque:</span> {{ $product->stock_product }}
-                </div>
-                <div>
-                    <span class="font-bold text-lg">Valor:</span> R$ {{ $product->price }}
-                </div>
-                <div>
-                    <span class="font-bold text-lg">Vendido por:</span> {{ $product->User->name }}
-                </div>
-            </div>
-        </div>
-    </a>
-@endif
+                    <a href="{{ route('product.show', $product->id) }}">
+                        <div class="flex flex-col items-center border-black p-6 mb-2 gap-4 hover:bg-lime-200">
+                            <div class="flex flex-col items-center">
+                                <img src="{{ asset('/img/imgProduct/' . $product->imagem) }}" alt="Imagem do Produto" class="w-48 h-100 mb-4">
+                                <div>
+                                    <span class="font-bold text-lg">Descrição:</span> {{ $product->description }}
+                                </div>
+                                <div>
+                                    <span class="font-bold text-lg">Estoque:</span> {{ $product->stock_product }}
+                                </div>
+                                <div>
+                                    <span class="font-bold text-lg">Valor:</span> R$ {{ $product->price }}
+                                </div>
+                                <div>
+                                    <span class="font-bold text-lg">Vendido por:</span> {{ $product->User->name }}
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                    @endif
 
                     @endforeach
                     @endif
@@ -181,44 +185,44 @@
 
                                 <div class="flex justify-between flex-grow" href="{{ route('product.show', $product->id) }}">
 
-                                <a href="{{ route('product.show', $product->id) }}">
-        <div class="flex justify-center border-b mb-2 gap-4">
-            <div class="flex flex-col items-center"><br><br>
-                <img src="{{ asset('/img/imgProduct/' . $product->imagem) }}" alt="Imagem do Produto" class="w-48 h-100 mb-4">
-                <div>
-                    <span class="font-bold text-lg">Descrição:</span> {{ $product->description }}
-                </div>
-                <div>
-                    <span class="font-bold text-lg">Estoque:</span> {{ $product->stock_product }}
-                </div>
-                <div>
-                    <span class="font-bold text-lg">Valor:</span> R$ {{ $product->price }}
-                </div>
-                <div>
-                    <span class="font-bold text-lg">Vendido por:</span> {{ $product->User->name }}
-                </div>
-            </div>
-        </div>
-    </a>
-                                
+                                    <a href="{{ route('product.show', $product->id) }}">
+                                        <div class="flex justify-center border-b mb-2 gap-4">
+                                            <div class="flex flex-col items-center"><br><br>
+                                                <img src="{{ asset('/img/imgProduct/' . $product->imagem) }}" alt="Imagem do Produto" class="w-48 h-100 mb-4">
+                                                <div>
+                                                    <span class="font-bold text-lg">Descrição:</span> {{ $product->description }}
+                                                </div>
+                                                <div>
+                                                    <span class="font-bold text-lg">Estoque:</span> {{ $product->stock_product }}
+                                                </div>
+                                                <div>
+                                                    <span class="font-bold text-lg">Valor:</span> R$ {{ $product->price }}
+                                                </div>
+                                                <div>
+                                                    <span class="font-bold text-lg">Vendido por:</span> {{ $product->User->name }}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </a>
+
 
 
                                     @if(Auth::user()->type=='cliente')
                                     <div class="mt-28">
-                                    <form action="{{ route('cart.add') }}" method="POST">
-                                        @csrf
+                                        <form action="{{ route('cart.add') }}" method="POST">
+                                            @csrf
 
-                                        <input type="hidden" name="product_id" value="{{ $product->id }}" required>
-                                        <input type="hidden" name="user_id" value="{{ Auth::user()->id }}" required>
-                                        <x-input-label for="quantity" :value="__('Quantidade')" />
+                                            <input type="hidden" name="product_id" value="{{ $product->id }}" required>
+                                            <input type="hidden" name="user_id" value="{{ Auth::user()->id }}" required>
+                                            <x-input-label for="quantity" :value="__('Quantidade')" />
 
-                                        <input type="number" name="quantity" value="1" min="1" max="{{ $product-> stock_product }}" required>
+                                            <input type="number" name="quantity" value="1" min="1" max="{{ $product-> stock_product }}" required>
 
-                                        <x-primary-button class="bg-green-800 hover:bg-orange-500">Adicionar ao carrinho</x-primary-button>
-                                    </form>
+                                            <x-primary-button class="bg-green-800 hover:bg-orange-500">Adicionar ao carrinho</x-primary-button>
+                                        </form>
+                                    </div>
+                                    @endif
                                 </div>
-                                @endif
-                            </div>
                             </div>
                         </a>
 
