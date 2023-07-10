@@ -243,6 +243,7 @@
 
 
 
+
                         <template x-if="showDelete">
                             <div class="fixed inset-0 flex items-center justify-center z-50">
                                 <div class="absolute inset-0 bg-gray-800 bg-opacity-20"></div>
