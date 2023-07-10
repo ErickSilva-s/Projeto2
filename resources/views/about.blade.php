@@ -26,7 +26,6 @@
             <nav class="flex space-x-10">
                 <a href="{{ url('/product') }}" class="bg-transparent text-white text-2xl">Produtos</a>
                 <a href="{{ route('login') }}" class="bg-transparent text-white text-2xl">Entrar</a>
-                <a href="{{ route('register') }}" class="bg-transparent text-white text-2xl">Cadastre-se</a>
             </nav>
             @endif
 </header>
