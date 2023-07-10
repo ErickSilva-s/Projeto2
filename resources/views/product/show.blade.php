@@ -43,20 +43,11 @@
     <x-slot name="header">
 
         @if(!Auth::user())
-        <header class="fixed top-0 left-0 right-0 bg-green-800 py-4 px-6 text-white flex justify-between items-center">
-            <div style="display: flex; align-items: center;">
-                <a href="{{ url('/') }}">
-                    <img src="{{ asset('logo2.png') }}" alt="imagem do logotipo" style="width: 150px; margin-right: 10px;">
-                    <h1 class="text-2xl font-bold">Feira Na Mão</h1>
-            </div>
-            <nav class="flex space-x-10">
-                <a href="{{ route('login') }}" class="bg-transparent text-white text-2xl">Entrar</a>
-                <a href="{{ url('/product') }}" class="bg-transparent text-white text-2xl">Produtos</a>
-
-            </nav>
-        </header><br><br><br>
+        <div class="hidden fixed top-0 right-0 px-6 py-4 sm:block ">
+            <a href="{{ route('login') }}" class="text-sm text-gray-700 dark:text-gray-500 underline">Entrar</a>
+            <a href="{{ route('register') }}" class="ml-4 text-sm text-gray-700 dark:text-gray-500 underline">Cadastre-se</a>
+        </div>
         @endif
-
 
         @if(Auth::user())
         <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
@@ -163,7 +154,7 @@
                     </div>
                 </div>
 
-                <!-- CARROSEL DE PRODUTOS -->
+                <!-- CARROSEL DE PRODUTOS --><br>
                 <p class="text-white bg-green-800 mt-2 ml-5 text-xl text-center font-semibold">Passe para o lado para conferir mais produtos!!</p><br>
                 <div class="bg-transparent mt-20" style="overflow: hidden;">
                     <div class="max-w-screen mx-auto relative">
@@ -193,7 +184,7 @@
                 <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
                 <script>
                     new Swiper('.swiper-container', {
-                        slidesPerView: 3,
+                        slidesPerView: 2,
                         spaceBetween: 10,
                         navigation: {
                             nextEl: '.swiper-button-next',
