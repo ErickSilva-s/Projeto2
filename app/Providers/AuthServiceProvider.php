@@ -30,7 +30,7 @@ class AuthServiceProvider extends ServiceProvider
         VerifyEmail::toMailUsing(function ($notifiable, $url) {
             return (new MailMessage)
                 ->subject('Verificação de Email Feira na Mão')
-                ->line("Olá,  obrigado por se cadastrar no Feira na Mão, mas pra continuar precisamos verificar seu email. Para isso, clique no botão abaixo. Caso ao apertar no botão  e já esteja logado, saia da sua conta, clique no botão novamente e faça seu login. ")
+                ->line("Olá,  obrigado por se cadastrar no Feira na Mão, mas pra continuar precisamos verificar seu email. Para isso, clique no botão abaixo. ")
                 ->action('Verificar Email', $url);
         });
     }
