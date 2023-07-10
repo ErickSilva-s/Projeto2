@@ -12,17 +12,19 @@
 
         <!-- Navigation Links -->
 
-        @if(Auth::user()->type == 'entregador')
-        <x-nav-link :href="route('deliveries.index')" class="text-white text-xl hover:text-orange-400">
-            {{ __('Entregador') }}
-        </x-nav-link>
-        @endif
+
 
 
         <div class="hidden space-x-8 sm:my-14 sm:ml-10 sm:flex">
             @if(!(Auth::user() ->type=='entregador'))
             <x-nav-link :href="route('product.index')" :active="request()->routeIs('product.index')" class="text-white text-xl hover:text-orange-400">
                 {{ __('Produtos') }}
+            </x-nav-link>
+            @endif
+
+            @if(Auth::user()->type == 'entregador')
+            <x-nav-link :href="route('deliveries.index')" :active="request()->routeIs('deliveries.index')" class="text-white text-xl hover:text-orange-400">
+                {{ __('Entregador') }}
             </x-nav-link>
             @endif
 
@@ -47,17 +49,13 @@
                 </x-nav-link>
                 @endif
 
-                @if(Auth::user()->type == 'entregador')
-                    <x-nav-link :href="route('deliveries.index')" :active="request()->routeIs('deliveries.index')" class="text-white text-xl hover:text-orange-400">
-                        {{ __('Entregador') }}
-                    </x-nav-link>
-                    @endif
 
-                    @if(!(Auth::user() ->type=='entregador'))
-                    <x-nav-link :href="route('questions.index')" :active="request()->routeIs('questions.index')" class="text-white text-xl hover:text-orange-400">
-                        {{ __('Ajuda?') }}
-                    </x-nav-link>
-                    @endif
+
+                @if(!(Auth::user() ->type=='entregador'))
+                <x-nav-link :href="route('questions.index')" :active="request()->routeIs('questions.index')" class="text-white text-xl hover:text-orange-400">
+                    {{ __('Ajuda?') }}
+                </x-nav-link>
+                @endif
             </div>
 
             <!-- Settings Dropdown -->
