@@ -313,13 +313,13 @@
                                     <div class="flex justify-between items-center w-full">
                                         <div></div>
                                         <div>
-                                            <div class="flex gap-2 ml-auto mb-3">
-                                                <x-danger-button class="bg-red-300 hover:bg-red-500" @click="showDelete = true ">Apagar</x-danger-button>
                                             </div>
+                                            <hr>
                                         </div>
-                                        <hr>
-                                    </div>
 
+                                        <div class="flex gap-2 ml-auto mb-3">
+                                            <x-danger-button class="bg-red-300 hover:bg-red-500" @click="showDelete = true ">Apagar</x-danger-button>
+                                        </div>
 
 
                                     <template x-if="showDelete">
