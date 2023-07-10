@@ -1,14 +1,5 @@
+<div class="py-44">
 <x-app-layout>
-
-    <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-            Olá, {{ Auth::user()->name }}, escolha o endereço e a forma de pagamento para concluir sua compra!<br>
-        </h2>
-            <p>{{ \Carbon\Carbon::now()->format('d/m/Y') }}
-        </p>
-
-    </x-slot>
-
     <div class="py-12 ">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-amber-50 dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
@@ -64,7 +55,7 @@
                         <br>
 
                         <div class="text-center">
-                            <x-primary-button type="submit" class=" bg-orange-600"> Continuar </x-primary-button>
+                            <x-primary-button type="submit" class=" bg-orange-600 hover:bg-green-800"> Continuar </x-primary-button>
                             </form>
                         </div>
 
@@ -72,8 +63,8 @@
                         <div class="text-center">
                             <h2 class="text-lg font-bold bg-text-black text-center"> Você ainda não tem nenhum endereço cadastrado! <br> Cadastre seu endereço para finalizar seu pedido </h2>
                             <br>
-                            <x-primary-button class=" bg-orange-600">
-                                <a href="{{ route('dashboard') }}" class="ml-4 text-sm text-white dark:text-gray-500 ">Cadastrar Endereços</a>
+                            <x-primary-button class=" bg-orange-600 hover:bg-green-800">
+                                <a href="{{ route('dashboard') }}" class="ml-4 text-sm text-white">Cadastrar Endereços</a>
                             </x-primary-button>
                         </div>
                         @endif
@@ -82,7 +73,7 @@
                     </div>
 
                     <div class="text-right">
-                        <a href="{{ route('cart.index') }}" class="ml-4 text-sm text-gray-700 dark:text-gray-500 underline">
+                        <a href="{{ route('cart.index') }}" class="ml-4 text-sm text-black underline">
                             Voltar para o carrinho
                             <!-- <img src="{{ asset('meu_carrinho2.png') }}" alt="Ícone do carrinho" class="h-6 w-6"> -->
                         </a>

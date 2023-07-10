@@ -5,7 +5,7 @@
 
 
   </div>
-  <div class="w-1/2 p-8">
+  <div class="w-1/2 p-8 bg-orange-100">
 
 
 <x-guest-layout >
@@ -62,7 +62,7 @@
         </div>
 
         <div>
-            <a class="underline text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-gray-800" href="{{ route('register') }}">
+            <a class="underline text-md text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-gray-800" href="{{ route('register') }}">
                <br>
             {{ __('Ainda não tem uma conta? Cadastre-se') }}
                 </a>

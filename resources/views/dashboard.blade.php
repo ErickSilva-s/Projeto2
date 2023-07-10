@@ -21,7 +21,7 @@
 
                     <br>
                     <fieldset class="border p-2 mb-2 border-black rounded">
-                        <legend class="px-2 border rounded-md border-black text-black ">Adicionar novo endereço</legend>
+                        <legend class="px-2 border rounded-md border-black">Adicionar novo endereço</legend>
                         <form action="{{ route('address.store')  }}" method="POST">
                             @csrf
                             <div class="grid gap-2 grid-cols-2 mb-2">
@@ -48,9 +48,9 @@
                             </div>
 
                             <div class="flex justify-center mt-8">
-                                     <x-primary-button class="bg-green-900 hover:bg-orange-600 text-center w-48 justify-center ">
-                                        Adicionar
-                                    </x-primary-button>
+                                <x-primary-button class="bg-green-900 hover:bg-orange-600 text-center w-48 justify-center ">
+                                    Adicionar
+                                </x-primary-button>
                             </div>
 
 
@@ -60,31 +60,30 @@
 
                     @if(count(Auth::user()->myAddress) > 0)
 
-                    <h2 class="text-lg font-bold bg-text-black text-center"> Seus Endereços cadastrados: </h2> <br>
+                    <h2 class="text-xl font-bold bg-text-black text-center"> Seus Endereços cadastrados: </h2> <br>
 
                     @foreach(Auth::user()->myAddress as $address)
 
                     <div class="flex justify-between border-b mb-2 gap-4
                     hover:bg-gray-300" x-data=" { showDelete: false, showEdit: false  } ">
 
-                        <div class="flex justify-between flex-grow px-2 border rounded-md border-green-500">
-                            CEP:{{ $address->cep }}
-                            Rua: {{ $address->road}},
-                            Número: {{ $address->number }},
-                            Bairro: {{ $address->neighborhood}}
+                        <div class="flex justify-between flex-grow px-2 border rounded-md border-green-500 text-xl">
+                            Nome:{{ Auth::user()->name }}<br>
+                            Cep:{{ $address->cep }}<br>
+                            Rua: {{ $address->road}}, {{ $address->number }}, {{ $address->neighborhood}}<br>
                             Complemento: {{ $address->complement}}
-                        </div>
 
-
-                        <div class="flex gap-2">
-                            <div>
-                                <span class="cursor-pointer px-2 bg-red-500 border rounded-md text-white" @click="showDelete = true ">Apagar</span>
+                            <div class="flex flex-col gap-2">
+                                <div class="mt-4">
+                                    <span class="cursor-pointer px-5 bg-blue-500 hover:bg-blue-300 border rounded-md text-white" @click="showEdit = true">Editar</span>
+                                </div>
+                                <div>
+                                    <span class="cursor-pointer px-4 bg-red-500 border rounded-md text-white" @click="showDelete = true">Apagar</span>
+                                </div>
 
                             </div>
 
-                            <div>
-                                <span class="cursor-pointer px-2 bg-blue-500 border rounded-md text-white" @click="showEdit = true ">Editar </span>
-                            </div>
+
                         </div>
 
 
@@ -93,16 +92,21 @@
                                 <div class="absolute inset-0 bg-gray-800 bg-opacity-20"></div>
                                 <div class="w-96 bg-white p-4 relative z-10">
                                     <h2 class="text-xl font-bold text-center">Você tem certeza que quer apagar?</h2>
-                                    <form action="{{ route('address.destroy',  $address) }}" method="POST">
-                                        @csrf
-                                        @method('delete')
-                                        <x-danger-button class="bg-red-300 hover:bg-red-500">Apagar</x-danger-button>
-                                    </form>
-                                    <x-primary-button class="w-full" @click="showDelete = false">Cancelar</x-primary-button>
-                                </div>
-                            </div>
-                        </template>
+                                    <div class="flex justify-center">
+                                        <form action="{{ route('address.destroy',  $address) }}" method="POST">
+                                            <br>
+                                            @csrf
+                                            @method('delete')
+                                            <x-danger-button class="bg-red-300 hover:bg-red-500">Apagar</x-danger-button>
+                                        </form>
+                                    </div>
+                                    <div class="flex justify-center mt-2">
+                                        <x-primary-button class="bg-blue-500" @click="showDelete = false">Cancelar</x-primary-button>
+                                    </div>
 
+
+
+                        </template>
                         <template x-if="showEdit">
                             <div class="fixed inset-0 flex items-center justify-center z-50">
                                 <div class="absolute inset-0 bg-gray-800 bg-opacity-20"></div>
@@ -131,12 +135,15 @@
                                             <label for="complement" class="block mb-2">Complemento:</label>
                                             <x-text-input name="complement" id="complement" placeholder="Complemento" value="{{ $address->complement }}"></x-text-input>
                                         </div>
-                                        <x-primary-button>Editar</x-primary-button>
+                                        <div class="flex justify-center">
+                                            <x-primary-button class="mr-2 bg-blue-500 text-lg">Editar</x-primary-button>
+                                            <x-primary-button @click="showEdit = false">Cancelar</x-primary-button>
+                                        </div>
                                     </form>
-                                    <x-primary-button @click="showEdit = false" class="w-full">Cancelar</x-primary-button>
                                 </div>
                             </div>
                         </template>
+
 
                     </div>
                     @endforeach
