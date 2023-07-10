@@ -220,10 +220,10 @@
                                             <x-primary-button class="bg-green-800 hover:bg-orange-500">Adicionar ao carrinho</x-primary-button>
                                         </form>
                                     </div>
-                                    @endif
                                 </div>
-                                <!-- </div> -->
-                        </a>
+                            </a>
+                                @endif
+                            </div>
 
 
                         @if(( Auth::user() && Auth::user()->type=='administrador'))
