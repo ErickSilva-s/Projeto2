@@ -42,22 +42,22 @@
 
     <x-slot name="header">
 
-            @if(!Auth::user())
-            <header class="fixed top-0 left-0 right-0 bg-green-800 py-4 px-6 text-white flex justify-between items-center">
-                <div style="display: flex; align-items: center;">
-                    <a href="{{ url('/') }}">
-                        <img src="{{ asset('logo2.png') }}" alt="imagem do logotipo" style="width: 150px; margin-right: 10px;">
-                        <h1 class="text-2xl font-bold">Feira Na Mão</h1>
-                </div>
-                <nav class="flex space-x-10">
-                    <a href="{{ route('login') }}" class="bg-transparent text-white text-2xl">Entrar</a>
+        @if(!Auth::user())
+        <header class="fixed top-0 left-0 right-0 bg-green-800 py-4 px-6 text-white flex justify-between items-center">
+            <div style="display: flex; align-items: center;">
+                <a href="{{ url('/') }}">
+                    <img src="{{ asset('logo2.png') }}" alt="imagem do logotipo" style="width: 150px; margin-right: 10px;">
+                    <h1 class="text-2xl font-bold">Feira Na Mão</h1>
+            </div>
+            <nav class="flex space-x-10">
+                <a href="{{ route('login') }}" class="bg-transparent text-white text-2xl">Entrar</a>
 
-                    <a href="{{ url('/product') }}" class="bg-transparent text-white text-2xl">Produtos</a>
+                <a href="{{ url('/product') }}" class="bg-transparent text-white text-2xl">Produtos</a>
 
 
-                </nav>
-            </header><br><br><br>
-            @endif
+            </nav>
+        </header><br><br><br>
+        @endif
 
         @if(Auth::user())
         <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
@@ -312,45 +312,47 @@
                                 <div class="flex gap-2">
                                     <div class="flex justify-between items-center w-full">
                                         <div></div>
-                                        <div class="mb-3">
-                                            <span class="cursor-pointer border rounded-md px-2 bg-red-500 text-white" @click="showDelete = true">Apagar Avaliação</span>
+                                        <div>
+                                            <div class="flex gap-2 ml-auto mb-3">
+                                                <x-danger-button class="bg-red-300 hover:bg-red-500" @click="showDelete = true ">Apagar</x-danger-button>
+                                            </div>
                                         </div>
+                                        <hr>
                                     </div>
-                                    <hr>
+
+
+
+                                    <template x-if="showDelete">
+                                        <div class="fixed inset-0 flex items-center justify-center z-50">
+                                            <div class="absolute inset-0 bg-gray-800 bg-opacity-20"></div>
+                                            <div class="w-96 bg-white p-4 relative z-10">
+                                                <h2 class="text-xl font-bold text-center">Você tem certeza que quer apagar?</h2>
+                                                <div class="flex justify-center">
+                                                    <form action="{{ route('review.destroy', $review) }}" method="POST">
+                                                        <br>
+                                                        @csrf
+                                                        @method('delete')
+                                                        <x-danger-button class="bg-red-300 hover:bg-red-500">Apagar</x-danger-button>
+                                                    </form>
+                                                </div>
+                                                <div class="flex justify-center mt-2">
+                                                    <x-primary-button class="bg-blue-500" @click="showDelete = false">Cancelar</x-primary-button>
+                                                </div>
+                                    </template>
                                 </div>
-
-
-                                <template x-if="showDelete">
-                                    <div class="fixed inset-0 flex items-center justify-center z-50">
-                                        <div class="absolute inset-0 bg-gray-800 bg-opacity-20"></div>
-                                        <div class="w-96 bg-white p-4 relative z-10">
-                                            <h2 class="text-xl font-bold text-center">Você tem certeza que quer apagar?</h2>
-                                            <form action="{{ route('review.destroy', $review) }}" method="POST">
-                                                @csrf
-                                                @method('delete')
-
-
-                                                <x-danger-button class="bg-red-300 hover:bg-red-500">Apagar </x-danger-button>
-
-                                            </form>
-                                            <x-primary-button class="w-full" @click="showDelete = false">Cancelar</x-primary-button>
-                                        </div>
-                                    </div>
-                                </template>
+                                @endif
+                                @endif
                             </div>
-                            @endif
-                            @endif
-                        </div>
 
+                        </div>
+                        @endif
+                        @endforeach
                     </div>
                     @endif
-                    @endforeach
-                </div>
-                @endif
 
+                </div>
             </div>
         </div>
-    </div>
     </div>
 
 </x-app-layout>
