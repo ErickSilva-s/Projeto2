@@ -153,7 +153,7 @@
                     </div>
                 </div>
 
-                <!-- CARROSEL DE PRODUTOS -->
+                <!-- CARROSEL DE PRODUTOS --><br>
  <p class="text-white bg-green-800 mt-2 ml-5 text-xl text-center font-semibold">Passe para o lado para conferir mais produtos!!</p><br>
                 <div class="bg-transparent mt-20" style="overflow: hidden;">
   <div class="max-w-screen mx-auto relative">
@@ -183,7 +183,7 @@
 <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
 <script>
   new Swiper('.swiper-container', {
-    slidesPerView: 3,
+    slidesPerView: 2,
     spaceBetween: 10,
     navigation: {
       nextEl: '.swiper-button-next',
