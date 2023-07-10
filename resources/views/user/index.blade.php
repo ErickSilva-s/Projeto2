@@ -21,7 +21,7 @@
                         <h1 class="text-lg font-bold ">Feira Na Mão</h1>
                         <h1 class="text-3xl mt-4 font-bold text-center text-green-800 underline"> Usuários</h1>
                     </div>
-                   
+
                     <br>
                     @if(Auth::user() ->type=='administrador')
                     @foreach (App\Models\user::all() as $user)
@@ -49,30 +49,34 @@
                         </div>
 
 
+
+
                         <template x-if="showDelete">
                             <div class="fixed inset-0 flex items-center justify-center z-50">
                                 <div class="absolute inset-0 bg-gray-800 bg-opacity-20"></div>
                                 <div class="w-96 bg-white p-4 relative z-10">
                                     <h2 class="text-xl font-bold text-center">Você tem certeza que quer apagar?</h2>
-                                    <form action="{{ route('user.destroy', $user) }}" method="POST">
-                                        @csrf
-                                        @method('delete')
-                                        <x-danger-button class="bg-red-300 hover:bg-red-500">Apagar</x-danger-button>
-                                    </form>
-                                    <x-primary-button class="w-full" @click="showDelete = false">Cancelar</x-primary-button>
-                                </div>
-                            </div>
+                                    <div class="flex justify-center">
+                                        <form action="{{ route('user.destroy', $user) }}" method="POST">
+                                            <br>
+                                            @csrf
+                                            @method('delete')
+                                            <x-danger-button class="bg-red-300 hover:bg-red-500">Apagar</x-danger-button>
+                                        </form>
+                                    </div>
+                                    <div class="flex justify-center mt-2">
+                                        <x-primary-button class="bg-blue-500" @click="showDelete = false">Cancelar</x-primary-button>
+                                    </div>
+                        </template>
                     </div>
-                    </template>
+
+
+                    @endforeach
+                    @endif
+
                 </div>
-
-
-                @endforeach
-                @endif
-
             </div>
         </div>
-    </div>
     </div>
 
 </x-app-layout>
