@@ -1,3 +1,12 @@
+O “Feira na Mão” é um projeto da disciplina “projeto e prática 2” do curso Informática para internet do IFPE campus Igarassu. O projeto foi desenvolvido por
+ <a href="https://github.com/Eri123silva2"  alt="Github de Erick Silva">Erick Silva</a>, 
+ <a href="https://github.com/hannasabrynna"  alt="Github de Hanna Sabrynna">Hanna Sabrynna</a> e 
+<a href="https://github.com/laur20f"  alt="Github de Laura Fernanda">Laura Fernanda</a>. 
+Com o intuito de sanar a dificuldade dos munícipes de Abreu e Lima devido a distância do mercado municipal da mesma, o Feira na Mão funciona como um e-commerce, trazendo como o seu próprio nome diz, a facilidade de comprar os produtos da feira na palma da mão dos clientes e no conforto de suas residências. 
+Como funciona: Os feirantes da cidade, que também sofrem com o fraco movimento em suas barracas, divulgam para a venda seus produtos; Os clientes selecionam e compram o que desejam; A entrega será feita pelos próprios mototaxistas ou taxistas do município.
+
+
+
 <p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
 
 <p align="center">
