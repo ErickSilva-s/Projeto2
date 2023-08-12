@@ -1,5 +1,6 @@
 <x-app-layout>
-    <div class="py-12">
+
+    <div class="py-52">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-amber-50 dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900 dark:text-gray-100">
@@ -23,7 +24,7 @@
                             <div class="text-xl">
                                 <p class="bg-green-800 text-white"> -Como editar minhas informações?</p>
                                 <br>
-                                <p class="border ml-8 mr-8 text-lg ">Para editar suas informações de login, <br>
+                                <p class="border ml-8 mr-8 text-lg">Para editar suas informações de login, <br>
                                     va na parte superior da pagina e aperte no <br>
                                     botão laranja que contem seu nome e clique em "profile"</p>
                                 <br>
@@ -128,10 +129,10 @@
                     @foreach ($questions as $question)
                     <div class="text-xl rounded mt-5 ">
                         <div class="border border-green-800 rounded bg-lime-100">
-                        <p class="font-bold ml-2 mt-2">{{ $question->user->name}}</p>
-                        <p><span class="ml-2 text-sm text-gray-500">{{ $question->created_at->diffForHumans() }}</span></p>
+                            <p class="font-bold ml-2 mt-2">{{ $question->user->name}}</p>
+                            <p><span class="ml-2 text-sm text-gray-500">{{ $question->created_at->diffForHumans() }}</span></p>
 
-                        <p class="ml-4 mt-3">{{ $question->question }}</p>
+                            <p class="ml-4 mt-3">{{ $question->question }}</p>
                         </div>
                         <br>
 
@@ -178,23 +179,23 @@
 
                         @if(Auth::user()->type == 'vendedor' || Auth::user()->type == 'administrador' )
 
+                        <br>
+                        <div class="text-center" x-data="{ showForm: false }">
+                            <x-primary-button class="bg-orange-600" @click="showForm = !showForm">
+                                Responder
+                            </x-primary-button>
                             <br>
-                            <div class="text-center" x-data="{ showForm: false }">
-                                <x-primary-button class="bg-orange-600" @click="showForm = !showForm">
-                                    Responder
-                                </x-primary-button>
-                                <br>
-                                <br>
-                                <div x-show="showForm" class="text-center">
-                                    <form action="{{ route('answers.store') }}" method="POST">
-                                        @csrf
-                                        <input type="hidden" name="question_id" value="{{ $question->id }}">
-                                        <textarea name="answer" style="width: 900px; height:100px;" required placeholder="Digite sua resposta"></textarea>
-                                        <br>
-                                        <x-primary-button type="submit" class="bg-orange-600">Enviar</x-primary-button>
-                                    </form>
-                                </div>
+                            <br>
+                            <div x-show="showForm" class="text-center">
+                                <form action="{{ route('answers.store') }}" method="POST">
+                                    @csrf
+                                    <input type="hidden" name="question_id" value="{{ $question->id }}">
+                                    <textarea name="answer" style="width: 900px; height:100px;" required placeholder="Digite sua resposta"></textarea>
+                                    <br>
+                                    <x-primary-button type="submit" class="bg-orange-600">Enviar</x-primary-button>
+                                </form>
                             </div>
+                        </div>
 
                         @endif
                         @endforeach
@@ -202,6 +203,4 @@
                 </div>
             </div>
         </div>
-    <!-- </div> -->
-
 </x-app-layout>

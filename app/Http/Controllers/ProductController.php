@@ -19,7 +19,7 @@ class ProductController extends Controller
         $pesquisa = $request->input('pesquisa');
 
         if (Auth::check() && Auth::user()->type == 'entregador') {
-            return view('deliveryman.index');
+            return     redirect('/deliveries');
         }
 
         if (Auth::check() && Auth::user()->type == 'vendedor') {
@@ -48,6 +48,12 @@ class ProductController extends Controller
     public function store(Request $request)
     {
 
+        $user = Auth::user();
+
+        if ($user->type == 'vendedor' && !$user->email_verified_at) {
+            return redirect()->route('verification.notice');
+        }
+
         $request->validate([
             'imagem' => 'required|file|mimes:jpeg,png,jpg|max:2048',
             // o mimes especifica o tipo dos arquivos; o max esta especificando o tamanho em kilobyte.
@@ -61,7 +67,7 @@ class ProductController extends Controller
         $product->stock_product =  $request->stock_product;
         $product->price =  $request->price;
         $product->category  =  $request->category;
-        $product->user_id = Auth::user()->id;
+        $product->user_id = $user->id;
 
 
 

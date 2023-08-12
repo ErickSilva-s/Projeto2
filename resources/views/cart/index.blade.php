@@ -1,5 +1,5 @@
 <x-app-layout>
-    <x-slot name="header">
+    <x-slot name="header"><br>
         @if(Auth::user())
         <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
             Olá, {{ Auth::user()->name }}, esse é o seu carrinho de compras <br>
@@ -14,7 +14,7 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-amber-50 dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900 dark:text-gray-100">
-                    <h1 class="text-3xl mt-4 font-bold text-center text-green-800 "> Seu Carrinho de Compras</h1>
+                    <h1 class="text-3xl mt-4 font-bold text-center text-orange-600 "> Seu Carrinho de Compras</h1>
                     <br>
 
                     @php
@@ -56,7 +56,7 @@
                         @endforeach
                         @endforeach
 
-                        <h1 class="text-xl mt-4 text-center text-black font-bold border border-white bg-">TOTAL R$: {{ $totalCarrinho }}</h1>
+                        <h1 class="text-xl mt-4 text-center text-black font-bold">TOTAL R$: {{ $totalCarrinho }}</h1>
 
 
                     </div>
@@ -72,13 +72,12 @@
                     <a href="{{ route('product.show', $product->id) }}">
 
                         <div class="flex justify-between bg-white border border-lime-300 mb-3 gap-4 hover:bg-lime-100" x-data="{ showEdit: false }">
-                            <img src="{{ asset('/img/imgProduct/' . $product->imagem) }}" alt="Imagem do Produto" style="width: 200px; height:auto;">
-                            <div class="text-xl mt-2 mb-2">
+                            <img src="{{ asset('/img/imgProduct/' . $product->imagem) }}" alt="Imagem do Produto" style="width: 300px; height:auto;">
+                            <div class="text-xl mt-2 mb-2 font-bold">
                                 Descrição: {{ $product->description }} <br>
                                 Categoria: {{ $product->category }} <br>
                                 Vendido por: {{ $product->User->name}} <br>
-
-
+                            
                                 Valor por unidade/kg: R$ {{ $product->price }} <br>
                                 Quantidade: {{ $cartItem->quantity }} <br>
 
@@ -89,7 +88,7 @@
                             </div>
 
                             <!-- <img src="{{ asset('/img/imgProduct/' . $product->imagem) }}" alt="Imagem do Produto" style="width: 200px; height:auto;"> -->
-                            <div class="mt-5 mr-5 ">
+                            <div class="mt-10 mr-5 ">
                                 <div x-show="!showEdit">
                                     <button @click="showEdit = true" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-3 rounded">Atualizar</button>
                                 </div>
@@ -132,13 +131,13 @@
                             <form action="{{ route('address.show') }}" method="POST">
                                 @csrf
                                 <button type="submit" class="bg-green-900 text-center">
-                                    <button class="bg-orange-600 text-center text-white text-2xl px-7 py-3 rounded">Finalizar compra</button>
+                                    <button class="bg-orange-600 hover:bg-green-800 text-center text-white text-2xl px-7 py-3 rounded">Finalizar compra</button>
                                 </button>
                             </form>
                         </div>
                         <form action="{{ route('cart.empty') }}" method="POST">
                             @csrf
-                            <x-primary-button class=" bg-red-500">Esvaziar Carrinho</x-primary-button>
+                            <x-primary-button class=" bg-red-500 hover:bg-red-500">Esvaziar Carrinho</x-primary-button>
                         </form><br>
                         @else
                         <h1 class="text-lg mt-4 text-center">Você ainda não tem nenhum produto adicionado ao carrinho</h1>

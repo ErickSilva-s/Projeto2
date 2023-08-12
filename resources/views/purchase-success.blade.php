@@ -99,16 +99,17 @@
                     </div><br>
                     <div class="">
                         <div class="text-left">
-                            <a href="{{ route('product.index') }}" class="ml-4 text-sm text-gray-700 dark:text-gray-500 "> <x-primary-button class="bg-green-800">Ver mais produtos</x-primary-button></a>
+                            <a href="{{ route('product.index') }}" class="ml-4 text-sm text-gray-700 dark:text-gray-500 "> <x-primary-button class="bg-green-800 hover:bg-green-800">Ver mais produtos</x-primary-button></a>
                         </div>
                         <div class="text-right">
-                        <a href="{{ route('makePDF') }}" class="ml-4 text-sm text-gray-700 dark:text-gray-500">
-                            <x-primary-button class="bg-orange-600">Baixar PDF</x-primary-button>
-                        </a>
-                        <div>
+                            <a href="{{ route('makePDF') }}" class="ml-4 text-sm text-gray-700 dark:text-gray-500">
+                                <x-primary-button class="bg-orange-600 hover:bg-green-800">Baixar PDF</x-primary-button>
+                            </a>
+                            <div>
 
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
+
 </x-app-layout>
