@@ -1,5 +1,5 @@
 O “Feira na Mão” é um projeto da disciplina “projeto e prática 2” do curso Informática para internet do IFPE campus Igarassu. O projeto foi desenvolvido por
- <a href="https://github.com/Eri123silva2"  alt="Github de Erick Silva">Erick Silva</a>, 
+ <a href="https://github.com/ErickSilva-s"  alt="Github de Erick Silva">Erick Silva</a>, 
  <a href="https://github.com/hannasabrynna"  alt="Github de Hanna Sabrynna">Hanna Sabrynna</a> e 
 <a href="https://github.com/laur20f"  alt="Github de Laura Fernanda">Laura Fernanda</a>. 
 Com o intuito de sanar a dificuldade dos munícipes de Abreu e Lima devido a distância do mercado municipal da mesma, o Feira na Mão funciona como um e-commerce, trazendo como o seu próprio nome diz, a facilidade de comprar os produtos da feira na palma da mão dos clientes e no conforto de suas residências. 
